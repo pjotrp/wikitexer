@@ -1,0 +1,40 @@
+= WikiTeXer design document =
+
+== Introduction ==
+
+What would I give to have simple wiki markup mixed with LaTeX for
+writing documents? That itch is being scratched here.
+
+MediaWiki is becoming something of a standard, so that markup makes
+sense to support. Other markups may be supported by input handlers in
+the future. We create output handlers for LaTeX and HTML. This means,
+to support both outputs, rather then converting native LaTeX or HTML
+to the other format we create special generators (macro's) that can
+provide either. This avoids the complexity of translation routines at the
+expense of creating generators through a shared mechanism.
+
+
+== MediaWiki input handler ==
+
+The mediawiki input handler will support a subset of MediaWiki style 
+markup. Markup (like LaTex) it will basically ignore. So it should
+support headers, emphasing text and URLs initially.
+
+
+== LaTeX output handler ==
+
+Markup is translated to native LaTex.
+
+
+== HTML output handler ==
+
+Markup is translated to HTML. Embedded LaTeX is ignored. This is
+important. If HTML output is critical use macro's rather then LaTeX
+commands and register these with the HTML handler.
+
+
+== Macro's ==
+
+LaTeX is a macro language, but not always that nice to program.
+Embedding Ruby and Ruby macro's is a great feature to add to LaTeX
+native macros.

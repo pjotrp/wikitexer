@@ -1,0 +1,37 @@
+WikiTeXer is created to allow writing simple Mediawiki type input and
+generating HTML or LaTeX. The reasoning is that TeX is great for output, but
+not so friendly for users. Personally I needed a tool that would:
+
+1. Allow a mixture of Wiki language and LaTeX input
+2. Generate HTML -> Word/OpenOffice
+3. Generate LaTeX -> PS -> PDF
+
+There is a plethora of tools that comes some way towards achieving this goal.
+However, there are downsides for each. I did not want a Wiki based HTML server
+- just the command line. The 'deplate' program does a lot of things right,
+unfortunately the architecture was too complex to start hacking it and the
+author made a number of design choices I did not care about.
+
+Ultimately the architecture should be simple and allow contained HTML for HTML
+output and contained LaTeX for LaTeX output. Much of the complexity of existing
+systems is that they need to cater to either pure LaTeX (like latex2html), or
+HTML (many wysiwyg examples), or XML (docbook, XML/FO). Where the latter is
+about rendering, and less about usage
+
+LaTeX itself is a great system for publishing (less so for interactive systems,
+but I don't care about those too much either). My main criticism is that LaTeX
+(or TeX) is showing its age in terms of syntax and verbosity. For typing I want
+something even less in the way, but to generate powerful output like LaTeX does.
+
+What would be nice is to have a LaTeX environment where one could replace some
+of the common markup with Wiki-style markup. Also macro's would be nice in a
+modern language, say Ruby.  Finally we need great output. Converting figures
+between LaTeX and HTML can be done transparently.  However, tables are a
+difficult problem. My choice is to support native LaTeX tables and native HTML
+tables - as I tend to generate them anyway. Maybe later a external converter
+can be used to handle translation automatically as a plugin.
+
+Darn, I have another project on my hands.
+
+Pjotr Prins.
+
