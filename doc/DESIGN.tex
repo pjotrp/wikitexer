@@ -13,17 +13,24 @@ to the other format we create special generators (macro's) that can
 provide either. This avoids the complexity of translation routines at the
 expense of creating generators through a shared mechanism.
 
+The point here is minimalism and simplicity! Parser tend to get very 
+complicated as they have to adapt to strange user behaviour. WikiTeXer
+is not in that business. Nor does it provide a complete solution to
+all formats. The basic premise is to use LaTeX in a convenient fashion
+for writine a book (yes, that is the purpose) and allow HTML exports
+for review and other purposes.
+
 
 == MediaWiki input handler ==
 
-The mediawiki input handler will support a subset of MediaWiki style 
-markup. Markup (like LaTex) it will basically ignore. So it should
-support headers, emphasing text and URLs initially.
+The MediaWiki input handler will support a minimalistic MediaWiki style 
+markup. Other markup (like LaTex) it will basically ignore. So it should
+support MediaWiki headers, emphasing text and URLs initially.
 
 
 == LaTeX output handler ==
 
-Markup is translated to native LaTex.
+Markup is translated to native LaTex. Embedded LaTeX is left alone.
 
 
 == HTML output handler ==
