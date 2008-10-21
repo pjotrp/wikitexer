@@ -2,7 +2,9 @@
 
 == Introduction ==
 
-What would I give to have simple wiki markup mixed with LaTeX for
+\notice{This is a work in progress!}
+
+What would you give to have simple wiki markup mixed with LaTeX for
 writing documents? That itch is being scratched in this document. 
 
 MediaWiki is becoming something of a standard, so that markup makes
@@ -28,7 +30,8 @@ outputs either pure LaTeX or pure HTML.
 Much of the simplicity is achieved by ignoring stuff the parser does
 not understand, but filling in what it understands. By default
 \wikitexer\ uses stdin and stdout - which would allow it to be
-embedded in a webserver.
+embedded in a webserver. Another simplification is that WikiTeXer is 
+paragraph based for macro expansion - much like TeX itself.
 
 
 == MediaWiki input handler ==
@@ -140,6 +143,12 @@ A Ruby macro is defined as:
 	end
 </source>
 
+Finally there is the option to call directly into ruby with:
+
+  \ruby{Time.now}                     % => Tue Oct 21 13:38:01 +0200 2008
+	\ruby{'Test'.sub(/[Tt]/,'x')}       % => xest
+
+obviously a feature that needs to be disabled on a public web server.
 
 === Example: inject file ===
   

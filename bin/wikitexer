@@ -11,6 +11,9 @@ require 'optparse'
 require 'ostruct'
 require 'util/other/version'
 require 'wikitexer'
+require 'wtlatex'
+require 'wthtml'
+
 
 WIKITEXER_VERSION = 'wikitexer '+Version.get(File.dirname(__FILE__),'VERSION')+' by Pjotr Prins'
 LATEX = 1
@@ -44,6 +47,10 @@ EXAMPLE
     options.outputtype = HTML
   end
 
+  opts.on("--css stylesheet.css", String, "URI to .css file") do |uri|
+    options.css = uri
+  end
+
   opts.on('-r filename.rb',String,"Use Ruby module") do | fn |
     options.filenamerb = fn
   end
@@ -72,7 +79,17 @@ print WIKITEXER_VERSION,"\n" if not options.quiet and !options.use_stdin
 
 raise 'I can not use both stdin and input files' if options.use_stdin and ARGV.size > 0 
 
-wikitexer = WikiTexer.new(options.outputtype)
+if options.outputtype==LATEX
+  handler = WtLatex.new
+elsif options.outputtype==HTML
+  handler = WtHtml.new(options.css)
+else
+  raise 'Unknown output type'
+end
+
+wikitexer = WikiTexer.new(handler)
+
+handler.writer.header
 
 if options.use_stdin
   num = 1
@@ -89,3 +106,6 @@ else
 		end
 	end
 end
+
+handler.writer.footer
+
