@@ -5,16 +5,29 @@ class Paragraph
 
   def initialize par
     @original = par.clone
-    @current  = par
+    @current  = set(par)
     hastitle = false
   end
-
+ 
+  # Sets the paragraph buffer to an Array - each item ending in an eol.
   def set buf
+    if buf.kind_of? String
+      a = buf.split(/\n/)
+      (0..a.size-2).each do | i |
+        a[i] += "\n"
+      end
+      buf = a
+    end
     @current = buf
+    @current
   end
 
   def to_s
     @current.to_s
+  end
+
+  def to_a
+    @current
   end
 
   def replace_all search, modifier = nil
@@ -37,4 +50,23 @@ class Paragraph
     set(buf)  
     self
   end
+end
+
+if $UNITTEST
+
+  class Test_Paragraph < Test::Unit::TestCase
+
+    def test_buffer
+      a = [ "with a single value representing the level of variation on each array.\n", "\n"]
+      par = Paragraph.new(a)
+      assert_equal(par.to_a,a)
+      par.set(a)
+      assert_equal(par.to_s,a.to_s)
+
+      s = "line1\nline2 \n line3"
+      par = Paragraph.new(s)
+      assert_equal(s,par.to_s)
+    end
+  end
+
 end

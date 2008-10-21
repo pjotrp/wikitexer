@@ -13,8 +13,8 @@ class WtParser
   def parse par
     paragraph = Paragraph.new(par)
     Ruby::parse(paragraph)
-    Headers::parse(paragraph, proc {|level,buf| @creator.title(level,buf) } )
-    BasicFormatting::parse(paragraph,@creator)
+    Headers::markup(paragraph, proc {|level,buf| @creator.title(level,buf) } )
+    BasicFormatting::remarks(paragraph)
     paragraph
   end
 
