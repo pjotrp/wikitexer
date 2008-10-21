@@ -13,6 +13,7 @@ require 'util/other/version'
 require 'wikitexer'
 require 'wtlatex'
 require 'wthtml'
+require 'wtparser'
 
 
 WIKITEXER_VERSION = 'wikitexer '+Version.get(File.dirname(__FILE__),'VERSION')+' by Pjotr Prins'
@@ -87,7 +88,9 @@ else
   raise 'Unknown output type'
 end
 
-wikitexer = WikiTexer.new(handler)
+parser = WtParser.new(handler)
+
+wikitexer = WikiTexer.new(parser)
 
 handler.writer.header
 

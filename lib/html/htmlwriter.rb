@@ -5,11 +5,15 @@ class HtmlWriter
     @css = css
   end
 
+  def write buf
+    print buf
+  end
+
   def header
-    print "<html>\n"
-    print "  <body>\n"
+    write "<html>\n"
+    write "  <body>\n"
     if @css
-      print <<HEADER
+      write <<HEADER
     <head>
       <link href="#{@css}" rel="stylesheet" type="text/css">
     </head>
@@ -18,7 +22,15 @@ HEADER
   end
 
   def footer
-    print "  </body>\n</html>\n"
+    write "  </body>\n</html>\n"
+  end
+
+  def start_par paragraph
+    write "<p>\n" if !paragraph.hastitle
+  end
+
+  def end_par paragraph
+    write "</p>\n" if !paragraph.hastitle
   end
 
 end
