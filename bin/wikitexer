@@ -88,9 +88,9 @@ else
   raise 'Unknown output type'
 end
 
-parser = WtParser.new(handler)
+parser = WtParser.new(handler.creator)
 
-wikitexer = WikiTexer.new(parser)
+wikitexer = WikiTexer.new(parser, handler.writer)
 
 handler.writer.header
 

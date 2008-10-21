@@ -9,6 +9,9 @@ class HtmlCreator
     end
   end
 
+  def italics buf
+    '<i>'+buf+'</i>'
+  end
 end
 
 

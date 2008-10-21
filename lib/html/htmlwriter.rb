@@ -26,11 +26,11 @@ HEADER
   end
 
   def start_par paragraph
-    write "<p>\n" if !paragraph.hastitle
+    write "\n<p>\n" if !paragraph.hastitle
   end
 
   def end_par paragraph
-    write "</p>\n" if !paragraph.hastitle
+    write "\n</p>\n" if !paragraph.hastitle
   end
 
 end
