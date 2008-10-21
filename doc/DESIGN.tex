@@ -1,4 +1,4 @@
-= WikiTeXer design document =
+= wikitexer design document =
 
 == Introduction ==
 
@@ -17,20 +17,20 @@ expense of creating generators through a shared mechanism.
 
 The point here is minimalism and simplicity! Parsers, in general, tend
 to get very complicated mostly to adapt to 'strange' or unpredicatble
-user behaviour. WikiTeXer is not in that business. Nor does it provide
+user behaviour. wikitexer is not in that business. Nor does it provide
 a complete solution to all formats. The basic premise is to use LaTeX
 in a convenient fashion for writing a book (yes, that is the purpose)
-and allow clean HTML exports for review and other purposes (for
+and to allow clean HTML exports for review and other purposes (for
 example exporting to Microsoft Word).
 
 The input files are written as .tex files with Wiki markup extensions
-and macros. WikiTeXer is a command-line or library pre-parser which
+and macros. wikitexer is a command-line or library pre-parser which
 outputs either pure LaTeX or pure HTML.
 
 Much of the simplicity is achieved by ignoring stuff the parser does
 not understand, but filling in what it understands. By default
 \wikitexer\ uses stdin and stdout - which would allow it to be
-embedded in a webserver. Another simplification is that WikiTeXer is 
+embedded in a webserver. Another simplification is that wikitexer is 
 paragraph based for macro expansion - much like TeX itself.
 
 
@@ -72,14 +72,15 @@ Markup is translated to native or 'pure' LaTex. Embedded LaTeX is left alone.
 
 == HTML output handler ==
 
-Markup is translated to HTML. Embedded LaTeX is ignored. This is
-important. If HTML output is critical use macro's rather then LaTeX
-commands and register these with the HTML handler.
+Markup is translated to HTML. Embedded LaTeX, in this handler, is
+ignored. This is important. If HTML output is critical use
+\wikitexer\ macro's
+rather then LaTeX commands and register these with the HTML handler.
 
 == Variables ==
 
 Variables defined with the newcommand are only visible to the LaTeX
-output mechanism. Variable defined visible to WikiTeXer are available
+output mechanism. Variables defined visible to wikitexer are available
 to both with:
 
   \newvar{\linux}{\emph{Linux}}
@@ -130,12 +131,12 @@ which will call into expand_begin and expand_end, if they exist ('s'
 is a default parameter).
 
 Adding macro's is easy - with LaTeX add the macro's as usual. With
-Ruby add the Ruby module on the WikiTeXer command line.
+Ruby add the Ruby module on the wikitexer command line.
 
 A Ruby macro is defined as:
 
 <source lang="ruby">
-  module WikiTeXer
+  module WikiTexer
 		# Expand string s
 		def expand s
 			'hello '+s+' expanded'
@@ -147,7 +148,7 @@ Finally there is the option to call directly into ruby with:
 
   \ruby{Time.now}                     % => Tue Oct 21 13:38:01 +0200 2008
 	\ruby{'Test'.sub(/[Tt]/,'x')}       % => xest
-	\ruby{`cat /etc/hostname`}
+	\ruby{`cat /etc/hostname`}          % you are joking, right?
 
 obviously a feature that needs to be disabled on a public web server.
 
