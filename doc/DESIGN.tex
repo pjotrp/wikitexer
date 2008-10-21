@@ -3,7 +3,7 @@
 == Introduction ==
 
 What would I give to have simple wiki markup mixed with LaTeX for
-writing documents? That itch is being scratched here.
+writing documents? That itch is being scratched in this document. 
 
 MediaWiki is becoming something of a standard, so that markup makes
 sense to support. Other markups may be supported by input handlers in
@@ -13,24 +13,58 @@ to the other format we create special generators (macro's) that can
 provide either. This avoids the complexity of translation routines at the
 expense of creating generators through a shared mechanism.
 
-The point here is minimalism and simplicity! Parser tend to get very 
-complicated as they have to adapt to strange user behaviour. WikiTeXer
-is not in that business. Nor does it provide a complete solution to
-all formats. The basic premise is to use LaTeX in a convenient fashion
-for writine a book (yes, that is the purpose) and allow HTML exports
-for review and other purposes.
+The point here is minimalism and simplicity! Parsers, in general, tend
+to get very complicated mostly to adapt to 'strange' or unpredicatble
+user behaviour. WikiTeXer is not in that business. Nor does it provide
+a complete solution to all formats. The basic premise is to use LaTeX
+in a convenient fashion for writing a book (yes, that is the purpose)
+and allow clean HTML exports for review and other purposes (for
+example exporting to Microsoft Word).
+
+The input files are written as .tex files with Wiki markup extensions
+and macros. WikiTeXer is a command-line or library pre-parser which
+outputs either pure LaTeX or pure HTML.
+
+Much of the simplicity is achieved by ignoring stuff the parser does
+not understand, but filling in what it understands. By default
+\wikitexer\ uses stdin and stdout - which would allow it to be
+embedded in a webserver.
 
 
 == MediaWiki input handler ==
 
 The MediaWiki input handler will support a minimalistic MediaWiki style 
 markup. Other markup (like LaTex) it will basically ignore. So it should
-support MediaWiki headers, emphasing text and URLs initially.
+support MediaWiki headers, emphasing text and URLs initially. Initial 
+support for:
+
+LaTeX style commands.
+
+<nowiki><nowiki>suppresses markup</nowiki></nowiki>
+
+Headings like:
+
+<nowiki>== Heading ==</nowiki>
+
+Formatting:
+
+''Italicized text''
+'''Bold text'''
+<u>underline new material</u>
+
+External links:
+
+[http://en.wikipedia.org Wikipedia]
+
+Templates:
+
+{{variable}} or {{macro}} or {{rubycall}}, or the more LaTeX-like
+\variable, \macro and \rubycall (see below).
 
 
 == LaTeX output handler ==
 
-Markup is translated to native LaTex. Embedded LaTeX is left alone.
+Markup is translated to native or 'pure' LaTex. Embedded LaTeX is left alone.
 
 
 == HTML output handler ==
@@ -39,9 +73,109 @@ Markup is translated to HTML. Embedded LaTeX is ignored. This is
 important. If HTML output is critical use macro's rather then LaTeX
 commands and register these with the HTML handler.
 
+== Variables ==
 
-== Macro's ==
+Variables defined with the newcommand are only visible to the LaTeX
+output mechanism. Variable defined visible to WikiTeXer are available
+to both with:
 
-LaTeX is a macro language, but not always that nice to program.
-Embedding Ruby and Ruby macro's is a great feature to add to LaTeX
-native macros.
+  \newvar{\linux}{\emph{Linux}}
+
+which can be written as
+
+  \newvar{\linux}{''Linux''}
+
+== Macro's and templates ==
+
+Macros are powerful (templates in MediaWiki speak). They prevent
+typing things more than once by defining shared attributes in a single
+location.  LaTeX is a macro language, but not always that nice to
+program.  Embedding Ruby and Ruby macro's is a great feature to add to
+LaTeX' native macros. When using the {{call}} syntax, or LaTex style
+backslash \call the input handler will try to find a matching routine
+and use that. If it misses a routine it will assume it can ignore it.
+
+LaTex uses the following syntax variations:
+
+	\hfill
+  \hyphenpenalty=5000
+	\caption{This is the caption.\label{fig:rawss}}
+  \epsfig{file=graph.ps, angle=-90, width=\linewidth}
+
+  \begin{figure} ... \end{figure}
+  \begin{minipage}[t]{0.58\linewidth} ... \end{minipage} % with (default parameter [t]).
+
+See also [http://en.wikibooks.org/wiki/LaTeX/Customizing_LaTeX newcommand and newenvironment].
+
+It would be nice to have Ruby macro's 'override' LaTeX commands - so
+they can share the same syntax. This way different output handlers can
+choose to implement either in LaTeX or Ruby. It would be cool to do
+that from within TeX - who dares - but a preparser will do the job for
+most situations - just expand to the point it becomes pure LaTeX. Say
+we have defined a macro named 'expand' this could be implemented as:
+
+  \expand{'text'}
+
+if a Ruby method 'expand' exists in this context it will be called
+with parameter text. Otherwise it is not expanded. Likewise we can 
+define environment methods:
+
+  \begin{expand}[s]{pars}
+	\end{expand}
+
+which will call into expand_begin and expand_end, if they exist ('s'
+is a default parameter).
+
+Adding macro's is easy - with LaTeX add the macro's as usual. With
+Ruby add the Ruby module on the WikiTeXer command line.
+
+A Ruby macro is defined as:
+
+<source lang="ruby">
+  module WikiTeXer
+		# Expand string s
+		def expand s
+			'hello '+s+' expanded'
+		end
+	end
+</source>
+
+
+=== Example: inject file ===
+  
+One example is, based on whether we are generating LaTeX or HTML we
+want to insert different code in the output handler. The injected
+source can be stored in separate files. A method could be:
+
+  \injectfile{table1}
+
+where the LaTeX version would use table1.tex, using a standard Tex
+\input command, and the HTML version table1.html using a Ruby method
+which can do more, for example strip extraneous HTML tags.
+
+=== Example: fetch hot info ===
+
+Another example would be to fetch live data from a database or a
+webserver to generate a document. For example:
+
+  \sqlfetch{connection=\sqlconnection, query='select record from db'}
+
+or more likely
+
+  \userinfo(\username)
+
+with a Ruby implementation for both LaTeX and HTML output generators.
+
+
+== See also ==
+
+Ruby Mediacloth. A MediaWiki to HTML converter in Ruby. Appears to
+lacking in functionality - but what is there may be of interest.
+
+Python wikimarkup on Google's code. A basic MediaWiki to HTML
+converter which can be run from the command line. Does not support
+LaTeX.
+
+latex2html - HTML generator written in Perl and rather ancient. Took
+the effort of trying to understand LaTeX and convert that to HTML. An
+impossible job. Not flexible in terms of generation.
