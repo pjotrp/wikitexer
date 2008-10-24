@@ -16,6 +16,20 @@ class HtmlCreator
   def bold buf
     '<b>'+buf+'</b>'
   end
+
+  def small buf
+    '<SMALL>'+buf+'</SMALL>'
+  end
+
+  def strikeout buf
+    '<S>'+buf+'</S>'
+  end
+
+  def underline buf
+    '<U>'+buf+'</U>'
+  end
+
+
 end
 
 

@@ -6,6 +6,9 @@ module BasicFormatting
     paragraph.replace_all("('''''([^']+)''''')", proc { | buf | creator.italics(creator.bold(buf)) } )
     paragraph.replace_all("('''([^']+)''')", proc { | buf | creator.bold(buf) } )
     paragraph.replace_all("(''([^']+)'')", proc { | buf | creator.italics(buf) } )
+    paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf | creator.small(buf) } )
+    paragraph.replace_all("(<s>(.*?)<\/s>)", proc { | buf | creator.strikeout(buf) } )
+    paragraph.replace_all("(<u>(.*?)<\/u>)", proc { | buf | creator.underline(buf) } )
   end
 
   # Remove remarks
@@ -28,7 +31,7 @@ if $UNITTEST
 
   class Test_BasicFormatting < Test::Unit::TestCase
 
-    def test_italics
+    def test_markup
       creator = HtmlCreator.new
       par = Paragraph.new(["''italics''"])
       assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_s)
@@ -36,6 +39,12 @@ if $UNITTEST
       assert_equal("<b>bold</b>",BasicFormatting::markup(par,creator).to_s)
       par = Paragraph.new(["'''''bold intalics'''''"])
       assert_equal("<i><b>bold intalics</b></i>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["<small>test</small>"])
+      assert_equal("<SMALL>test</SMALL>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["<s>test</s>"])
+      assert_equal("<S>test</S>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["<u>test</u>"])
+      assert_equal("<U>test</U>",BasicFormatting::markup(par,creator).to_s)
     end
 
     def test_remark
