@@ -133,7 +133,7 @@ is a default parameter).
 Adding macro's is easy - with LaTeX add the macro's as usual. With
 Ruby add the Ruby module on the wikitexer command line.
 
-A Ruby macro is defined as:
+A Ruby macro is defined in a separate file as:
 
 <source lang="ruby">
   module WikiTexer
@@ -151,6 +151,15 @@ Finally there is the option to call directly into ruby with:
 	\ruby{`cat /etc/hostname`}          % you are joking, right?
 
 obviously a feature that needs to be disabled on a public web server.
+
+Allowing more complicated multi lines:
+
+	\ruby{{
+    result = 0
+    (1..10) do { | i | result += i }
+		result
+	}}
+
 
 === Example: inject file ===
   

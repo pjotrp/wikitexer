@@ -18,5 +18,5 @@ require 'test/unit'
 
 $UNITTEST = true
 
-require 'wikitexer'
-require 'wtparser'
+require 'control/wikitexer'
+require 'input/wtparser'

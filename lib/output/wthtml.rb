@@ -1,7 +1,9 @@
 
-require 'html/htmlcreator'
-require 'html/htmlwriter'
+require 'output/html/htmlcreator'
+require 'output/html/htmlwriter'
 
+# WikiTeXer HTML output handler
+#
 class WtHtml
 
   attr_reader :writer, :creator
@@ -10,6 +12,5 @@ class WtHtml
     @creator = HtmlCreator.new
     @writer = HtmlWriter.new css
   end
-
 
 end

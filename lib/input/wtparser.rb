@@ -1,9 +1,11 @@
 
-require 'wikimedia/headers'
-require 'wikimedia/basicformatting'
-require 'wikimedia/ruby'
-require 'types/paragraph'
+require 'input/wikimedia/headers'
+require 'input/wikimedia/basicformatting'
+require 'input/wikimedia/ruby'
+require 'doc/paragraph'
 
+# The main paragraph parser 
+#
 class WtParser
 
   def initialize creator
