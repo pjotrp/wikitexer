@@ -22,7 +22,15 @@ end
 
 if $UNITTEST
 
+  require 'output/html/htmlcreator'
+
   class Test_BasicFormatting < Test::Unit::TestCase
+
+    def test_italics
+      creator = HtmlCreator.new
+      par = Paragraph.new(["''this is a title''"])
+      assert_equal("<i>this is a title</i>",BasicFormatting::markup(par,creator).to_s)
+    end
 
     def test_remark
       par = Paragraph.new(["test % test\n","test \\% test"])
