@@ -12,6 +12,10 @@ class HtmlCreator
   def italics buf
     '<i>'+buf+'</i>'
   end
+
+  def bold buf
+    '<b>'+buf+'</b>'
+  end
 end
 
 

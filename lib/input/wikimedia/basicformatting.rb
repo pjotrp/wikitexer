@@ -3,6 +3,8 @@ module BasicFormatting
 
   # Replace markup with appropriate output
   def BasicFormatting::markup paragraph, creator
+    paragraph.replace_all("('''''([^']+)''''')", proc { | buf | creator.italics(creator.bold(buf)) } )
+    paragraph.replace_all("('''([^']+)''')", proc { | buf | creator.bold(buf) } )
     paragraph.replace_all("(''([^']+)'')", proc { | buf | creator.italics(buf) } )
   end
 
@@ -28,8 +30,12 @@ if $UNITTEST
 
     def test_italics
       creator = HtmlCreator.new
-      par = Paragraph.new(["''this is a title''"])
-      assert_equal("<i>this is a title</i>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["''italics''"])
+      assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["'''bold'''"])
+      assert_equal("<b>bold</b>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["'''''bold intalics'''''"])
+      assert_equal("<i><b>bold intalics</b></i>",BasicFormatting::markup(par,creator).to_s)
     end
 
     def test_remark
