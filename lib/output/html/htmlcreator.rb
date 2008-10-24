@@ -1,9 +1,9 @@
 
 class HtmlCreator
 
-  def title level, buf
+  def title titlenumbering, level, buf
     if buf.strip.size > 0
-      "<h#{level}>"+buf+"</h#{level}>"
+      "<h#{level}>"+titlenumbering.to_s+' '+buf+"</h#{level}>"
     else
       buf
     end

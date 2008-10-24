@@ -12,10 +12,11 @@ class WtParser
     @creator = creator
   end
 
-  def parse par
+  def parse document, par
     paragraph = Paragraph.new(par)
     Ruby::parse(paragraph)
-    Headers::markup(paragraph, proc {|level,buf| @creator.title(level,buf) } )
+    Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
+    BasicFormatting::markup(paragraph, @creator)
     BasicFormatting::remarks(paragraph)
     paragraph
   end

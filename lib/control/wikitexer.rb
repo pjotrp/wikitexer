@@ -1,3 +1,5 @@
+require 'doc/document'
+
 # Main WikiTeXer module which receives input lines through +addline+
 
 class WikiTexer
@@ -5,6 +7,7 @@ class WikiTexer
   def initialize(parser, writer)
     @parser = parser
     @writer = writer
+    @document = Document.new
     @par = []  
   end
 
@@ -14,7 +17,7 @@ class WikiTexer
   def addline s, lineno, fn
     @par.push s
     if s.strip.size == 0
-      paragraph = @parser.parse(@par)
+      paragraph = @parser.parse(@document,@par)
       @writer.start_par(paragraph)
       @writer.write paragraph
       @writer.end_par(paragraph)

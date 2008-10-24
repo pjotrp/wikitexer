@@ -22,6 +22,26 @@ class TitleNumbering
     bump
   end
 
+  # both adjust level and bump
+  def levelbumper level
+    if level == @level.size
+      bump
+      return to_s
+    end
+    if level > @level.size
+      while level > @level.size
+        # p ['>',@level]
+        newlevel
+      end
+      return to_s
+    end
+    while level < @level.size
+      # p ['<',@level]
+      parentlevel
+    end
+    to_s
+  end
+
   def to_s
     @level.join('.')
   end
@@ -43,7 +63,13 @@ if $UNITTEST
       assert_equal('1.3',t.to_s)
       t.parentlevel
       assert_equal('2',t.to_s)
-
+      assert_equal('3',t.levelbumper(1))
+      assert_equal('3.1',t.levelbumper(2))
+      assert_equal('3.2',t.levelbumper(2))
+      assert_equal('3.2.1',t.levelbumper(3))
+      assert_equal('3.3',t.levelbumper(2))
+      assert_equal('3.3.1.1',t.levelbumper(4))
+      assert_equal('3.4',t.levelbumper(2))
     end
   end
 

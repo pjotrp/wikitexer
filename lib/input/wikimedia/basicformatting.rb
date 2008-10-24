@@ -35,6 +35,8 @@ if $UNITTEST
       creator = HtmlCreator.new
       par = Paragraph.new(["''italics''"])
       assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_s)
+      par = Paragraph.new(["''italics\nline2''"])
+      assert_equal("<i>italics\nline2</i>",BasicFormatting::markup(par,creator).to_s)
       par = Paragraph.new(["'''bold'''"])
       assert_equal("<b>bold</b>",BasicFormatting::markup(par,creator).to_s)
       par = Paragraph.new(["'''''bold intalics'''''"])
