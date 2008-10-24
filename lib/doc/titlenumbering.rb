@@ -6,7 +6,7 @@ class TitleNumbering
   attr_reader :level
 
   def initialize
-    @level = [ 1 ]
+    @level = [ 0 ]
   end
 
   def bump
