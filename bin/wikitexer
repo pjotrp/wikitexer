@@ -107,6 +107,7 @@ else
 		  wikitexer.addline(s,num,fn)
 			num += 1
 		end
+    wikitexer.write_paragraph
 	end
 end
 

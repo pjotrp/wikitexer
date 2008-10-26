@@ -35,16 +35,27 @@ class Paragraph
   # will replace the whole match passing the substring contained between curly 
   # braces to the +replace_func+. This is repeated as long as there are matches.
   #
-  def replace_all search, replace_func = nil
+  # If +extra_parameters+ is defined the +replace_func+ is called with an 
+  # array of extra matches
+  #
+  def replace_all search, replace_func, extra_parameters=0
     buf = to_s
     while pos = buf =~ /#{search}/
       repl = $1
       substr = $2
+      extra = []
+      (1..extra_parameters).each do | i |
+        extra.push eval("$#{i+2}")
+      end
       buf2 = ''
       if pos > 0 
         buf2 = buf[0..pos-1]
       end
-      buf2 += replace_func.call(substr)
+      if extra_parameters == 0
+        buf2 += replace_func.call(substr)
+      else
+        buf2 += replace_func.call(substr, extra)
+      end
       if pos+repl.size < buf.size-2
         buf2 += buf[pos+repl.size..-1]
       end

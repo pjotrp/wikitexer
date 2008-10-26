@@ -11,7 +11,20 @@ module Functions
   # in place.
   #
   def Functions::expand par, functionresolver
-    par.replace_all("(\\\\ruby\\{([^}]+)\\})",proc { | cmd | eval(cmd).to_s } )
+    # get all newvars and store them in the functionresolver
+    par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", proc { | name, values |
+      body = values[0]
+      functionresolver.newvar(name,body)
+      return ''  
+    }, 1 )
+    # Expand all known variables
+    par.replace_all("(\\\\(\\w+))", proc { | funcname |
+      if functionresolver.hasmethod?(funcname)
+        return functionresolver[funcname]
+      end
+      '@__@unknown'
+    })
+    par.replace_all("((@__@))", proc { | nothing | "\\" } )
   end
 
 end
@@ -24,7 +37,7 @@ if $UNITTEST
       @funcresolver = FunctionResolver.new
       assert_equal(' \unknown test',expand([' \unknown test']))
       assert_equal('',expand(['\newvar{test}{me}']))
-      assert_equal('me',@funcresolver.get('test'))
+      assert_equal('me',@funcresolver['test'])
       assert_equal('me',expand(['\test']))
     end
 

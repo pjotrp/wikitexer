@@ -16,13 +16,14 @@ class WikiTexer
   #
   def addline s, lineno, fn
     @par.push s
-    if s.strip.size == 0
-      paragraph = @parser.parse(@document,@par)
-      @writer.start_par(paragraph)
-      @writer.write paragraph
-      @writer.end_par(paragraph)
-      @par = []
-    end
+    write_paragraph if s.strip.size == 0
   end
 
+  def write_paragraph
+    paragraph = @parser.parse(@document,@par)
+    @writer.start_par(paragraph)
+    @writer.write paragraph
+    @writer.end_par(paragraph)
+    @par = []
+  end
 end
