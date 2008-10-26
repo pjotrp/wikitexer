@@ -53,7 +53,8 @@ if $UNITTEST
 
     def test_titelnum
       t = TitleNumbering.new
-      assert_equal([1],t.level)
+      assert_equal([0],t.level)
+      t.bump
       t.newlevel
       assert_equal([1,1],t.level)
       t.bump

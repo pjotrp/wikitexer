@@ -30,7 +30,12 @@ class Paragraph
     @current
   end
 
-  def replace_all search, modifier = nil
+  # replace_all replaces all occurences matching +search+, where parentheses
+  # define a regex replace wit substring. For example "(\\\\ruby\\{([^}]+)\\})"
+  # will replace the whole match passing the substring contained between curly 
+  # braces to the +replace_func+. This is repeated as long as there are matches.
+  #
+  def replace_all search, replace_func = nil
     buf = to_s
     while pos = buf =~ /#{search}/
       repl = $1
@@ -39,7 +44,7 @@ class Paragraph
       if pos > 0 
         buf2 = buf[0..pos-1]
       end
-      buf2 += modifier.call(substr)
+      buf2 += replace_func.call(substr)
       if pos+repl.size < buf.size-2
         buf2 += buf[pos+repl.size..-1]
       end

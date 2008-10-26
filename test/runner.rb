@@ -21,3 +21,4 @@ $UNITTEST = true
 require 'control/wikitexer'
 require 'input/wtparser'
 require 'doc/titlenumbering'
+require 'input/tex/functions'
