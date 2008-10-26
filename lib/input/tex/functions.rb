@@ -17,13 +17,20 @@ module Functions
       functionresolver.newvar(name,body)
       return ''  
     }, 1 )
-    # Expand all known variables
+    # Expand all known variables with trailing backslash
+    par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", proc { | funcname, values |
+      if functionresolver.hasmethod?(funcname)
+        return functionresolver[funcname]+values[1]
+      end
+      '@__@'+funcname+values.to_s
+    }, 2)
+    # Expand all remaining
     par.replace_all("(\\\\(\\w+))", proc { | funcname |
       if functionresolver.hasmethod?(funcname)
         return functionresolver[funcname]
       end
-      '@__@unknown'
-    })
+      '@__@'+funcname
+    } )
     par.replace_all("((@__@))", proc { | nothing | "\\" } )
   end
 
@@ -38,7 +45,13 @@ if $UNITTEST
       assert_equal(' \unknown test',expand([' \unknown test']))
       assert_equal('',expand(['\newvar{test}{me}']))
       assert_equal('me',@funcresolver['test'])
-      assert_equal('me',expand(['\test']))
+      assert_equal('1 me,',expand(['1 \test\,']))
+      assert_equal('2 me',expand(['2 \test']))
+      assert_equal('3 me test',expand(['3 \test\ test']))
+      assert_equal('4 meme',expand(['4 \test\test']))
+      assert_equal('5 \unknown test',expand(['5 \unknown test']))
+      assert_equal('6 \reallyunknown test',expand(['6 \reallyunknown test']))
+      assert_equal('7 \reallyunknown\ test',expand(['7 \reallyunknown\ test']))
     end
 
   protected
