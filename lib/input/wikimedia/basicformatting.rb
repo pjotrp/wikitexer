@@ -12,7 +12,7 @@ module BasicFormatting
   end
 
   # Remove remarks
-  def BasicFormatting::remarks paragraph
+  def BasicFormatting::remarks paragraph, creator
     a = paragraph.to_a
     a.each_with_index do | s, i |
       if (pos = s =~ /[^\\]%/)
@@ -21,6 +21,8 @@ module BasicFormatting
       end
     end
     paragraph.set(a)
+    # set percentage symbol correctly
+    paragraph.replace_all("((\\\\%))", proc { | buf | creator.percentage(buf) } )
   end
 
 end
@@ -50,8 +52,9 @@ if $UNITTEST
     end
 
     def test_remark
+      creator = HtmlCreator.new
       par = Paragraph.new(["test % test\n","test \\% test"])
-      assert_equal(["test \n","test \\% test"],BasicFormatting::remarks(par))
+      assert_equal("test \ntest % test",BasicFormatting::remarks(par,creator).to_s)
     end
   end
 

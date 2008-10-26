@@ -24,7 +24,7 @@ class WtParser
     # ---- standard markup
     BasicFormatting::markup(paragraph, @creator)
     # ---- remarks
-    BasicFormatting::remarks(paragraph)
+    BasicFormatting::remarks(paragraph, @creator)
     paragraph
   end
 

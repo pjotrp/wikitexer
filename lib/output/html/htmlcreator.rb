@@ -29,6 +29,9 @@ class HtmlCreator
     '<U>'+buf+'</U>'
   end
 
+  def percentage buf
+    '%'
+  end
 
 end
 
