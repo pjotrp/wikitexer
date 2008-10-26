@@ -5,26 +5,27 @@
 \notice{This is a work in progress!}
 
 What would you give to have simple wiki markup mixed with LaTeX for
-writing documents? That itch is being scratched in this document. 
+writing documents? That itch is being scratched by WikiTeXer.
 
-MediaWiki is becoming something of a standard, so that markup makes
+\mediawiki\ is becoming something of a standard, so that markup makes
 sense to support. Other markups may be supported by input handlers in
-the future. We create output handlers for LaTeX and HTML. This means,
-to support both outputs, rather then converting native LaTeX or HTML
-to the other format we create special generators (macro's) that can
-provide either. This avoids the complexity of translation routines at the
-expense of creating generators through a shared mechanism.
+the future. For now we created output handlers for LaTeX and HTML.
+This means, to support both outputs, rather then converting native
+LaTeX or HTML to the other format we create special generators
+(macro's) that can provide either. This avoids the complexity of
+translation routines at the expense of creating generators through a
+shared mechanism.
 
-The point here is minimalism and simplicity! Parsers, in general, tend
+The point here is minimalism and simplicity. Parsers, in general, tend
 to get very complicated mostly to adapt to 'strange' or unpredicatble
-user behaviour. wikitexer is not in that business. Nor does it provide
-a complete solution to all formats. The basic premise is to use LaTeX
-in a convenient fashion for writing a book (yes, that is the purpose)
-and to allow clean HTML exports for review and other purposes (for
-example exporting to Microsoft Word).
+user behaviour. \wikitexer\ is not in that particular business. Nor
+does it provide a complete solution to all formats. The basic premise
+is to use LaTeX in a convenient fashion for writing a book (yes, that
+is the purpose), or papers, and to allow clean HTML exports for review
+and other purposes (for example exporting to Microsoft Word).
 
 The input files are written as .tex files with Wiki markup extensions
-and macros. wikitexer is a command-line or library pre-parser which
+and macros. \wikitexer\ is a command-line or library pre-parser which
 outputs either pure LaTeX or pure HTML.
 
 Much of the simplicity is achieved by ignoring stuff the parser does
@@ -34,16 +35,18 @@ embedded in a webserver. Another simplification is that wikitexer is
 paragraph based for macro expansion - much like TeX itself.
 
 
-== MediaWiki input handler ==
+== \mediawiki\ input handler ==
 
-The MediaWiki input handler will support a minimalistic MediaWiki style 
-markup. Other markup (like LaTex) it will basically ignore. So it should
-support MediaWiki headers, emphasing text and URLs initially. Initial 
-support for:
+The \mediawiki\ input handler supports a minimalistic \mediawiki\ style
+markup. Other markup (like LaTex) it will basically ignore, unless a
+handler exists. So \wikitexer\ supports \mediawiki\ headers, emphasing text
+and URLs initially. Initial support for:
 
-LaTeX style commands.
+LaTeX style commands
 
-<nowiki><nowiki>suppresses markup</nowiki></nowiki>
+\begin{verbatim}
+<nowiki>suppresses markup</nowiki>
+\end{verbatim}
 
 Headings like:
 
@@ -73,9 +76,9 @@ Markup is translated to native or 'pure' LaTex. Embedded LaTeX is left alone.
 == HTML output handler ==
 
 Markup is translated to HTML. Embedded LaTeX, in this handler, is
-ignored. This is important. If HTML output is critical use
-\wikitexer\ macro's
-rather then LaTeX commands and register these with the HTML handler.
+ignored. This is important. If HTML output is critical use \wikitexer\
+macro's rather then LaTeX commands and register these with the HTML
+handler.
 
 == Variables ==
 
@@ -91,7 +94,7 @@ which can be written as
 
 == Macro's and templates ==
 
-Macros are powerful (templates in MediaWiki speak). They prevent
+Macros are powerful (templates in \mediawiki\ speak). They prevent
 typing things more than once by defining shared attributes in a single
 location.  LaTeX is a macro language, but not always that nice to
 program.  Embedding Ruby and Ruby macro's is a great feature to add to
@@ -150,7 +153,7 @@ Finally there is the option to call directly into ruby with:
 	\ruby{'Test'.sub(/[Tt]/,'x')}       % => xest
 	\ruby{`cat /etc/hostname`}          % you are joking, right?
 
-obviously a feature that needs to be disabled on a public web server.
+obviously a very powerful feature that needs to be disabled on a public web server.
 
 Allowing more complicated multi lines:
 
@@ -189,10 +192,10 @@ with a Ruby implementation for both LaTeX and HTML output generators.
 
 == See also ==
 
-Ruby Mediacloth. A MediaWiki to HTML converter in Ruby. Appears to
+Ruby Mediacloth. A \mediawiki\ to HTML converter in Ruby. Appears to
 lacking in functionality - but what is there may be of interest.
 
-Python wikimarkup on Google's code. A basic MediaWiki to HTML
+Python wikimarkup on Google's code. A basic \mediawiki\ to HTML
 converter which can be run from the command line. Does not support
 LaTeX.
 
