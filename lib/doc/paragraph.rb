@@ -41,7 +41,7 @@ class Paragraph
   def replace_all search, replace_func, extra_parameters=0
     buf = to_s
     while pos = buf =~ /#{search}/
-      repl = $1
+      orig = $1
       substr = $2
       extra = []
       (1..extra_parameters).each do | i |
@@ -52,12 +52,12 @@ class Paragraph
         buf2 = buf[0..pos-1]
       end
       if extra_parameters == 0
-        buf2 += replace_func.call(substr)
+        buf2 += replace_func.call(substr, orig)
       else
-        buf2 += replace_func.call(substr, extra)
+        buf2 += replace_func.call(substr, orig, extra)
       end
-      if pos+repl.size < buf.size-2
-        buf2 += buf[pos+repl.size..-1]
+      if pos+orig.size < buf.size-2
+        buf2 += buf[pos+orig.size..-1]
       end
       # print buf2
       # sleep 2

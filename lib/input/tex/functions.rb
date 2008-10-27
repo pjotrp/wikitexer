@@ -12,26 +12,34 @@ module Functions
   #
   def Functions::expand par, functionresolver
     # get all newvars and store them in the functionresolver
-    par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", proc { | name, values |
+    par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", proc { | name, orig, values |
       body = values[0]
       functionresolver.newvar(name,body)
       return ''  
     }, 1 )
-    # Expand all known variables with trailing backslash
-    par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", proc { | funcname, values |
+    # get all single arg functions
+    par.replace_all("(\\\\(\\w+)\\{([^}]+)\\})", proc { | funcname, orig, values |
+      var = values[0]
       if functionresolver.hasmethod?(funcname)
+        return functionresolver.send(funcname,var)
+      end
+      return ''  
+    }, 1 )
+    # Expand all known variables with trailing backslash
+    par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", proc { | funcname, orig, values |
+      if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]+values[1]
       end
       '@__@'+funcname+values.to_s
     }, 2)
     # Expand all remaining
-    par.replace_all("(\\\\(\\w+))", proc { | funcname |
-      if functionresolver.hasmethod?(funcname)
+    par.replace_all("(\\\\(\\w+))", proc { | funcname, orig |
+      if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]
       end
       '@__@'+funcname
     } )
-    par.replace_all("((@__@))", proc { | nothing | "\\" } )
+    par.replace_all("((@__@))", proc { | nothing, orig | "\\" } )
   end
 
 end
@@ -52,6 +60,12 @@ if $UNITTEST
       assert_equal('5 \unknown test',expand(['5 \unknown test']))
       assert_equal('6 \reallyunknown test',expand(['6 \reallyunknown test']))
       assert_equal('7 \reallyunknown\ test',expand(['7 \reallyunknown\ test']))
+    end
+
+    def test_function_parameters
+      @funcresolver = FunctionResolver.new
+      assert_equal('testme',expand(['\dummy{testme}']))
+      assert_equal('testje',expand(['\insertfile{data/insertfile.txt}']))
     end
 
   protected

@@ -3,12 +3,12 @@ module BasicFormatting
 
   # Replace markup with appropriate output
   def BasicFormatting::markup paragraph, creator
-    paragraph.replace_all("('''''([^']+)''''')", proc { | buf | creator.italics(creator.bold(buf)) } )
-    paragraph.replace_all("('''([^']+)''')", proc { | buf | creator.bold(buf) } )
-    paragraph.replace_all("(''([^']+)'')", proc { | buf | creator.italics(buf) } )
-    paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf | creator.small(buf) } )
-    paragraph.replace_all("(<s>(.*?)<\/s>)", proc { | buf | creator.strikeout(buf) } )
-    paragraph.replace_all("(<u>(.*?)<\/u>)", proc { | buf | creator.underline(buf) } )
+    paragraph.replace_all("('''''([^']+)''''')", proc { | buf, orig | creator.italics(creator.bold(buf)) } )
+    paragraph.replace_all("('''([^']+)''')", proc { | buf, orig | creator.bold(buf) } )
+    paragraph.replace_all("(''([^']+)'')", proc { | buf, orig | creator.italics(buf) } )
+    paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf, orig | creator.small(buf) } )
+    paragraph.replace_all("(<s>(.*?)<\/s>)", proc { | buf, orig | creator.strikeout(buf) } )
+    paragraph.replace_all("(<u>(.*?)<\/u>)", proc { | buf, orig | creator.underline(buf) } )
   end
 
   # Remove remarks
@@ -22,7 +22,7 @@ module BasicFormatting
     end
     paragraph.set(a)
     # set percentage symbol correctly
-    paragraph.replace_all("((\\\\%))", proc { | buf | creator.percentage(buf) } )
+    paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
   end
 
 end

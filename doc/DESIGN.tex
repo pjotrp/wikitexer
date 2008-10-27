@@ -164,17 +164,22 @@ Allowing more complicated multi lines:
 	}}
 
 
-=== Example: inject file ===
+=== Example: insert table from file ===
   
 One example is, based on whether we are generating LaTeX or HTML we
 want to insert different code in the output handler. The injected
-source can be stored in separate files. A method could be:
+source can be stored in separate files. E.g.
 
-  \injectfile{table1}
+  \insertfile{table1}
 
 where the LaTeX version would use table1.tex, using a standard Tex
 \input command, and the HTML version table1.html using a Ruby method
-which can do more, for example strip extraneous HTML tags.
+which can do more, for example strip extraneous HTML tags. The
+alternative is to also parse the file:
+
+  \parsefile{table1}
+
+which expands macros in that file.
 
 === Example: fetch hot info ===
 

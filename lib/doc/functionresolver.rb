@@ -1,4 +1,6 @@
 
+require 'input/support/filefunctions'
+
 class NewVar
   attr_reader :name, :body
   def initialize name, body
@@ -15,9 +17,11 @@ class Func
 end
 
 # FunctionResolver provides a mechanism for function lookups. It does not care
-# for the syntax - just passes data around.
+# for the syntax - just passes data around. It is extended by special modules.
 #
 class FunctionResolver
+
+  include FileFunctions
 
   def initialize
     @lookup = { 'newvar' => 'newvar' }
@@ -30,6 +34,13 @@ class FunctionResolver
   end
 
   def hasmethod? name
+    methods.include?(name)
+  end
+
+  def methodcall funcname
+  end
+
+  def hasvar? name
     @lookup[name] != nil
   end
 
@@ -45,12 +56,15 @@ if $UNITTEST
 
     def test_resolver
       resolver = FunctionResolver.new
-      assert(!resolver.hasmethod?('test'))
+      assert(!resolver.hasvar?('test'))
+      assert(resolver.hasmethod?('newvar'))
       resolver.newvar('test','me')
-      assert(!resolver.hasmethod?('testme'))
-      assert(resolver.hasmethod?('test'))
+      assert(!resolver.hasvar?('testme'))
+      assert(resolver.hasvar?('test'))
       assert_equal('me',resolver['test'])
       # assert_equal('me',resolver['unknown'])
+      assert_equal('testDummy',resolver.dummy)
+      assert(resolver.hasmethod?('dummy'))
     end
 
   end
