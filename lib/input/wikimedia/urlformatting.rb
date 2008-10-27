@@ -3,7 +3,7 @@ module UrlFormatting
 
   # Replace markup with appropriate output
   def UrlFormatting::markup paragraph, creator
-    paragraph.replace_all("(\\[([^\\]]+))", proc { | buf, orig | creator.url(buf) } )
+    paragraph.replace_all('(\[([^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
   end
 
 end

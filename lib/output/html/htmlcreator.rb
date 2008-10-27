@@ -35,6 +35,9 @@ class HtmlCreator
 
   def url buf
     a = buf.split
+    if a.size != 2
+      return '(<u>'+buf+'</u>)'
+    end
     '<a href="' + a[0] + '">'+a[1]+'</a>'
   end
 end
