@@ -33,6 +33,10 @@ class HtmlCreator
     '%'
   end
 
+  def url buf
+    a = buf.split
+    '<a href="' + a[0] + '">'+a[1]+'</a>'
+  end
 end
 
 

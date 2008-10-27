@@ -2,6 +2,7 @@
 require 'input/wikimedia/headers'
 require 'input/wikimedia/basicformatting'
 require 'input/wikimedia/ruby'
+require 'input/wikimedia/urlformatting'
 require 'input/tex/functions'
 require 'doc/paragraph'
 
@@ -23,6 +24,8 @@ class WtParser
     Functions::expand(paragraph, document.functionresolver)
     # ---- titles
     Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
+    # ---- urls
+    UrlFormatting::markup(paragraph, @creator)
     # ---- standard markup
     BasicFormatting::markup(paragraph, @creator)
     paragraph
