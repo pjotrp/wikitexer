@@ -15,8 +15,10 @@ module BasicFormatting
   def BasicFormatting::remarks paragraph, creator
     a = paragraph.to_a
     a.each_with_index do | s, i |
-      if (pos = s =~ /[^\\]%/)
-        p pos
+      if (s =~ /^%/)
+        a[i] = "\n"
+      elsif (pos = s =~ /[^\\]%/)
+        # p pos
         a[i] = s[0..pos]+"\n"
       end
     end
