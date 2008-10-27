@@ -15,6 +15,8 @@ class WtParser
 
   def parse document, par
     paragraph = Paragraph.new(par)
+    # ---- remarks
+    BasicFormatting::remarks(paragraph, @creator)
     # ---- Parse \ruby{}
     Ruby::parse(paragraph)
     # ---- expand functions
@@ -23,8 +25,6 @@ class WtParser
     Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
     # ---- standard markup
     BasicFormatting::markup(paragraph, @creator)
-    # ---- remarks
-    BasicFormatting::remarks(paragraph, @creator)
     paragraph
   end
 
