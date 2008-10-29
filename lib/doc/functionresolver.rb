@@ -1,5 +1,6 @@
 
 require 'input/support/filefunctions'
+require 'input/html/htmlfunctions'
 
 class NewVar
   attr_reader :name, :body
@@ -22,6 +23,7 @@ end
 class FunctionResolver
 
   include FileFunctions
+  include HtmlFunctions
 
   def initialize
     @lookup = { 'newvar' => 'newvar' }

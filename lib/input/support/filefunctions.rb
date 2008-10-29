@@ -22,10 +22,6 @@ module FileFunctions
     buf
   end
 
-  def inserthtmltable filename
-    insertfile filename,'<TABLE','<\/TABLE'
-  end
-
   def dummy arg='testDummy'
     arg
   end
