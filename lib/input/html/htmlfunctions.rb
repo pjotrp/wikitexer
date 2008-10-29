@@ -12,6 +12,10 @@ module HtmlFunctions
 REMARK
   end
 
+  def ref body
+    '<u>'+body+'</u> section'
+  end
+
   def format_cite body
     '<small><sup>'+body+'</sup></small>'
 
