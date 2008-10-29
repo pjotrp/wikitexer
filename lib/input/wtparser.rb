@@ -16,16 +16,16 @@ class WtParser
 
   def parse document, par
     paragraph = Paragraph.new(par)
-    # ---- remarks
+    # ---- first remarks, so later HTML expansion does not break off
     BasicFormatting::remarks(paragraph, @creator)
+    # ---- next urls, as we don't want expansion and to allow '[' expansion later
+    UrlFormatting::markup(paragraph, @creator)
     # ---- Parse \ruby{}
     Ruby::parse(paragraph)
     # ---- expand functions
-    Functions::expand(paragraph, document.functionresolver)
+    Functions::expand(paragraph, document)
     # ---- titles
     Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
-    # ---- urls
-    UrlFormatting::markup(paragraph, @creator)
     # ---- standard markup
     BasicFormatting::markup(paragraph, @creator)
     paragraph

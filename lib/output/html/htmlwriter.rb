@@ -33,4 +33,10 @@ HEADER
     write "\n</p>\n" if !paragraph.hastitle
   end
 
+  def bibliography citations
+    write "\n<hr>\n<h2>Biobliography</h2>\n"
+    citations.each do | ref, citation |
+      write "\n<sup>#{ref}</sup> #{citation}<br />\n"
+    end
+  end
 end

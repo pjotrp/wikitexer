@@ -111,5 +111,7 @@ else
 	end
 end
 
+wikitexer.write_bibliography
+
 handler.writer.footer
 

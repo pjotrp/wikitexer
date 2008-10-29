@@ -26,4 +26,8 @@ class WikiTexer
     @writer.end_par(paragraph)
     @par = []
   end
+
+  def write_bibliography
+    @writer.bibliography(@document.citations)
+  end
 end

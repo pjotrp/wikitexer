@@ -10,7 +10,8 @@ module Functions
   # content in place. When a name has no match in the var resolver it is left
   # in place.
   #
-  def Functions::expand par, functionresolver
+  def Functions::expand par, document
+    functionresolver = document.functionresolver
     # get all newvars and store them in the functionresolver
     par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", proc { | name, orig, values |
       body = values[0]
@@ -21,24 +22,38 @@ module Functions
     par.replace_all("(\\\\(\\w+)\\{([^}]+)\\})", proc { | funcname, orig, values |
       var = values[0]
       if functionresolver.hasmethod?(funcname)
-        return functionresolver.send(funcname,var)
+        if functionresolver.docmodify?(funcname)
+          return functionresolver.send(funcname,document,var)
+        else
+          return functionresolver.send(funcname,var)
+        end
       end
-      return ''  
+      return remove_marker(orig)
     }, 1 )
     # Expand all known variables with trailing backslash
     par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", proc { | funcname, orig, values |
       if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]+values[1]
       end
-      '@__@'+funcname+values.to_s
+      return remove_marker(orig)
     }, 2)
     # Expand all remaining
     par.replace_all("(\\\\(\\w+))", proc { | funcname, orig |
       if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]
       end
-      '@__@'+funcname
+      return remove_marker(orig)
     } )
+    restore_markers(par)
+  end
+
+protected
+
+  def Functions::remove_marker(s)
+    '@__@'+s[1..-1]
+  end
+
+  def Functions::restore_markers par
     par.replace_all("((@__@))", proc { | nothing, orig | "\\" } )
   end
 
@@ -49,7 +64,8 @@ if $UNITTEST
   class Test_Functions < Test::Unit::TestCase
 
     def test_expand
-      @funcresolver = FunctionResolver.new
+      @document = Document.new
+      @funcresolver = @document.functionresolver
       assert_equal(' \unknown test',expand([' \unknown test']))
       assert_equal('',expand(['\newvar{test}{me}']))
       assert_equal('me',@funcresolver['test'])
@@ -63,7 +79,8 @@ if $UNITTEST
     end
 
     def test_function_parameters
-      @funcresolver = FunctionResolver.new
+      @document = Document.new
+      @funcresolver = @document.functionresolver
       assert_equal('testme',expand(['\dummy{testme}']))
       assert_equal('testje',expand(['\insertfile{data/insertfile.txt}']))
     end
@@ -71,7 +88,7 @@ if $UNITTEST
   protected
 
     def expand a
-      Functions::expand(Paragraph.new(a),@funcresolver).to_s
+      Functions::expand(Paragraph.new(a),@document).to_s
     end
   end
 

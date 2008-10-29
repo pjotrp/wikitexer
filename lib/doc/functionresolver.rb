@@ -1,4 +1,5 @@
 
+require 'input/support/citationfunctions'
 require 'input/support/filefunctions'
 require 'input/html/htmlfunctions'
 
@@ -22,6 +23,7 @@ end
 #
 class FunctionResolver
 
+  include CitationFunctions
   include FileFunctions
   include HtmlFunctions
 
@@ -37,6 +39,12 @@ class FunctionResolver
 
   def hasmethod? name
     methods.include?(name)
+  end
+
+  # If a method modifies the document state it should be in this list - and gets passed
+  # the document as a parameter.
+  def docmodify? name
+    ['cite'].index(name) != nil
   end
 
   def methodcall funcname
