@@ -4,6 +4,7 @@ require 'input/wikimedia/basicformatting'
 require 'input/wikimedia/ruby'
 require 'input/wikimedia/urlformatting'
 require 'input/wikimedia/listformatting'
+require 'input/support/keywordformatting'
 require 'input/tex/functions'
 require 'doc/paragraph'
 
@@ -31,6 +32,8 @@ class WtParser
     Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
     # ---- standard markup
     BasicFormatting::markup(paragraph, @creator)
+    # ---- speacial markup
+    KeywordFormatting::markup(paragraph, @creator)
     paragraph
   end
 

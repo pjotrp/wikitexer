@@ -60,6 +60,10 @@ class HtmlCreator
     end
     '<a href="' + a[0] + '">'+a[1]+'</a>'
   end
+
+  def keyword buf
+    "<font color='RED'>"+bold(buf)+"</font>"
+  end
 end
 
 

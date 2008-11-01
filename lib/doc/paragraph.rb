@@ -43,6 +43,25 @@ class Paragraph
     @current.size
   end
 
+  def replace_each_line_once search, replace_func
+    @current.each_with_index do | buf, index |
+      if pos = buf =~ /#{search}/
+        orig = $1
+        substr = $2
+        buf2 = ''
+        if pos > 0 
+          buf2 = buf[0..pos-1]
+        end
+        buf2 += replace_func.call(substr, orig)
+        if pos+orig.size < buf.size-2
+          buf2 += buf[pos+orig.size..-1]
+        end
+        buf = buf2
+        @current[index] = buf
+      end
+    end
+  end
+
   # replace_all replaces all occurences matching +search+, where parentheses
   # define a regex replace wit substring. For example "(\\\\ruby\\{([^}]+)\\})"
   # will replace the whole match passing the substring contained between curly 
