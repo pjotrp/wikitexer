@@ -29,6 +29,14 @@ class HtmlCreator
     '<U>'+buf+'</U>'
   end
 
+  def list_start buf
+    '<ol>' + buf
+  end
+
+  def list_end buf
+    buf + '</ol>'
+  end
+
   def bullets_start buf
     '<ul>' + buf
   end
