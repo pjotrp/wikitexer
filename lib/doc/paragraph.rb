@@ -9,7 +9,7 @@ class Paragraph
     hastitle = false
   end
  
-  # Sets the paragraph buffer to an Array - each item ending in an eol.
+  # Updates the paragraph buffer to an Array - each item ending in an eol.
   def set buf
     if buf.kind_of? String
       a = buf.split(/\n/)
@@ -21,13 +21,26 @@ class Paragraph
     @current = buf
     @current
   end
+  
+  def set_line i, buf
+    buf += "\n" if buf !~ /\n$/
+    @current[i] = buf
+  end
 
   def to_s
     @current.to_s
   end
 
+  def [] i
+    @current[i]
+  end
+
   def to_a
     @current
+  end
+
+  def size
+    @current.size
   end
 
   # replace_all replaces all occurences matching +search+, where parentheses

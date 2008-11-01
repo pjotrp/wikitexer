@@ -29,6 +29,18 @@ class HtmlCreator
     '<U>'+buf+'</U>'
   end
 
+  def bullets_start buf
+    '<ul>' + buf
+  end
+
+  def bullets_end buf
+    buf + '</ul>'
+  end
+
+  def bullet buf
+    '<li>'+buf  # +'</li>'
+  end
+
   def percentage buf
     '%'
   end

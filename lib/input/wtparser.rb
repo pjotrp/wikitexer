@@ -3,6 +3,7 @@ require 'input/wikimedia/headers'
 require 'input/wikimedia/basicformatting'
 require 'input/wikimedia/ruby'
 require 'input/wikimedia/urlformatting'
+require 'input/wikimedia/listformatting'
 require 'input/tex/functions'
 require 'doc/paragraph'
 
@@ -20,8 +21,10 @@ class WtParser
     BasicFormatting::remarks(paragraph, @creator)
     # ---- next urls, as we don't want expansion and to allow '[' expansion later
     UrlFormatting::markup(paragraph, @creator)
-    # ---- Parse \ruby{}
+    # ---- parse \ruby{}
     Ruby::parse(paragraph)
+    # ---- expand bullets and lists
+    ListFormatting::markup(paragraph, @creator)
     # ---- expand functions
     Functions::expand(paragraph, document)
     # ---- titles
