@@ -56,14 +56,14 @@ class Paragraph
         if pos+orig.size < buf.size-2
           buf2 += buf[pos+orig.size..-1]
         end
-        buf = buf2
+        buf = buf2+"\n"
         @current[index] = buf
       end
     end
   end
 
   # replace_all replaces all occurences matching +search+, where parentheses
-  # define a regex replace wit substring. For example "(\\\\ruby\\{([^}]+)\\})"
+  # define a regex replace with substring. For example "(\\\\ruby\\{([^}]+)\\})"
   # will replace the whole match passing the substring contained between curly 
   # braces to the +replace_func+. This is repeated as long as there are matches.
   #
