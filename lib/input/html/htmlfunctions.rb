@@ -22,6 +22,10 @@ REMARK
 TEXTBOX
   end
 
+  def includegraphics body
+    '<img src="'+body+'" />'
+  end
+
   def ref body
     '<u>'+body+'</u> section'
   end
