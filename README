@@ -20,7 +20,7 @@ about rendering, and less about usage
 
 LaTeX itself is a great system for publishing (less so for interactive systems,
 but I don't care about those too much either). My main criticism is that LaTeX
-(or TeX) is showing its age in terms of syntax and verbosity. For typing I want
+(or TeX) is showing its age in terms of programming syntax. For typing I want
 something even less in the way, but to generate powerful output like LaTeX does.
 
 What would be nice is to have a LaTeX environment where one could replace some
@@ -31,7 +31,11 @@ difficult problem. My choice is to support native LaTeX tables and native HTML
 tables - as I tend to generate them anyway. Maybe later a external converter
 can be used to handle translation automatically as a plugin.
 
-Darn, I have another project on my hands.
+Darn, I found I have another project on my hands. And it shows how powerful a
+force TeX still is.
+
+The latest is that WikiTeXer works, is fast, and delivers the goods I want. Need 
+a new name for the project, though.
 
 Pjotr Prins.
 

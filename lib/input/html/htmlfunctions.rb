@@ -14,6 +14,10 @@ module HtmlFunctions
 REMARK
   end
 
+  def ignore body
+    ''
+  end
+
   def textbox body
     <<TEXTBOX
     <table width='98%' border="1"><tr bgcolor='lightblue'><td border=1 bgcolor='black'>&nbsp;</td><td>
@@ -23,7 +27,20 @@ TEXTBOX
   end
 
   def includegraphics body
-    '<img src="'+body+'" />'
+    img = '<img src="'+body+'" />'
+    img
+  end
+
+  def caption body
+    '<small>'+body+'</small>'
+  end
+
+  def label body
+    'Figure: '
+  end
+
+  def large body
+    '<font size="8">'+body+'</font>'
   end
 
   def ref body
