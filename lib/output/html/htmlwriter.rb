@@ -9,6 +9,13 @@ class HtmlWriter
     print buf
   end
 
+  def write_paragraph environments, paragraph
+    paragraph.each do | line |
+      write line
+      write '<br />' if environments.has?('verbatim')
+    end
+  end
+
   def header
     write "<html>\n"
     write "  <body>\n"

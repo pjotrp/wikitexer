@@ -24,7 +24,7 @@ class WikiTexer
   def write_paragraph
     paragraph = @parser.parse_paragraph(@document,@par)
     @writer.start_par(paragraph)
-    @writer.write paragraph
+    @writer.write_paragraph @document.environments, paragraph
     @writer.end_par(paragraph)
     @par = []
   end

@@ -35,6 +35,12 @@ class Paragraph
     @current[i]
   end
 
+  def each 
+    @current.each do | s |
+      yield s
+    end
+  end
+
   def to_a
     @current
   end

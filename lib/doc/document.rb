@@ -8,7 +8,7 @@ require 'doc/environment/environmentstack'
 
 class Document
 
-  attr_reader :titlenumbering, :citations, :functionresolver
+  attr_reader :titlenumbering, :citations, :functionresolver, :environments
 
   def initialize
     @titlenumbering   = TitleNumbering.new
