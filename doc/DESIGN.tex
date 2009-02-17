@@ -133,6 +133,13 @@ define environment methods:
 which will call into expand_begin and expand_end, if they exist ('s'
 is a default parameter).
 
+An environment is maintained by the document to provide output that
+runs across multiple paragraphs. Environments are stacked where the
+begin and end marker defines output, but also the stack position
+defines output behaviour. For example in a verbatim environment the
+HTML generator may have to output end of lines in certain
+implementations (though a simple <pre></pre> may suffice).
+
 Adding macro's is easy - with LaTeX add the macro's as usual. With
 Ruby add the Ruby module on the wikitexer command line.
 

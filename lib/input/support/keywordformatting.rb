@@ -1,7 +1,7 @@
 
 module KeywordFormatting
 
-  # Replace markup with appropriate output
+  # Replace special markup with appropriate output - e.g. highlight FIXME
   def KeywordFormatting::markup paragraph, creator
     paragraph.replace_each_line_once("((FIXME\\W))", proc { | buf, orig | creator.keyword(buf) } )
   end

@@ -15,6 +15,8 @@ class WikiTexer
   # parse the incoming stream
   #
   def addline s, lineno, fn
+    # Check for environments
+    # s = Environment.check(@document,s)
     @par.push s
     write_paragraph if s.strip.size == 0
   end

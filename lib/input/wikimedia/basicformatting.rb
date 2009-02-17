@@ -1,7 +1,14 @@
 
 module BasicFormatting
 
-  # Replace markup with appropriate output
+  # Replace typical Wiki markup with appropriate output. 
+  #
+  #   '''      bold
+  #   ''       italic
+  #   <small>  small font
+  #   <s>      strike out
+  #   <u>      underline
+  #
   def BasicFormatting::markup paragraph, creator
     paragraph.replace_all("('''''([^']+)''''')", proc { | buf, orig | creator.italics(creator.bold(buf)) } )
     paragraph.replace_all("('''([^']+)''')", proc { | buf, orig | creator.bold(buf) } )
@@ -11,7 +18,10 @@ module BasicFormatting
     paragraph.replace_all("(<u>(.*?)<\/u>)", proc { | buf, orig | creator.underline(buf) } )
   end
 
-  # Remove remarks
+  # Remove remarks from the text body
+  #
+  #   %        remarks start with a percentage on the first column
+  #
   def BasicFormatting::remarks paragraph, creator
     a = paragraph.to_a
     a.each_with_index do | s, i |
