@@ -49,6 +49,14 @@ class HtmlCreator
     '<li>'+buf  # +'</li>'
   end
 
+  def verbatim_start
+    '<pre>'
+  end
+
+  def verbatim_end
+    '</pre>'
+  end
+
   def percentage buf
     '%'
   end

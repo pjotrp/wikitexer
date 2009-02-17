@@ -4,6 +4,7 @@ require 'input/wikimedia/basicformatting'
 require 'input/wikimedia/ruby'
 require 'input/wikimedia/urlformatting'
 require 'input/wikimedia/listformatting'
+require 'input/wikimedia/environmentformatting'
 require 'input/support/keywordformatting'
 require 'input/tex/functions'
 require 'doc/paragraph'
@@ -16,9 +17,9 @@ class WtParser
     @creator = creator
   end
 
-  # Parse a paragraph of this document
+  # Parse a paragraph of this document and return the modified paragraph
 
-  def parse document, par
+  def parse_paragraph document, par
     paragraph = Paragraph.new(par)
     # ---- first remarks, so later HTML expansion does not break off
     BasicFormatting::remarks(paragraph, @creator)
@@ -37,6 +38,14 @@ class WtParser
     # ---- special markup, for example highlighting FIXME
     KeywordFormatting::markup(paragraph, @creator)
     paragraph
+  end
+
+  # Parse line for environments and return the line stripped of markers
+  def parse_environments environments, line
+    # temporary use a paragraph
+    paragraph = Paragraph.new(line)
+    EnvironmentFormatting::markup(paragraph, environments, @creator)
+    paragraph.to_s+"\n"
   end
 
 end

@@ -21,5 +21,6 @@ $UNITTEST = true
 require 'control/wikitexer'
 require 'input/wtparser'
 require 'doc/titlenumbering'
+require 'doc/environment/environmentstack'
 require 'input/tex/functions'
 require 'input/wikimedia/urlformatting'

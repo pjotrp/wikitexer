@@ -16,13 +16,13 @@ class WikiTexer
   #
   def addline s, lineno, fn
     # Check for environments
-    # s = Environment.check(@document,s)
+    s = @document.scan(@parser,s)
     @par.push s
     write_paragraph if s.strip.size == 0
   end
 
   def write_paragraph
-    paragraph = @parser.parse(@document,@par)
+    paragraph = @parser.parse_paragraph(@document,@par)
     @writer.start_par(paragraph)
     @writer.write paragraph
     @writer.end_par(paragraph)
