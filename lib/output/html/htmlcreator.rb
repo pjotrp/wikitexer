@@ -62,7 +62,7 @@ class HtmlCreator
   end
 
   def url buf
-    a = buf.split
+    a = buf.split(/ /,2)
     if a.size != 2
       return '(<u>'+buf+'</u>)'
     end
