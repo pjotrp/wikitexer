@@ -25,10 +25,22 @@ class HtmlWriter
       <link href="#{@css}" rel="stylesheet" type="text/css">
     </head>
 HEADER
+    else
+      write <<HEADER2
+    <style type="text/css" media="all">
+    /*<![CDATA[*/
+    /* CSS inserted by theme options */
+    body{font-family:'times new roman',times,serif;font-size:90%;color:#222222;background-color:#F0F8FF}
+    body pre { margin: 3em 200px 0 0;color:#8B0000; background-color: #D8BFD8; border-style:outset; }
+    /*]]>*/
+    </style>
+HEADER2
     end
   end
 
   def footer
+    write "  <hr \>\n"
+    write "  "+WIKITEXER_VERSION+' - generated '+Time.now.strftime("%Y-%m-%d %H:%M")+"\n"
     write "  </body>\n</html>\n"
   end
 

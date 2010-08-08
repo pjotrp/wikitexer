@@ -16,7 +16,7 @@ require 'output/wthtml'
 require 'input/wtparser'
 
 
-WIKITEXER_VERSION = 'wikitexer '+Version.get(File.dirname(__FILE__),'VERSION')+' by Pjotr Prins'
+WIKITEXER_VERSION = 'wikiTeXer '+Version.get(File.dirname(__FILE__),'VERSION')+' by Pjotr Prins'
 LATEX = 1
 HTML  = 2
 
