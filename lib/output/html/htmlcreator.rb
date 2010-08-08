@@ -57,6 +57,14 @@ class HtmlCreator
     '</pre>'
   end
 
+  def literal_start name
+    "<#{name}>"
+  end
+
+  def literal_end name
+    "</#{name}>"
+  end
+
   def percentage buf
     '%'
   end

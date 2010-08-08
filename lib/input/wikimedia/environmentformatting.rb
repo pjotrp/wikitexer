@@ -4,15 +4,17 @@ module EnvironmentFormatting
 
   def EnvironmentFormatting::markup paragraph, environments, creator
     paragraph.replace_all("(\\\\begin\\{([^}]+)\\})", proc { | name, orig, values | 
-      $stderr.print "#{name},#{orig},#{values}"
+      # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)
       environments.push(env)
-      return creator.verbatim_start
+      return creator.verbatim_start if name == 'verbatim'
+      return creator.literal_start(name)
     }, 1)
     paragraph = paragraph.replace_all("(\\\\end\\{([^}]+)\\})", proc { | name, orig, values | 
       # p name,orig,values
       env = environments.pop(name)
-      return creator.verbatim_end
+      return creator.verbatim_end if name == 'verbatim'
+      return creator.literal_end(name)
     }, 1)
   end
 
