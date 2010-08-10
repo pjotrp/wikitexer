@@ -9,10 +9,59 @@ class HtmlWriter
     print buf
   end
 
+  def writeln buf
+    print buf + "\n"
+  end
+
+  def tagbox text
+    write "<div ALIGN=right>"
+    write text 
+    write "</div>"
+  end
+
+  # Writes a paragraph to stdout. When last_env contains a special 
+  # environment, more can be done.
   def write_paragraph last_env, environments, paragraph
-    paragraph.each do | line |
-      write line
-      # write '<br />' if environments.has?('verbatim')
+    # $stderr.print last_env,",",paragraph,"\n" if last_env != nil
+    case last_env
+      when 'verbatim'
+        paragraph.each { | line | write line }
+      when 'cmake'
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+      when 'perl' 
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+      when 'python' 
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+      when 'c' 
+      when 'swig'
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+      when 'ruby' 
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+      when 'shell'
+        write "<pre>\n"
+        tagbox last_env
+        paragraph.each { | line | write line }
+        write "</pre>\n"
+    else
+      paragraph.each do | line |
+        write line
+        # write '<br />' if environments.has?('verbatim')
+      end
     end
   end
 

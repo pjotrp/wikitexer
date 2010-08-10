@@ -51,12 +51,12 @@ class HtmlCreator
 
   def verbatim_start
     # "<pre>\n<![CDATA[\n"
-    "\n<pre>\n"
+    "<pre>"
   end
 
   def verbatim_end
     # "]]>\n</pre>"
-    "\n</pre>\n"
+    "</pre>"
   end
 
   def shell_start
@@ -64,6 +64,22 @@ class HtmlCreator
   end
 
   def shell_end
+    ''
+  end
+
+  def c_start
+    ''
+  end
+
+  def c_end
+    ''
+  end
+
+  def swig_start
+    ''
+  end
+
+  def swig_end
     ''
   end
 
