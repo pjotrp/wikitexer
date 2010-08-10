@@ -3,19 +3,39 @@
 module EnvironmentFormatting
 
   def EnvironmentFormatting::markup paragraph, environments, creator
+    last_env = nil
     paragraph.replace_all("(\\\\begin\\{([^}]+)\\})", proc { | name, orig, values | 
       # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)
       environments.push(env)
-      return creator.verbatim_start if name == 'verbatim'
-      return creator.literal_start(name)
+      last_env = name
+      case name
+        when 'verbatim' : return creator.verbatim_start
+        when 'ruby'     : return creator.ruby_start
+        when 'shell'    : return creator.shell_start
+        when 'python'   : return creator.python_start
+        when 'perl'     : return creator.perl_start
+        when 'cmake'    : return creator.cmake_start
+      else
+        $stderr.print "Warning: unknown literal #{name}\n"
+        return creator.literal_start(name)
+      end
     }, 1)
     paragraph = paragraph.replace_all("(\\\\end\\{([^}]+)\\})", proc { | name, orig, values | 
       # p name,orig,values
       env = environments.pop(name)
-      return creator.verbatim_end if name == 'verbatim'
-      return creator.literal_end(name)
+      case name
+        when 'verbatim' : return creator.verbatim_end
+        when 'ruby'     : return creator.ruby_end
+        when 'shell'    : return creator.shell_end
+        when 'python'   : return creator.python_end
+        when 'perl'     : return creator.perl_end
+        when 'cmake'    : return creator.cmake_end
+      else
+        return creator.literal_end(name)
+      end
     }, 1)
+    return paragraph,last_env
   end
 
 end
@@ -30,7 +50,8 @@ if $UNITTEST
       creator = HtmlCreator.new
       environments = EnvironmentStack.new
       par = Paragraph.new(["\\begin{verbatim}\n","\\end{verbatim}\n"])
-      assert_equal("<pre>\n</pre>",EnvironmentFormatting::markup(par,environments,creator).to_s)
+      # p EnvironmentFormatting::markup(par,environments,creator)
+      assert_equal("\n<pre>\n\n\n</pre>verbatim",EnvironmentFormatting::markup(par,environments,creator).to_s)
     end
   end
 

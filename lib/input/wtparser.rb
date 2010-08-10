@@ -47,12 +47,13 @@ class WtParser
     paragraph
   end
 
-  # Parse line for environments and return the line stripped of markers
+  # Parse line for environments and return the line stripped of markers, as well 
+  # as the current environment (only one supported!)
   def parse_environments environments, line
     # temporary use a paragraph
     paragraph = Paragraph.new(line)
-    EnvironmentFormatting::markup(paragraph, environments, @creator)
-    paragraph.to_s+"\n"
+    par, last_environment = EnvironmentFormatting::markup(paragraph, environments, @creator)
+    return paragraph.to_s+"\n", last_environment
   end
 
 end

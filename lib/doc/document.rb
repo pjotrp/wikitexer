@@ -21,6 +21,8 @@ class Document
   # environments. When an environment is found it updated on the
   # EnvironmentStack. This method returns the string stripped from its
   # environment commands
+  #
+  # Note the stack is not working
   def scan parser, s
     parser.parse_environments(@environments, s)
   end

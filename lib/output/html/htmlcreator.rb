@@ -59,6 +59,46 @@ class HtmlCreator
     "\n</pre>\n"
   end
 
+  def shell_start
+    ''
+  end
+
+  def shell_end
+    ''
+  end
+
+  def cmake_start
+    ''
+  end
+
+  def cmake_end
+    ''
+  end
+
+  def ruby_start
+    ''
+  end
+
+  def ruby_end
+    ''
+  end
+
+  def python_start
+    ''
+  end
+
+  def python_end
+    ''
+  end
+
+  def perl_start
+    ''
+  end
+
+  def perl_end
+    ''
+  end
+
   def literal_start name
     "<#{name}>"
   end

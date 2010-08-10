@@ -9,7 +9,7 @@ class HtmlWriter
     print buf
   end
 
-  def write_paragraph environments, paragraph
+  def write_paragraph last_env, environments, paragraph
     paragraph.each do | line |
       write line
       # write '<br />' if environments.has?('verbatim')

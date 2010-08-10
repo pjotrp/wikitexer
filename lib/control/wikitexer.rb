@@ -16,17 +16,18 @@ class WikiTexer
   #
   def addline s, lineno, fn
     # Check for environments
-    s = @document.scan(@parser,s)
+    s, last_env = @document.scan(@parser,s)
     @par.push s
-    write_paragraph if s.strip.size == 0
+    write_paragraph(last_env) if s.strip.size == 0
   end
 
-  def write_paragraph
+  def write_paragraph last_env
     # Here a paragraph gets transformed - unfortunately the environment
     # stack is empty here
+    p last_env
     paragraph = @parser.parse_paragraph(@document,@par)
     @writer.start_par(paragraph)
-    @writer.write_paragraph @document.environments, paragraph
+    @writer.write_paragraph(last_env, @document.environments, paragraph)
     @writer.end_par(paragraph)
     @par = []
   end
