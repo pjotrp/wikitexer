@@ -1,4 +1,6 @@
 
+require 'tempfile'
+
 class HtmlWriter
 
   def initialize css
@@ -14,7 +16,7 @@ class HtmlWriter
   end
 
   def tagbox text
-    write "<div ALIGN=right>"
+    write "<div class=\"sourceheader\">"
     write text 
     write "</div>"
   end
@@ -25,7 +27,9 @@ class HtmlWriter
     # $stderr.print last_env,",",paragraph,"\n" if last_env != nil
     case last_env
       when 'verbatim'
+        write "<div class=\"verbatim\">"
         paragraph.each { | line | write line }
+        write "</div>"
       when 'cmake'
         write "<pre>\n"
         tagbox last_env
@@ -48,15 +52,22 @@ class HtmlWriter
         paragraph.each { | line | write line }
         write "</pre>\n"
       when 'ruby' 
-        write "<pre>\n"
+        write "<div class=\"source\">\n"
         tagbox last_env
-        paragraph.each { | line | write line }
-        write "</pre>\n"
+        Tempfile.open("wikitexer") do | f |
+          paragraph.each { | line | f.print line }
+          f.close
+          write `/usr/bin/source-highlight -s ruby -i #{f.path}`
+        end
+        # paragraph.each { | line | write line }
+        write "</div>\n"
       when 'shell'
+        write "<div class=\"verbatim\">"
         write "<pre>\n"
         tagbox last_env
         paragraph.each { | line | write line }
         write "</pre>\n"
+        write "</div>"
     else
       paragraph.each do | line |
         write line
@@ -79,8 +90,10 @@ HEADER
     <style type="text/css" media="all">
     /*<![CDATA[*/
     /* CSS inserted by theme options */
-    body{font-family:'times new roman',times,serif;font-size:90%;color:#222222;background-color:#F0F8FF}
-    body pre { margin: 3em 200px 0 0;color:#8B0000; background-color: #D8BFD8; border-style:outset; }
+    body {font-family:'times new roman',times,serif;font-size:90%;color:#222222;background-color:#F0F8FF}
+    div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
+    div.sourceheader { text-align:right; color:blue; background-color:#CCCCFF; }
+    div.source { color: black; background-color:#CCFFFF; ; border-style:outset; }
     /*]]>*/
     </style>
 HEADER2
