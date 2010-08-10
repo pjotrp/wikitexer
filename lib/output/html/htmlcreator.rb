@@ -50,11 +50,13 @@ class HtmlCreator
   end
 
   def verbatim_start
-    '<pre>'
+    # "<pre>\n<![CDATA[\n"
+    "\n<pre>\n"
   end
 
   def verbatim_end
-    '</pre>'
+    # "]]>\n</pre>"
+    "\n</pre>\n"
   end
 
   def literal_start name

@@ -18,7 +18,7 @@ class Document
   end
 
   # Every input line passes through the +scan+ method to scan for 
-  # environments. When and environment is found it updated on the
+  # environments. When an environment is found it updated on the
   # EnvironmentStack. This method returns the string stripped from its
   # environment commands
   def scan parser, s

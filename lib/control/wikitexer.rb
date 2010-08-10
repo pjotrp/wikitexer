@@ -22,6 +22,8 @@ class WikiTexer
   end
 
   def write_paragraph
+    # Here a paragraph gets transformed - unfortunately the environment
+    # stack is empty here
     paragraph = @parser.parse_paragraph(@document,@par)
     @writer.start_par(paragraph)
     @writer.write_paragraph @document.environments, paragraph

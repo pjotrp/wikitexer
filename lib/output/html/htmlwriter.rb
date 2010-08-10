@@ -12,7 +12,7 @@ class HtmlWriter
   def write_paragraph environments, paragraph
     paragraph.each do | line |
       write line
-      write '<br />' if environments.has?('verbatim')
+      # write '<br />' if environments.has?('verbatim')
     end
   end
 

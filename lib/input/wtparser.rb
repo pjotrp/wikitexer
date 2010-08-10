@@ -21,6 +21,13 @@ class WtParser
 
   def parse_paragraph document, par
     paragraph = Paragraph.new(par)
+    # p [document.environments]
+    # if document.environments.has?('verbatim')
+    #   print "HEY"
+    #   p document.environments
+    #   exit 0
+    # end
+
     # ---- first remarks, so later HTML expansion does not break off
     BasicFormatting::remarks(paragraph, @creator)
     # ---- next urls, as we don't want expansion and to allow '[' expansion later

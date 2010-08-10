@@ -1,0 +1,3 @@
+- WikiTeXer now directly writes output - it can not deal with environments
+	inside a paragraph. To facilitate embedded environments we need to 
+	step inside.

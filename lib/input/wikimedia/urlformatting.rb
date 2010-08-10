@@ -4,8 +4,8 @@ module UrlFormatting
   # Replace markup with appropriate output
   def UrlFormatting::markup paragraph, creator
     # Find markup that starts with a square bracket and ends with one, and
-    # convert it to an href.
-    paragraph.replace_all('(\[([^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
+    # convert it to an href. This edition requires a URL.
+    paragraph.replace_all('(\[(http:[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
   end
 
 end
