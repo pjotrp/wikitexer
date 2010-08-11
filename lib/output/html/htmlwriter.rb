@@ -7,6 +7,17 @@ class HtmlWriter
     @css = css
   end
 
+  def author
+    author = ENV['USER']
+    author = 'pjotrp' if author == 'wrk'
+    author = 'unknown' if author == nil or author == ''
+    author
+  end
+
+  def timestamp
+    Time.now.strftime("%Y-%m-%d %H:%M")+' by '+author
+  end
+
   def write buf
     print buf
   end
@@ -69,7 +80,6 @@ class HtmlWriter
 
   def header
     write "<html>\n"
-    write "  <body>\n"
     if @css
       write <<HEADER
     <head>
@@ -84,20 +94,25 @@ HEADER
     body {font-family:'times new roman',times,serif;font-size:90%;color:#222222;background-color:#F0F8FF}
     div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
     div.sourceheader { text-align:right; color:blue; background-color:#CCCCFF; }
+    div.sourceauthor { text-align:right; background-color:white; }
     div.source { color: black; background-color:white ; border-style:outset; }
     div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
     div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
     div.perl { color: black; background-color:#CAFFD8; ; border-style:outset; }
-    div.shell { color: black; background-color:#ECD9D9; ; border-style:outset; }
+    div.shell { color: black; background-color:white; ; border-style:outset; }
     /*]]>*/
     </style>
 HEADER2
     end
+    writeln "  <body>"
+    write "<div class=\"sourceauthor\">"
+    write timestamp
+    writeln "</div>"
   end
 
   def footer
     write "  <hr \>\n"
-    write "  "+WIKITEXER_VERSION+' - generated '+Time.now.strftime("%Y-%m-%d %H:%M")+"\n"
+    writeln "  "+WIKITEXER_VERSION+' - generated '+timestamp
     write "  </body>\n</html>\n"
   end
 
