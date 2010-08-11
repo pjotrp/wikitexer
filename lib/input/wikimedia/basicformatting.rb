@@ -27,7 +27,7 @@ module BasicFormatting
     a.each_with_index do | s, i |
       if (s =~ /^%/)
         a[i] = "\n"
-      elsif (pos = s =~ /[^\\]%/)
+      elsif (pos = s =~ /[^\\]%[^dsif]/)
         # p pos
         a[i] = s[0..pos]+"\n"
       end
