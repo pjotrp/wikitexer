@@ -9,7 +9,7 @@ class HtmlWriter
 
   def author
     author = ENV['USER']
-    author = 'pjotrp' if author == 'wrk'
+    author = '<a href="http://thebird.nl/">pjotrp</a>' if author == 'wrk'
     author = 'unknown' if author == nil or author == ''
     author
   end
@@ -91,7 +91,8 @@ HEADER
     <style type="text/css" media="all">
     /*<![CDATA[*/
     /* CSS inserted by theme options */
-    body {font-family:'times new roman',times,serif;font-size:90%;color:#222222;background-color:#F0F8FF}
+    h1,h2,h3 { font-family: palatino font, monospace;  color:darkblue;background-color:#F0F8FF}
+    body {font-family:'times new roman',times,serif; color:#222222;background-color:#F0F8FF; }
     div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
     div.sourceheader { text-align:right; color:blue; background-color:#CCCCFF; }
     div.sourceauthor { text-align:right; background-color:white; }
