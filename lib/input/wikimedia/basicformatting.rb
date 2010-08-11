@@ -25,7 +25,7 @@ module BasicFormatting
   def BasicFormatting::remarks paragraph, creator
     a = paragraph.to_a
     a.each_with_index do | s, i |
-      if (s =~ /^%/)
+      if (s =~ /^%\s/)  # line starts with perc and space
         a[i] = "\n"
       elsif (pos = s =~ /[^\\]%[^dsif]/)
         # p pos
