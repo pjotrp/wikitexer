@@ -83,6 +83,14 @@ class HtmlCreator
     ''
   end
 
+  def quote_start
+    ''
+  end
+
+  def quote_end
+    ''
+  end
+
   def cmake_start
     ''
   end

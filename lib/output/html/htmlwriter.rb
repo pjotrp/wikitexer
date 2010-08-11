@@ -27,7 +27,7 @@ class HtmlWriter
   end
 
   def tagbox text
-    write "<div class=\"sourceheader\">"
+    write "<div class=\"source-header\">"
     write text.capitalize
     write "</div>"
   end
@@ -54,6 +54,10 @@ class HtmlWriter
     case last_env
       when 'verbatim'
         write "<div class=\"verbatim\">"
+        paragraph.each { | line | write line }
+        write "</div>"
+      when 'quote'
+        write "<div class=\"quote\">"
         paragraph.each { | line | write line }
         write "</div>"
       when 'cmake'
@@ -91,11 +95,12 @@ HEADER
     <style type="text/css" media="all">
     /*<![CDATA[*/
     /* CSS inserted by theme options */
-    h1,h2,h3 { font-family: palatino font, monospace;  color:darkblue;background-color:#F0F8FF}
+    h1,h2,h3 { font-family: palatino font, monospace; color:darkblue;background-color:#F0F8FF; }
     body {font-family:'times new roman',times,serif; color:#222222;background-color:#F0F8FF; }
     div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
-    div.sourceheader { text-align:right; color:blue; background-color:#CCCCFF; }
-    div.sourceauthor { text-align:right; background-color:white; }
+    div.quote { font-family: palatino font, monospace; font-size:80%; }
+    div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
+    div.source-author { text-align:right; background-color:white; }
     div.source { color: black; background-color:white ; border-style:outset; }
     div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
     div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
@@ -106,7 +111,7 @@ HEADER
 HEADER2
     end
     writeln "  <body>"
-    write "<div class=\"sourceauthor\">"
+    write "<div class=\"source-author\">"
     write timestamp
     writeln "</div>"
   end

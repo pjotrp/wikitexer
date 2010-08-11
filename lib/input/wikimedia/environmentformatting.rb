@@ -11,6 +11,7 @@ module EnvironmentFormatting
       # last_env = name
       case name
         when 'verbatim' : return creator.verbatim_start
+        when 'quote'    : return creator.quote_start
         when 'ruby'     : return creator.ruby_start
         when 'shell'    : return creator.shell_start
         when 'python'   : return creator.python_start
@@ -29,6 +30,7 @@ module EnvironmentFormatting
       last_env = name
       case name
         when 'verbatim' : return creator.verbatim_end
+        when 'quote'    : return creator.quote_end
         when 'ruby'     : return creator.ruby_end
         when 'shell'    : return creator.shell_end
         when 'python'   : return creator.python_end
