@@ -58,4 +58,20 @@ TEXTBOX
   def format_var body
     '<span class="varname">'+body+'</span>'
   end
+
+  def format_function body
+    '<span class="function">'+body+'</span>'
+  end
+
+  def format_code body
+    '<span class="code">'+body+'</span>'
+  end
+
+  def format_name body
+    '<span class="name">'+body+'</span>'
+  end
+
+  def format_data body
+    '<span class="data">'+body+'</span>'
+  end
 end
