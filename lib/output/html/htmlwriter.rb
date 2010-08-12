@@ -7,6 +7,18 @@ class HtmlWriter
     @css = css
   end
 
+  def latex
+    '<span class="latex">L<span class="a">A</span><span class="tex">T<span class="e">E</span>X</span></span>'
+  end
+
+  def tex
+    '<span class="latex"><span class="tex">T<span class="e">E</span>X</span></span>'
+  end
+
+  def wikitexer
+    'wiki'+tex+'er '+WIKITEXER_VERSION+' by Pjotr Prins'
+  end
+
   def author
     author = ENV['USER']
     author = '<a href="http://thebird.nl/">pjotrp</a>' if author == 'wrk'
@@ -112,6 +124,10 @@ HEADER
     span.code { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.name { color: darkred; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    .tex { font-family: Times, serif; letter-spacing: -0.09em; }
+    span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }
+    span.tex .e { position:relative; top: 0.40ex; left: -0.01em; }
+    span.latex .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
     /*]]>*/
     </style>
 HEADER2
@@ -124,7 +140,7 @@ HEADER2
 
   def footer
     write "  <hr \>\n"
-    writeln "  "+WIKITEXER_VERSION+' - generated '+timestamp
+    writeln "  "+wikitexer+' - generated '+timestamp
     write "  </body>\n</html>\n"
   end
 

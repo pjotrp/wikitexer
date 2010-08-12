@@ -16,7 +16,8 @@ require 'output/wthtml'
 require 'input/wtparser'
 
 
-WIKITEXER_VERSION = 'wikiTeXer '+Version.get(File.dirname(__FILE__),'VERSION')+' by Pjotr Prins'
+WIKITEXER_VERSION = Version.get(File.dirname(__FILE__),'VERSION')
+WIKITEXER_SHOW = 'wikiTeXer '+WIKITEXER_VERSION+' by Pjotr Prins'
 LATEX = 1
 HTML  = 2
 
@@ -76,7 +77,7 @@ EXAMPLE
 opts.parse!(ARGV)
 
 
-print WIKITEXER_VERSION,"\n" if not options.quiet and !options.use_stdin
+print WIKITEXER_SHOW,"\n" if not options.quiet and !options.use_stdin
 
 raise 'I can not use both stdin and input files' if options.use_stdin and ARGV.size > 0 
 
