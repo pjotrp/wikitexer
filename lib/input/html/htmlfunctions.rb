@@ -51,4 +51,11 @@ TEXTBOX
     '<small><sup>'+body+'</sup></small>'
   end
 
+  def format_filename body
+    '<span class="filename">'+body+'</span>'
+  end
+
+  def format_var body
+    '<span class="varname">'+body+'</span>'
+  end
 end

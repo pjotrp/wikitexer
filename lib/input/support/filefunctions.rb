@@ -22,6 +22,10 @@ module FileFunctions
     buf
   end
 
+  def fn filen
+    format_filename(filen)
+  end
+
   def dummy arg='testDummy'
     arg
   end

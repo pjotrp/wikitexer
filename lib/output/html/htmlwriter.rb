@@ -106,6 +106,8 @@ HEADER
     div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
     div.perl { color: black; background-color:#CAFFD8; ; border-style:outset; }
     div.shell { color: black; background-color:white; ; border-style:outset; }
+    span.filename { font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    span.varname { color: red; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     /*]]>*/
     </style>
 HEADER2
