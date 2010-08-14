@@ -27,7 +27,7 @@ module BasicFormatting
     a.each_with_index do | s, i |
       if (s =~ /^%\s/)  # line starts with perc and space
         a[i] = "\n"
-      elsif (pos = s =~ /[^\\]%[^dsif]/)
+      elsif (pos = s =~ /[^\\]%[^dsifl]/)
         # p pos
         a[i] = s[0..pos]+"\n"
       end

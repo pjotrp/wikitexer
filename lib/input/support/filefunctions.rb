@@ -26,6 +26,14 @@ module FileFunctions
     format_filename(filen)
   end
 
+  def file filen
+    format_filename(filen)
+  end
+
+  def filename filen
+    format_filename(filen)
+  end
+
   def dummy arg='testDummy'
     arg
   end

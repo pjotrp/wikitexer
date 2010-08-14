@@ -13,6 +13,10 @@ module CodeFunctions
     format_function(s)
   end
 
+  def program source
+    format_program(source)
+  end
+
   def data source
     format_data(source)
   end

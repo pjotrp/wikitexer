@@ -67,6 +67,10 @@ TEXTBOX
     '<span class="code">'+body+'</span>'
   end
 
+  def format_program body
+    '<span class="program">'+body+'</span>'
+  end
+
   def format_name body
     '<span class="name">'+body+'</span>'
   end

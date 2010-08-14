@@ -122,6 +122,7 @@ HEADER
     span.varname { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.function { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.code { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.name { color: darkred; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     .tex { font-family: Times, serif; letter-spacing: -0.09em; }
