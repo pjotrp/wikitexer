@@ -72,6 +72,10 @@ class HtmlWriter
         write "<div class=\"quote\">"
         paragraph.each { | line | write line }
         write "</div>"
+      when 'quotation'
+        write "<div class=\"quotation\">"
+        paragraph.each { | line | write line }
+        write "</div>"
       when 'cmake'
         code_box paragraph, last_env, 'shell'
       when 'perl' 
@@ -111,6 +115,7 @@ HEADER
     body {font-family:'times new roman',times,serif; color:#222222;background-color:#F0F8FF; }
     div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
     div.quote { font-family: palatino font, monospace; font-size:80%; }
+    div.quotation { font-family: palatino font, monospace; font-size:80%; }
     div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
     div.source-author { text-align:right; background-color:white; }
     div.source { color: black; background-color:white ; border-style:outset; }
