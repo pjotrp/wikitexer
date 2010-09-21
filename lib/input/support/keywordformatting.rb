@@ -1,5 +1,5 @@
 
-MARKWORDS = "like show ing".split
+MARKWORDS = "like show showing".split
 
 NOMARKWORDS = "including".split
 

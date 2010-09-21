@@ -148,7 +148,7 @@ class HtmlCreator
   end
 
   def markword buf
-    "<font color='DARKBLUE'>"+bold(buf)+"</font>"
+    "<font color='GRAY'>"+bold(buf)+"</font>"
   end
 end
 
