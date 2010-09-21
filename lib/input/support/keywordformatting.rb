@@ -1,7 +1,7 @@
 
 MARKWORDS = "
 like show often usually always any appears popular allow easy
-particular now
+particular now large small many
 ".split
 
 NOMARKWORDS = "including".split
