@@ -1,5 +1,8 @@
 
-MARKWORDS = "like show showing".split
+MARKWORDS = "
+like show often usually always any appears popular allow easy
+particular now
+".split
 
 NOMARKWORDS = "including".split
 
@@ -9,7 +12,8 @@ module KeywordFormatting
   def KeywordFormatting::markup paragraph, creator
     paragraph.replace_each_line_once("((FIXME\\W))", proc { | buf, orig | creator.keyword(buf) } )
     MARKWORDS.each do | word |
-      paragraph.replace_each_line_once("((#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
+      # paragraph.replace_each_line_once("((\\W#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
+      paragraph.replace_each_line_once("((\\W#{word}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
     end
     paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
   end
