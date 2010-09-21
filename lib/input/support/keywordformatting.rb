@@ -1,9 +1,16 @@
 
+MARKWORDS = "like show ing".split
+
+NOMARKWORDS = "including".split
+
 module KeywordFormatting
 
   # Replace special markup with appropriate output - e.g. highlight FIXME
   def KeywordFormatting::markup paragraph, creator
     paragraph.replace_each_line_once("((FIXME\\W))", proc { | buf, orig | creator.keyword(buf) } )
+    MARKWORDS.each do | word |
+      paragraph.replace_each_line_once("((#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
+    end
     paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
   end
 end
