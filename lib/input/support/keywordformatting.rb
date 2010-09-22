@@ -14,6 +14,7 @@ module KeywordFormatting
     MARKWORDS.each do | word |
       # paragraph.replace_each_line_once("((\\W#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
       paragraph.replace_each_line_once("((\\W#{word}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
+      paragraph.replace_each_line_once("((^#{word.capitalize}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
     end
     paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
   end
