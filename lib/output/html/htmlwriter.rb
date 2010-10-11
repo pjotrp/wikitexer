@@ -86,6 +86,8 @@ class HtmlWriter
         code_box paragraph, last_env
       when 'swig'
         code_box paragraph, last_env, 'c'
+      when 'r'
+        code_box paragraph, last_env, 'slang'
       when 'ruby'
         code_box paragraph, last_env
       when 'shell'
@@ -121,6 +123,7 @@ HEADER
     div.source { color: black; background-color:white ; border-style:outset; }
     div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
     div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
+    div.r { color: black; background-color:#CCFFFF; ; border-style:outset; }
     div.perl { color: black; background-color:#CAFFD8; ; border-style:outset; }
     div.shell { color: black; background-color:white; ; border-style:outset; }
     span.filename { font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }

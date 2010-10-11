@@ -19,6 +19,7 @@ module EnvironmentFormatting
         when 'perl'     : return creator.perl_start
         when 'cmake'    : return creator.cmake_start
         when 'c'        : return creator.c_start
+        when 'r'        : return creator.r_start
         when 'swig'     : return creator.swig_start
       else
         $stderr.print "Warning: unknown literal #{name}\n"
@@ -38,6 +39,7 @@ module EnvironmentFormatting
         when 'python'   : return creator.python_end
         when 'perl'     : return creator.perl_end
         when 'cmake'    : return creator.cmake_end
+        when 'r'        : return creator.r_end
         when 'c'        : return creator.c_end
         when 'swig'     : return creator.swig_end
       else

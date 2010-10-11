@@ -75,6 +75,14 @@ class HtmlCreator
     ''
   end
 
+  def r_start
+    ''
+  end
+
+  def r_end
+    ''
+  end
+
   def swig_start
     ''
   end
