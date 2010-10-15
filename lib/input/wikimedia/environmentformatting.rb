@@ -17,6 +17,7 @@ module EnvironmentFormatting
         when 'shell'    : return creator.shell_start
         when 'python'   : return creator.python_start
         when 'perl'     : return creator.perl_start
+        when 'scala'    : return creator.scala_start
         when 'cmake'    : return creator.cmake_start
         when 'c'        : return creator.c_start
         when 'r'        : return creator.r_start
@@ -38,6 +39,7 @@ module EnvironmentFormatting
         when 'shell'    : return creator.shell_end
         when 'python'   : return creator.python_end
         when 'perl'     : return creator.perl_end
+        when 'scala'    : return creator.scala_end
         when 'cmake'    : return creator.cmake_end
         when 'r'        : return creator.r_end
         when 'c'        : return creator.c_end

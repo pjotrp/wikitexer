@@ -131,6 +131,14 @@ class HtmlCreator
     ''
   end
 
+  def scala_start
+    ''
+  end
+
+  def scala_end
+    ''
+  end
+
   def literal_start name
     "<#{name}>"
   end
