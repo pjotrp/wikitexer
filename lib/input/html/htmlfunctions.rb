@@ -47,6 +47,10 @@ TEXTBOX
     '<u>'+body+'</u> section'
   end
 
+  def format_emph body
+    '<i>'+body+'</i>'
+  end
+
   def format_cite body
     '<small><sup>'+body+'</sup></small>'
   end

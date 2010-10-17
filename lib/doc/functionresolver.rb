@@ -2,6 +2,7 @@
 require 'input/support/citationfunctions'
 require 'input/support/filefunctions'
 require 'input/support/codefunctions'
+require 'input/support/latexfunctions'
 require 'input/html/htmlfunctions'
 
 class NewVar
@@ -28,6 +29,7 @@ class FunctionResolver
   include FileFunctions
   include HtmlFunctions
   include CodeFunctions
+  include LatexFunctions
 
   def initialize
     @lookup = { 'newvar' => 'newvar' }
