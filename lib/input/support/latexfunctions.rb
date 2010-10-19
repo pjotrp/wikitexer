@@ -5,5 +5,8 @@ module LatexFunctions
     format_emph(s)
   end
 
+  def url s
+    format_url(s)
+  end
 end
 

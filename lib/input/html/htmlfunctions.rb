@@ -82,4 +82,8 @@ TEXTBOX
   def format_data body
     '<span class="data">'+body+'</span>'
   end
+
+  def format_url body
+    '<a href="'+body+'">'+body+'</a>'
+  end
 end
