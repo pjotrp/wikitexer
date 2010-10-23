@@ -29,5 +29,9 @@ module CodeFunctions
     format_code(source)
   end
 
+  def command source
+    format_code(source)
+  end
+
 end
 

@@ -52,7 +52,9 @@ class HtmlWriter
     Tempfile.open("wikitexer") do | f |
       paragraph.each { | line | f.print line }
       f.close
-      write `/usr/bin/source-highlight -s #{lang} -i #{f.path}`
+      code = `/usr/bin/source-highlight -s #{lang} -i #{f.path}`
+      code = code.gsub(/<!--(.*?)-->[\n]?/m, "")
+      write code
     end
     # paragraph.each { | line | write line }
     write "</div>\n"

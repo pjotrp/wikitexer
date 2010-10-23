@@ -8,5 +8,9 @@ module LatexFunctions
   def url s
     format_url(s)
   end
+
+  def textsuperscript s
+    format_textsuperscript s
+  end
 end
 

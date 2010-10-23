@@ -55,6 +55,10 @@ TEXTBOX
     '<small><sup>'+body+'</sup></small>'
   end
 
+  def format_textsuperscript body
+    '<small><sup>'+body+'</sup></small>'
+  end
+
   def format_filename body
     '<span class="filename">'+body+'</span>'
   end
