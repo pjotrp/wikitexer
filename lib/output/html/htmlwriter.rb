@@ -166,10 +166,24 @@ HEADER2
     write "\n</p>\n" if !paragraph.hastitle
   end
 
-  def bibliography citations
+   				# #<Bibtex::Entry:0xb7c5b9f0 @fields={
+	  			#   :Title=>#<Bibtex::Field:0xb7c591dc @value="Patterns for parallel programming", @key=:Title>, 
+		  		#   :Year=>#<Bibtex::Field:0xb7c57f1c @value="2004", @key=:Year>, :Isbn=>#<Bibtex::Field:0xb7c578c8 @value="0321228111", @key=:Isbn>, 
+			  	#   :Publisher=>#<Bibtex::Field:0xb7c57274 @value="Addison-Wesley Professional", @key=:Publisher>, 
+				  #   :Author=>#<Bibtex::Field:0xb7c5b7c0 @value="Mattson, Timothy and Sanders, Beverly and Massingill, Berna", @key=:Author>}, 
+				  #   @key="Mattson", @type="book">
+
+  def bibliography citations, references
     write "\n<hr>\n<h2>Biobliography</h2>\n"
+    # $stderr.print references
     citations.each do | ref, citation |
-      write "\n<sup>#{ref}</sup> #{citation}<br />\n"
+      text = citation
+      if references[citation]
+        # write references[citation]
+        bib = references[citation] 
+        text = "<u>"+bib[:Title] + '</u> by ' + bib[:Author] + ", #{bib[:Journal]} #{bib[:Year]}"
+      end
+      write "\n<sup>#{ref}</sup> #{text}<br />\n"
     end
   end
 end

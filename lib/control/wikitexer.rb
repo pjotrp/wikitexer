@@ -32,7 +32,11 @@ class WikiTexer
     @par = []
   end
 
+  def add_reference ref
+    @document.references[ref.key] = ref
+  end
+
   def write_bibliography
-    @writer.bibliography(@document.citations)
+    @writer.bibliography(@document.citations, @document.references)
   end
 end

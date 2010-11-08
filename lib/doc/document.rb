@@ -8,13 +8,14 @@ require 'doc/environment/environmentstack'
 
 class Document
 
-  attr_reader :titlenumbering, :citations, :functionresolver, :environments
+  attr_reader :titlenumbering, :references, :citations, :functionresolver, :environments
 
   def initialize
     @titlenumbering   = TitleNumbering.new
     @citations        = Citations.new
+    @references       = {}
     @functionresolver = FunctionResolver.new
-    @environments      = EnvironmentStack.new
+    @environments     = EnvironmentStack.new
   end
 
   # Every input line passes through the +scan+ method to scan for 
