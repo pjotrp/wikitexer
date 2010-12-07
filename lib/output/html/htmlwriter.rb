@@ -176,14 +176,35 @@ HEADER2
   def bibliography citations, references
     write "\n<hr>\n<h2>Biobliography</h2>\n"
     # $stderr.print references
+    # p references
     citations.each do | ref, citation |
       text = citation
       if references[citation]
-        # write references[citation]
+        # p references[citation]
         bib = references[citation] 
-        text = "<u>"+bib[:Title] + '</u> by ' + bib[:Author] + ", #{bib[:Journal]} #{bib[:Year]}"
+        text = strip_bibtex(bib[:Author]) + ', ' 
+        if bib.type == 'book'
+          text += '<i>'+strip_bibtex(bib[:Title])+"</i>, #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
+        else
+         
+          text += strip_bibtex(bib[:Title])+", <i>#{bib[:Journal]}</i>, <b>#{bib[:Volume]}</b>, #{bib[:Pages]} [#{bib[:Year]}]."
+        end
+        if bib[:Url] and bib[:Url] != ''
+          text += " <a href=\"#{bib[:Url]}\">[Link]</a>"
+        elsif bib[:Doi] and bib[:Doi] != ''
+          text += " <a href=\"http://dx.doi.org/#{bib[:Doi]}\">[DOI]</a>"
+        end
       end
       write "\n<sup>#{ref}</sup> #{text}<br />\n"
     end
+  end
+
+private
+
+  def strip_bibtex str
+    str.gsub!(/^\{/,'')
+    str.gsub!(/\}$/,'')
+    $stderr.print str
+    str
   end
 end
