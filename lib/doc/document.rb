@@ -1,6 +1,7 @@
 
 require 'doc/titlenumbering'
 require 'doc/citations'
+require 'doc/references'
 require 'doc/functionresolver'
 require 'doc/environment/environmentstack'
 
@@ -13,7 +14,7 @@ class Document
   def initialize
     @titlenumbering   = TitleNumbering.new
     @citations        = Citations.new
-    @references       = {}
+    @references       = References.new
     @functionresolver = FunctionResolver.new
     @environments     = EnvironmentStack.new
   end

@@ -174,7 +174,7 @@ HEADER2
 				  #   @key="Mattson", @type="book">
 
   def bibliography citations, references
-    write "\n<hr>\n<h2>Biobliography</h2>\n"
+    write "\n<hr>\n<h2>Bibliography</h2>\n"
     # $stderr.print references
     # p references
     citations.each do | ref, citation |
@@ -182,17 +182,31 @@ HEADER2
       if references[citation]
         # p references[citation]
         bib = references[citation] 
-        text = strip_bibtex(bib[:Author]) + ', ' 
-        if bib.type == 'book'
-          text += '<i>'+strip_bibtex(bib[:Title])+"</i>, #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
+        text = comma(strip_bibtex(bib[:Author]))
+        if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
+          text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+" #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
         else
          
-          text += strip_bibtex(bib[:Title])+", <i>#{bib[:Journal]}</i>, <b>#{bib[:Volume]}</b>, #{bib[:Pages]} [#{bib[:Year]}]."
+          text += comma(strip_bibtex(bib[:Title]))+comma(italic(bib[:Journal]))+comma(bold(bib[:Volume]))+"#{bib[:Pages]} [#{bib[:Year]}]."
         end
         if bib[:Url] and bib[:Url] != ''
           text += " <a href=\"#{bib[:Url]}\">[Link]</a>"
         elsif bib[:Doi] and bib[:Doi] != ''
           text += " <a href=\"http://dx.doi.org/#{bib[:Doi]}\">[DOI]</a>"
+        end
+        # p references
+        # p bib
+        if bib.has?(:Impact)
+          text += " ; impact #{bold(bib[:Impact])}"
+        end
+        if bib.has?(:Cited)
+          text += " ; Cited #{bold(bib[:Cited])}x"
+        end
+        if bib.has?(:Pmcited)
+          text += " ; Pubmed #{bold(bib[:Pmcited])}x"
+        end
+        if bib.has?(:Gscited)
+          text += " ; Google Scholar #{bold(bib[:Gscited])}x"
         end
       end
       write "\n<sup>#{ref}</sup> #{text}<br />\n"
@@ -204,7 +218,24 @@ private
   def strip_bibtex str
     str.gsub!(/^\{/,'')
     str.gsub!(/\}$/,'')
-    $stderr.print str
+    # $stderr.print str
     str
+  end
+
+  def bold str
+    return "<b>"+str+"</b>" if str!=nil and str.strip != ''
+    ''
+  end
+
+  def italic str
+    return "<i>"+str+"</i>" if str!=nil and str.strip != ''
+    ''
+  end
+
+  def comma str
+    if str!=nil and str.strip != ''
+      return str + ', '
+    end
+    ""
   end
 end
