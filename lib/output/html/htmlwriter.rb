@@ -182,31 +182,38 @@ HEADER2
       if references[citation]
         # p references[citation]
         bib = references[citation] 
-        text = comma(strip_bibtex(bib[:Author]))
+        authors = strip_bibtex(bib[:Author]).split(/ and /)
+        if authors.size > 5
+          text = comma(authors[0..1].join(', ')+' <i>et al.</i>')
+        else
+          text = comma(authors.join(', '))
+        end
         if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
           text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+" #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
         else
          
           text += comma(strip_bibtex(bib[:Title]))+comma(italic(bib[:Journal]))+comma(bold(bib[:Volume]))+"#{bib[:Pages]} [#{bib[:Year]}]."
         end
-        if bib[:Url] and bib[:Url] != ''
-          text += " <a href=\"#{bib[:Url]}\">[Link]</a>"
-        elsif bib[:Doi] and bib[:Doi] != ''
+        if bib[:Doi] and bib[:Doi] != ''
           text += " <a href=\"http://dx.doi.org/#{bib[:Doi]}\">[DOI]</a>"
+        elsif bib[:Url] and bib[:Url] != ''
+          text += " <a href=\"#{bib[:Url]}\">[Link]</a>"
         end
-        # p references
-        # p bib
         if bib.has?(:Impact)
-          text += " ; impact #{bold(bib[:Impact])}"
+          text += " ; Impact factor = #{bold(bib[:Impact])}"
         end
+        cited = ''
         if bib.has?(:Cited)
-          text += " ; Cited #{bold(bib[:Cited])}x"
+          cited += " #{bold(bib[:Cited])}x,"
         end
         if bib.has?(:Pmcited)
-          text += " ; Pubmed #{bold(bib[:Pmcited])}x"
+          cited += " Pubmed #{bold(bib[:Pmcited])}x,"
         end
         if bib.has?(:Gscited)
-          text += " ; Google Scholar #{bold(bib[:Gscited])}x"
+          cited += " Google Scholar #{bold(bib[:Gscited])}x,"
+        end
+        if cited != ''
+          text += " ; Cited "+cited.chop
         end
       end
       write "\n<sup>#{ref}</sup> #{text}<br />\n"
