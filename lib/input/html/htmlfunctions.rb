@@ -51,8 +51,10 @@ TEXTBOX
     '<i>'+body+'</i>'
   end
 
-  def format_cite body
-    '<small><sup>'+body+'</sup></small>'
+  def format_cite body, resolved
+    text = body
+    text = '<u><font color="red">'+body+'</font></u>' if !resolved
+    '<small><sup>'+text+'</sup></small>'
   end
 
   def format_textsuperscript body
