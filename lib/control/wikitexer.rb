@@ -36,7 +36,7 @@ class WikiTexer
     @document.references[ref.key] = ref
   end
 
-  def write_bibliography
-    @writer.bibliography(@document.citations, @document.references)
+  def write_bibliography(style)
+    @writer.bibliography(@writer,style,@document.citations, @document.references)
   end
 end

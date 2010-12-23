@@ -21,6 +21,8 @@ WIKITEXER_SHOW = 'wikiTeXer '+WIKITEXER_VERSION+' by Pjotr Prins'
 LATEX = 1
 HTML  = 2
 
+bib_style = {}
+
 options = OpenStruct.new()
 opts = OptionParser.new() { |opts|
   opts.on_tail("-h", "--help", "Show help and examples") {
@@ -55,6 +57,18 @@ EXAMPLE
 
   opts.on('-r filename.rb',String,"Use Ruby module") do | fn |
     options.filenamerb = fn
+  end
+
+  opts.on("--bib-cites", "Bibliography: show citation values") do
+    bib_style[:bib_cites] = true
+  end
+
+  opts.on("--bib-nrg", "Bibliography format: Nature") do
+    bib_style[:format] = :nrg
+  end
+
+  opts.on("--final", "Final version (no citation values)") do
+    bib_style[:final] = true
   end
 
   opts.on("-q", "--quiet", "Run quietly") do |q|
@@ -119,7 +133,7 @@ else
   end
 end
 
-wikitexer.write_bibliography
+wikitexer.write_bibliography(bib_style)
 
 handler.writer.footer
 

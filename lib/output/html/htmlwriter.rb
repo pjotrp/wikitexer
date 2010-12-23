@@ -1,5 +1,6 @@
 
 require 'tempfile'
+require 'output/bib/bibformatters'
 
 class HtmlWriter
 
@@ -173,76 +174,20 @@ HEADER2
 				  #   :Author=>#<Bibtex::Field:0xb7c5b7c0 @value="Mattson, Timothy and Sanders, Beverly and Massingill, Berna", @key=:Author>}, 
 				  #   @key="Mattson", @type="book">
 
-  def bibliography citations, references
+  def bibliography writer, style, citations, references
     write "\n<hr>\n<h2>Bibliography</h2>\n"
     # $stderr.print references
     # p references
+    formatter = BibFormatter::get_formatter(writer,style)
     citations.each do | ref, citation |
       text = citation
       if references[citation]
         # p references[citation]
-        bib = references[citation] 
-        authors = strip_bibtex(bib[:Author]).split(/ and /)
-        if authors.size > 5
-          text = comma(authors[0..1].join(', ')+' <i>et al.</i>')
-        else
-          text = comma(authors.join(', '))
-        end
-        if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
-          text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+" #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
-        else
-         
-          text += comma(strip_bibtex(bib[:Title]))+comma(italic(bib[:Journal]))+comma(bold(bib[:Volume]))+"#{bib[:Pages]} [#{bib[:Year]}]."
-        end
-        if bib[:Doi] and bib[:Doi] != ''
-          text += " <a href=\"http://dx.doi.org/#{bib[:Doi]}\">[DOI]</a>"
-        elsif bib[:Url] and bib[:Url] != ''
-          text += " <a href=\"#{bib[:Url]}\">[Link]</a>"
-        end
-        if bib.has?(:Impact)
-          text += " ; Impact factor = #{bold(bib[:Impact])}"
-        end
-        cited = ''
-        if bib.has?(:Cited)
-          cited += " #{bold(bib[:Cited])}x,"
-        end
-        if bib.has?(:Pmcited)
-          cited += " Pubmed #{bold(bib[:Pmcited])}x,"
-        end
-        if bib.has?(:Gscited)
-          cited += " Google Scholar #{bold(bib[:Gscited])}x,"
-        end
-        if cited != ''
-          text += " ; Cited "+cited.chop
-        end
+        bib = references[citation]
+        text = formatter.write(bib)
       end
       write "\n<sup>#{ref}</sup> #{text}<br />\n"
     end
   end
 
-private
-
-  def strip_bibtex str
-    str.gsub!(/^\{/,'')
-    str.gsub!(/\}$/,'')
-    # $stderr.print str
-    str
-  end
-
-  def bold str
-    return "<b>"+str+"</b>" if str!=nil and str.strip != ''
-    ''
-  end
-
-  def italic str
-    return "<i>"+str+"</i>" if str!=nil and str.strip != ''
-    ''
-  end
-
-  def comma str
-    if str!=nil and str.strip != ''
-      return str + ', '
-    end
-    ""
-  end
 end
