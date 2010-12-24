@@ -24,6 +24,17 @@ end
 
 module BibOutput
 
+  # Authors in bibtex style are separated by 'and' keywords. Valid 
+  # names are
+  #
+  #   Jane Austen 
+  #   J. Austen
+  #   Austen, Jane
+  #   Austen, J.
+  #
+  # The output style can be any of these: firstnamefirst, initialsfirst,
+  # firstnamelast, initialslast.
+  #
   def authors authorstr, style = {}
     authors = []
     strip_bibtex(authorstr).split(/ and /).each do | s |
