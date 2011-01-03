@@ -10,18 +10,18 @@ module EnvironmentFormatting
       environments.push(env)
       # last_env = name
       case name
-        when 'verbatim' : return creator.verbatim_start
-        when 'quote'    : return creator.quote_start
-        when 'quotation': return creator.quote_start
-        when 'ruby'     : return creator.ruby_start
-        when 'shell'    : return creator.shell_start
-        when 'python'   : return creator.python_start
-        when 'perl'     : return creator.perl_start
-        when 'scala'    : return creator.scala_start
-        when 'cmake'    : return creator.cmake_start
-        when 'c'        : return creator.c_start
-        when 'r'        : return creator.r_start
-        when 'swig'     : return creator.swig_start
+        when 'verbatim' then return creator.verbatim_start
+        when 'quote'    then return creator.quote_start
+        when 'quotation'then return creator.quote_start
+        when 'ruby'     then return creator.ruby_start
+        when 'shell'    then return creator.shell_start
+        when 'python'   then return creator.python_start
+        when 'perl'     then return creator.perl_start
+        when 'scala'    then return creator.scala_start
+        when 'cmake'    then return creator.cmake_start
+        when 'c'        then return creator.c_start
+        when 'r'        then return creator.r_start
+        when 'swig'     then return creator.swig_start
       else
         $stderr.print "Warning: unknown literal #{name}\n"
         return creator.literal_start(name)
@@ -32,18 +32,18 @@ module EnvironmentFormatting
       env = environments.pop(name)
       last_env = name
       case name
-        when 'verbatim' : return creator.verbatim_end
-        when 'quote'    : return creator.quote_end
-        when 'quotation': return creator.quote_end
-        when 'ruby'     : return creator.ruby_end
-        when 'shell'    : return creator.shell_end
-        when 'python'   : return creator.python_end
-        when 'perl'     : return creator.perl_end
-        when 'scala'    : return creator.scala_end
-        when 'cmake'    : return creator.cmake_end
-        when 'r'        : return creator.r_end
-        when 'c'        : return creator.c_end
-        when 'swig'     : return creator.swig_end
+        when 'verbatim' then return creator.verbatim_end
+        when 'quote'    then return creator.quote_end
+        when 'quotation' then return creator.quote_end
+        when 'ruby'     then return creator.ruby_end
+        when 'shell'    then return creator.shell_end
+        when 'python'   then return creator.python_end
+        when 'perl'     then return creator.perl_end
+        when 'scala'    then return creator.scala_end
+        when 'cmake'    then return creator.cmake_end
+        when 'r'        then return creator.r_end
+        when 'c'        then return creator.c_end
+        when 'swig'     then return creator.swig_end
       else
         return creator.literal_end(name)
       end
