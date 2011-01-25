@@ -241,7 +241,7 @@ class BibSpringerFormatter
     if !@style[:final]
       text += citations(bib) 
     end
-    text
+    text+'<br />'
   end
 
   def to_authorlist s
