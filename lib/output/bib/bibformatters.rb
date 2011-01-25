@@ -1,4 +1,6 @@
 
+require 'output/bib/authors'
+
 module BibFormatter
 
   def BibFormatter::get_formatter writer, style
@@ -26,6 +28,8 @@ end
 
 module BibOutput
 
+  include FormatBibAuthors
+
   # Authors in bibtex style are separated by 'and' keywords. Valid 
   # names are
   #
@@ -37,12 +41,8 @@ module BibOutput
   # The output style can be any of these: firstnamefirst, initialsfirst,
   # firstnamelast, initialslast.
   #
-  def authors authorstr, style = {}
-    authors = []
-    strip_bibtex(authorstr).split(/ and /).each do | s |
-      # authors.push(BibAuthor.new(s))
-      authors.push s
-    end
+  def authors authorlist, style = {}
+    authors = split_bib_authors(authorlist)
     num = authors.size
     max=5
     max=style[:max_authors] if style[:max_authors]
@@ -50,6 +50,7 @@ module BibOutput
       aunum = 1
       aunum = style[:etal_num] if style[:etal_num]
       text = comma(authors[0..aunum-1].join(', '))
+      text = text.chop.chop
       text += if style[:etal] == :plain
         ' et al.'
       else
@@ -58,6 +59,7 @@ module BibOutput
 
     else
       if num > 1
+        # p [num,authors]
         text = comma(authors[0..num-2].join(', ')+' &amp; '+authors[num-1])
       else
         text = comma(authors[0])
@@ -214,7 +216,7 @@ class BibSpringerFormatter
   end
 
   def write bib
-    text = authors(bib[:Author], :etal=>:plain, :etal_num => 2, :amp=>true)
+    text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 2, :amp=>true)
     text += " (#{bib[:Year]}) "
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
       text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+bib[:Pages]+"."
@@ -227,6 +229,21 @@ class BibSpringerFormatter
       text += citations(bib) 
     end
     text
+  end
+
+  def to_authorlist s
+    list = split_bib_authors(s)
+    list = list.map do | a | 
+      first,last = split_first_lastname(a)
+      a = last+' '+first
+      if first !~ /\./ or first =~ /\w\w/
+        $stderr.print "Possibly malformed ref <",a,">\n"
+      end
+      a = a.gsub(/[,.]/,'') 
+      # $stderr.print a,"\n" 
+      a
+    end
+    list
   end
 end
 
