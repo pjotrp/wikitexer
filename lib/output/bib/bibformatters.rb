@@ -69,9 +69,9 @@ module BibOutput
   end
 
   def citations bib
-    text = ''
+    text = ' <small>('
     if bib.has?(:Impact)
-      text += " ; Impact factor = #{bold(bib[:Impact])}"
+      text += "Impact factor = #{bold(bib[:Impact])}"
     end
     cited = ''
     if bib.has?(:Cited)
@@ -84,9 +84,9 @@ module BibOutput
       cited += " Google Scholar #{bold(bib[:Gscited])}x,"
     end
     if cited != ''
-      text += " ; Cited "+cited.chop
+      text += "Cited "+cited.chop
     end
-    text
+    text+')</small>'
   end
 
   def strip_bibtex str

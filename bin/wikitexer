@@ -94,6 +94,7 @@ EXAMPLE
 }
 opts.parse!(ARGV)
 
+$bib_style = bib_style # obviously a hack
 
 print WIKITEXER_SHOW,"\n" if not options.quiet and !options.use_stdin
 

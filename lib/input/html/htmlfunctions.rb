@@ -53,8 +53,13 @@ TEXTBOX
 
   def format_cite body, resolved
     text = body
-    text = '<u><font color="red">'+body+'</font></u>' if !resolved
-    '<small><sup>'+text+'</sup></small>'
+    if $bib_style[:format] == :springer
+      text = '<b><i>(<font color="red">'+body+'</font>)</i></b>' if !resolved
+      '<b><i>('+text+'</i></b>)'
+    else
+      text = '<u><font color="red">'+body+'</font></u>' if !resolved
+      '<small><sup>'+text+'</sup></small>'
+    end
   end
 
   def format_textsuperscript body
