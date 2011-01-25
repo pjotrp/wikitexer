@@ -47,8 +47,15 @@ module BibOutput
     max=5
     max=style[:max_authors] if style[:max_authors]
     if style[:etal] and num > max
-      # text = comma(authors[0..1].join(', ')+' <i>et al.</i>')
-      text = comma(authors[0]+' <i>et al.</i>')
+      aunum = 1
+      aunum = style[:etal_num] if style[:etal_num]
+      text = comma(authors[0..aunum-1].join(', '))
+      text += if style[:etal] == :plain
+        ' et al.'
+      else
+        ' <i>et al.</i>'
+      end
+
     else
       if num > 1
         text = comma(authors[0..num-2].join(', ')+' &amp; '+authors[num-1])
@@ -58,11 +65,15 @@ module BibOutput
     end
   end
 
-  def url doi, link
+  def url doi, link, full = false
     if doi and doi != ''
-      " <a href=\"http://dx.doi.org/#{doi}\">[DOI]</a>"
+      text = '[DOI]'
+      text = doi if full
+      " <a href=\"http://dx.doi.org/#{doi}\">#{text}</a>"
     elsif link and link != ''
-      " <a href=\"#{link}\">[Link]</a>"
+      text = '[Link]'
+      text = link if full
+      " <a href=\"#{link}\">#{text}</a>"
     else
       ''
     end
@@ -109,6 +120,13 @@ module BibOutput
   def comma str
     if str!=nil and str.strip != ''
       return str + ', '
+    end
+    ""
+  end
+
+  def dot str
+    if str!=nil and str.strip != ''
+      return str + '. '
     end
     ""
   end
@@ -188,11 +206,27 @@ class BibSpringerFormatter
   def initialize writer, style
     @writer = writer
     @style = style
+    style[:max_authors] ||= 2
   end
 
   def cite_marker num
     @writer.creator.bold(@writer.creator.italics("(#{num.to_s})"))
   end
 
+  def write bib
+    text = authors(bib[:Author], :etal=>:plain, :etal_num => 2, :amp=>true)
+    text += " (#{bib[:Year]}) "
+    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
+      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+bib[:Pages]+"."
+    else
+     
+      text += dot(strip_bibtex(bib[:Title]))+dot(bib[:Journal])+comma(bold(bib[:Volume]))+"#{bib[:Pages]}."
+    end
+    text += url(bib[:Doi],bib[:Url],true)
+    if !@style[:final]
+      text += citations(bib) 
+    end
+    text
+  end
 end
 
