@@ -67,6 +67,10 @@ EXAMPLE
     bib_style[:format] = :nrg
   end
 
+  opts.on("--bib-springer", "Bibliography format: Springer") do
+    bib_style[:format] = :springer
+  end
+
   opts.on("--final", "Final version (no citation values)") do
     bib_style[:final] = true
   end

@@ -5,6 +5,8 @@ module BibFormatter
     case style[:format]
       when :nrg
         BibNRGFormatter.new(writer, style)
+      when :springer
+        BibSpringerFormatter.new(writer, style)
       else
         BibDefaultFormatter.new(writer, style)
     end
@@ -137,6 +139,30 @@ class BibDefaultFormatter
 end
 
 class BibNRGFormatter
+  include BibOutput
+
+  def initialize writer, style
+    @writer = writer
+    @style = style
+  end
+
+  def write bib
+    text = authors(bib[:Author], :etal=>1, :amp=>true)
+    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
+      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+bib[:Pages]+" (#{bib[:Year]})."
+    else
+     
+      text += comma(strip_bibtex(bib[:Title]))+comma(italic(bib[:Journal]))+comma(bold(bib[:Volume]))+"#{bib[:Pages]} (#{bib[:Year]})."
+    end
+    if !@style[:final]
+      text += url(bib[:Doi],bib[:Url])
+      text += citations(bib) 
+    end
+    text
+  end
+end
+
+class BibSpringerFormatter
   include BibOutput
 
   def initialize writer, style
