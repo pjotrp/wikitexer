@@ -64,13 +64,16 @@ module BibOutput
       else
         text = comma(authors[0])
       end
+      # strip final comma
+      text = text.chop.chop
     end
+    text
   end
 
   def url doi, link, full = false
     if doi and doi != ''
       text = '[DOI]'
-      text = doi if full
+      text = 'doi:'+doi if full
       " <a href=\"http://dx.doi.org/#{doi}\">#{text}</a>"
     elsif link and link != ''
       text = '[Link]'
@@ -82,7 +85,7 @@ module BibOutput
   end
 
   def citations bib
-    text = ' <small>('
+    text = ''
     if bib.has?(:Impact)
       text += "Impact factor = #{bold(bib[:Impact])}"
     end
@@ -99,12 +102,13 @@ module BibOutput
     if cited != ''
       text += "Cited "+cited.chop
     end
-    text+')</small>'
+    text = ' <small>('+text+')</small>' if text != ''
+    text
   end
 
   def strip_bibtex str
-    str.gsub!(/^\{/,'')
-    str.gsub!(/\}$/,'')
+    str.gsub!(/\{/,'')
+    str.gsub!(/\}/,'')
     # $stderr.print str
     str
   end
@@ -119,16 +123,25 @@ module BibOutput
     ''
   end
 
+  def colon str, space=true
+    if str!=nil and str.strip != ''
+      c = ''
+      c = ' ' if space
+      return str.rstrip + ':' + c
+    end
+    ""
+  end
+
   def comma str
     if str!=nil and str.strip != ''
-      return str + ', '
+      return str.rstrip + ', '
     end
     ""
   end
 
   def dot str
     if str!=nil and str.strip != ''
-      return str + '. '
+      return str.rstrip + '. '
     end
     ""
   end
@@ -208,7 +221,7 @@ class BibSpringerFormatter
   def initialize writer, style
     @writer = writer
     @style = style
-    style[:max_authors] ||= 2
+    style[:max_authors] ||= 3
   end
 
   def cite_marker num
@@ -216,13 +229,13 @@ class BibSpringerFormatter
   end
 
   def write bib
-    text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 2, :amp=>true)
+    text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
     text += " (#{bib[:Year]}) "
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
-      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+bib[:Pages]+"."
+      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+dot(bib[:Pages])
     else
      
-      text += dot(strip_bibtex(bib[:Title]))+dot(bib[:Journal])+comma(bold(bib[:Volume]))+"#{bib[:Pages]}."
+      text += dot(strip_bibtex(bib[:Title]))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot("#{bib[:Pages]}")
     end
     text += url(bib[:Doi],bib[:Url],true)
     if !@style[:final]
@@ -239,9 +252,9 @@ class BibSpringerFormatter
       if first !~ /\./ or first =~ /\w\w/
         $stderr.print "Possibly malformed ref <",a,">\n"
       end
-      a = a.gsub(/[,.]/,'') 
+      a = a.gsub(/[,.]/,' ') 
       # $stderr.print a,"\n" 
-      a
+      a.strip
     end
     list
   end
