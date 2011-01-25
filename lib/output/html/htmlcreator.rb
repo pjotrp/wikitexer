@@ -29,6 +29,10 @@ class HtmlCreator
     '<U>'+buf+'</U>'
   end
 
+  def superscript buf
+    '<sup>'+buf+'</sup>'
+  end
+
   def list_start buf
     '<ol>' + buf
   end

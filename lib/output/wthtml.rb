@@ -10,7 +10,7 @@ class WtHtml
 
   def initialize css
     @creator = HtmlCreator.new
-    @writer = HtmlWriter.new css
+    @writer = HtmlWriter.new css, @creator
   end
 
 end

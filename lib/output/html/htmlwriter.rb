@@ -4,8 +4,10 @@ require 'output/bib/bibformatters'
 
 class HtmlWriter
 
-  def initialize css
+  attr_accessor :css, :creator
+  def initialize css, creator
     @css = css
+    @creator = creator
   end
 
   def latex
@@ -178,15 +180,16 @@ HEADER2
     write "\n<hr>\n<h2>Bibliography</h2>\n"
     # $stderr.print references
     # p references
-    formatter = BibFormatter::get_formatter(writer,style)
+    bibformatter = BibFormatter::get_formatter(writer,style)
     citations.each do | ref, citation |
       text = citation
       if references[citation]
         # p references[citation]
         bib = references[citation]
-        text = formatter.write(bib)
+        text = bibformatter.write(bib)
       end
-      write "\n<sup>#{ref}</sup> #{text}<br />\n"
+      marker = bibformatter.reference_marker(ref)
+      write "\n#{marker} #{text}<br />\n"
     end
   end
 

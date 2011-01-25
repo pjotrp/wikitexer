@@ -97,12 +97,12 @@ module BibOutput
   end
 
   def bold str
-    return "<b>"+str+"</b>" if str!=nil and str.strip != ''
+    return @writer.creator.bold(str) if str!=nil and str.strip != ''
     ''
   end
 
   def italic str
-    return "<i>"+str+"</i>" if str!=nil and str.strip != ''
+    return @writer.creator.italics(str) if str!=nil and str.strip != ''
     ''
   end
 
@@ -120,6 +120,10 @@ class BibDefaultFormatter
   def initialize writer, style
     @writer = writer
     @style = style
+  end
+  
+  def reference_marker num
+    @writer.creator.superscript(num.to_s)
   end
 
   def write bib
