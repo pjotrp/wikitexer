@@ -114,16 +114,15 @@ module BibOutput
   end
 end
 
-class BibDefaultFormatter
-  include BibOutput
+module BibDefaultOutput
 
-  def initialize writer, style
-    @writer = writer
-    @style = style
-  end
-  
-  def reference_marker num
+  def cite_marker num
     @writer.creator.superscript(num.to_s)
+  end
+
+  def reference_marker num
+    # @writer.creator.superscript(num.to_s)
+    "#{num.to_s}."
   end
 
   def write bib
@@ -142,12 +141,28 @@ class BibDefaultFormatter
   end
 end
 
-class BibNRGFormatter
+class BibDefaultFormatter
   include BibOutput
+  include BibDefaultOutput
 
   def initialize writer, style
     @writer = writer
     @style = style
+  end
+  
+end
+
+class BibNRGFormatter
+  include BibOutput
+  include BibDefaultOutput
+
+  def initialize writer, style
+    @writer = writer
+    @style = style
+  end
+
+  def reference_marker num
+    @writer.creator.superscript(num.to_s)
   end
 
   def write bib
@@ -168,25 +183,16 @@ end
 
 class BibSpringerFormatter
   include BibOutput
+  include BibDefaultOutput
 
   def initialize writer, style
     @writer = writer
     @style = style
   end
 
-  def write bib
-    text = authors(bib[:Author], :etal=>1, :amp=>true)
-    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
-      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+bib[:Pages]+" (#{bib[:Year]})."
-    else
-     
-      text += comma(strip_bibtex(bib[:Title]))+comma(italic(bib[:Journal]))+comma(bold(bib[:Volume]))+"#{bib[:Pages]} (#{bib[:Year]})."
-    end
-    if !@style[:final]
-      text += url(bib[:Doi],bib[:Url])
-      text += citations(bib) 
-    end
-    text
+  def cite_marker num
+    @writer.creator.bold(@writer.creator.italics("(#{num.to_s})"))
   end
+
 end
 
