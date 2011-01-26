@@ -113,6 +113,10 @@ module BibOutput
     str
   end
 
+  def newline
+    '<br />'
+  end 
+
   def bold str
     return @writer.creator.bold(str) if str!=nil and str.strip != ''
     ''
@@ -144,6 +148,31 @@ module BibOutput
       return str.rstrip + '. '
     end
     ""
+  end
+
+  # Return sentence with only first letter capitalized (except for those
+  # between curly braces)
+  #
+  def capitalize_first str
+    str.gsub!(/^\{/,'')
+    str.gsub!(/\}$/,'')
+    a = str.split(/[{}]/)
+    # $stderr.print(a.join('@@'),"\n")
+    i = 0
+    str2 = a.map { | s |
+      i += 1
+      if (i % 2 == 1)
+        if (i==1)
+          s.capitalize
+        else
+          s.downcase 
+        end
+      else
+        s
+      end
+    }.join('')
+    # $stderr.print(str2,"\n")
+    str2
   end
 end
 
@@ -232,16 +261,18 @@ class BibSpringerFormatter
     text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
     text += " (#{bib[:Year]}) "
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
-      text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+dot(bib[:Pages])
+      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+dot(bib[:Pages])
     else
      
-      text += dot(strip_bibtex(bib[:Title]))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot("#{bib[:Pages]}")
+      text += dot(strip_bibtex(capitalize_first(bib[:Title])))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot("#{bib[:Pages]}")
     end
     text += url(bib[:Doi],bib[:Url],true)
     if !@style[:final]
       text += citations(bib) 
     end
-    text+'<br />'
+    text = text.strip
+    text = text.chop if text =~ /[,.]$/
+    text+newline
   end
 
   def to_authorlist s
