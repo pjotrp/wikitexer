@@ -9,6 +9,7 @@ class TitleNumbering
     @level = [ 0 ]
   end
 
+  # bump the last element
   def bump
     @level[-1] += 1
   end
@@ -43,7 +44,11 @@ class TitleNumbering
   end
 
   def to_s
-    @level.join('.')
+    if $bib_style[:format] == :springer
+      @level[1..-1].join('.')
+    else
+      @level.join('.')
+    end
   end
 end
 
