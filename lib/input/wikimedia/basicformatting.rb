@@ -37,6 +37,22 @@ module BasicFormatting
     paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
   end
 
+  # Boxed output of indented paragraph
+  #
+  def BasicFormatting::indented paragraph, creator
+    a = paragraph.to_a
+    is_indented = a.reduce(true) { |res, s| res && s =~ /^\s/ }
+    is_empty = a.reduce(true) { |res, s| res && s.strip == "" }
+
+    if is_indented and !is_empty
+      # literal
+      a.push "</div>"
+      a.unshift "<div class=\"verbatim\">"
+      paragraph.set(a)
+    end
+    is_indented
+  end
+
 end
 
 if $UNITTEST
@@ -44,6 +60,19 @@ if $UNITTEST
   require 'output/html/htmlcreator'
 
   class Test_BasicFormatting < Test::Unit::TestCase
+
+    def test_indented
+      creator = HtmlCreator.new
+      par = Paragraph.new(["line1\n","line2\n"])
+      BasicFormatting::indented(par,creator)
+      assert_equal("line1\nline2\n",par.to_s)
+      par = Paragraph.new(["  line1\n","line2\n"])
+      BasicFormatting::indented(par,creator)
+      assert_equal("  line1\nline2\n",par.to_s)
+      par = Paragraph.new(["  line1\n","  line2\n"])
+      BasicFormatting::indented(par,creator)
+      assert_equal("<div class=\"verbatim\">  line1\n  line2\n</div>",par.to_s)
+    end
 
     def test_markup
       creator = HtmlCreator.new

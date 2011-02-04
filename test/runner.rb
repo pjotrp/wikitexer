@@ -1,4 +1,4 @@
-#! /usr/bin/ruby
+#! /usr/bin/ruby1.8
 #
 # Info:: Pjotr's shared Ruby modules
 # Author:: Pjotr Prins

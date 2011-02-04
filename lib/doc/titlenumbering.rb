@@ -44,7 +44,7 @@ class TitleNumbering
   end
 
   def to_s
-    if $bib_style[:format] == :springer
+    if $bib_style and $bib_style[:format] == :springer
       @level[1..-1].join('.')
     else
       @level.join('.')

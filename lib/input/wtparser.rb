@@ -22,22 +22,27 @@ class WtParser
   def parse_paragraph document, par
     paragraph = Paragraph.new(par)
 
-    # ---- first remarks, so later HTML expansion does not break off
-    BasicFormatting::remarks(paragraph, @creator)
-    # ---- next urls, as we don't want expansion and to allow '[' expansion later
-    UrlFormatting::markup(paragraph, @creator)
-    # ---- parse \ruby{} and evaluate
-    Ruby::parse(paragraph)
-    # ---- expand bullets and lists
-    ListFormatting::markup(paragraph, @creator)
-    # ---- expand functions TeX style 
-    Functions::expand(paragraph, document)
-    # ---- create titles from wiki type markup
-    Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
-    # ---- standard wiki type markup (bold, italics etc.)
-    BasicFormatting::markup(paragraph, @creator)
-    # ---- special markup, for example highlighting FIXME
-    KeywordFormatting::markup(paragraph, @creator)
+    # ---- indented verbose box
+    if BasicFormatting::indented(paragraph, @creator)
+      # do nothing
+    else
+      # ---- first remarks, so later HTML expansion does not break off
+      BasicFormatting::remarks(paragraph, @creator)
+      # ---- next urls, as we don't want expansion and to allow '[' expansion later
+      UrlFormatting::markup(paragraph, @creator)
+      # ---- parse \ruby{} and evaluate
+      Ruby::parse(paragraph)
+      # ---- expand bullets and lists
+      ListFormatting::markup(paragraph, @creator)
+      # ---- expand functions TeX style 
+      Functions::expand(paragraph, document)
+      # ---- create titles from wiki type markup
+      Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
+      # ---- standard wiki type markup (bold, italics etc.)
+      BasicFormatting::markup(paragraph, @creator)
+      # ---- special markup, for example highlighting FIXME
+      KeywordFormatting::markup(paragraph, @creator)
+    end
     paragraph
   end
 
