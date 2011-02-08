@@ -127,7 +127,7 @@ HEADER
     div.quotation { font-family: palatino font, monospace; font-size:80%; }
     div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
     div.source-author { text-align:right; background-color:white; }
-    div.source { color: black; background-color:white ; border-style:outset; }
+    div.source { color: black; background-color:white ; border-style:outset; margin-left: 10px; margin-right: 10px }
     div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
     div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
     div.r { color: black; background-color:#CCFFFF; ; border-style:outset; }
