@@ -122,7 +122,7 @@ HEADER
     /* CSS inserted by theme options */
     h1,h2,h3 { font-family: palatino font, monospace; color:darkblue;background-color:#F0F8FF; }
     body {font-family:'times new roman',times,serif; color:#222222;background-color:#F0F8FF; }
-    div.verbatim { color:#8B0000; background-color: #D8BFD8; border-style:outset; }
+    div.verbatim { color: black; background-color: white; border-style:outset; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     div.quote { font-family: palatino font, monospace; font-size:80%; }
     div.quotation { font-family: palatino font, monospace; font-size:80%; }
     div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
