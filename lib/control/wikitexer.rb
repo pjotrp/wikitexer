@@ -23,9 +23,9 @@ class WikiTexer
 
   def write_paragraph last_env
     # Here a paragraph gets transformed - unfortunately the environment
-    # stack is empty here
+    # stack is empty here, last_env only contains last.
     # $stderr.print last_env,"\n"
-    paragraph = @parser.parse_paragraph(@document,@par)
+    paragraph = @parser.parse_paragraph(@document,@par,last_env)
     @writer.start_par(paragraph)
     @writer.write_paragraph(last_env, @document.environments, paragraph)
     @writer.end_par(paragraph)

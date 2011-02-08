@@ -19,12 +19,12 @@ class WtParser
 
   # Parse a paragraph of this document and return the modified paragraph
 
-  def parse_paragraph document, par
+  def parse_paragraph document, par, env
     paragraph = Paragraph.new(par)
 
     # ---- indented verbose box
-    if BasicFormatting::indented(paragraph, @creator)
-      # do nothing
+    if env == nil and BasicFormatting::indented(paragraph, @creator)
+      # indented, do nothing further
     else
       # ---- first remarks, so later HTML expansion does not break off
       BasicFormatting::remarks(paragraph, @creator)
