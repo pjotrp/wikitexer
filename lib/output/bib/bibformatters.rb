@@ -279,13 +279,13 @@ class BibSpringerFormatter
     list = split_bib_authors(s)
     list = list.map do | a | 
       first,last = split_first_lastname(a)
-      a = last+' '+first
       if first !~ /\./ or first =~ /\w\w/
-        $stderr.print "Possibly malformed ref <",a,">\n"
+        $stderr.print "Possibly malformed name <#{first}> in ref <",a,">\n"
       end
-      a = a.gsub(/[,.]/,' ') 
-      # $stderr.print a,"\n" 
-      a.strip
+      a1 = last+' '+to_initials(first)
+      a2 = a1.gsub(/[,.]/,' ') 
+      # $stderr.print a," <--\n" 
+      a2.strip
     end
     list
   end
