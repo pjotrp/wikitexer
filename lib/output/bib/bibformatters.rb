@@ -143,6 +143,13 @@ module BibOutput
     ""
   end
 
+  def braces str
+    if str!=nil and str.strip != ''
+      return ' (' + str.strip + ')'
+    end
+    ""
+  end
+
   def dot str
     if str!=nil and str.strip != ''
       return str.rstrip + '. '
@@ -259,7 +266,7 @@ class BibSpringerFormatter
 
   def write bib
     text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
-    text += " (#{bib[:Year]}) "
+    text += braces(bib[:Year])+' '
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
       text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+dot(bib[:Pages])
     else
