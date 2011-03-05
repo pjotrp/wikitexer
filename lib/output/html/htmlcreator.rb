@@ -155,7 +155,7 @@ module HtmlGen
     '%'
   end
 
-  def url buf, text=nil
+  def url(buf, text=nil)
     a = if text==nil
           buf.split(/ /,2)
         else
