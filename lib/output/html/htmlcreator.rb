@@ -159,7 +159,7 @@ module HtmlGen
     a = if text==nil
           buf.split(/ /,2)
         else
-          a = [ but, text ]
+          a = [ buf, text ]
         end
     if a.size != 2
       return '(<u>'+buf+'</u>)'
@@ -171,6 +171,8 @@ module HtmlGen
            end
     '<a href="' + link + '">'+a[1]+'</a>'
   end
+
+  alias url2 url
 
   def keyword buf
     "<font color='RED'>"+bold(buf)+"</font>"

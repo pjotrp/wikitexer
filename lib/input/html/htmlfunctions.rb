@@ -4,7 +4,6 @@ require 'output/html/htmlcreator'
 
 module HtmlFunctions
 
-  include HtmlGen
 
   def inserthtmltable filename
     insertfile filename,'<TABLE','<\/TABLE'
@@ -98,7 +97,8 @@ TEXTBOX
     '<span class="data">'+body+'</span>'
   end
 
+  include HtmlGen
   def format_url body
-    url(body,body)
+    url2(body,body)
   end
 end
