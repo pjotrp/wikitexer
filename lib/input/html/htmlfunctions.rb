@@ -1,6 +1,10 @@
 # These functions should really be generic and pass into a Creator module
 
+require 'output/html/htmlcreator'
+
 module HtmlFunctions
+
+  include HtmlGen
 
   def inserthtmltable filename
     insertfile filename,'<TABLE','<\/TABLE'
@@ -95,6 +99,6 @@ TEXTBOX
   end
 
   def format_url body
-    '<a href="'+body+'">'+body+'</a>'
+    url(body,body)
   end
 end

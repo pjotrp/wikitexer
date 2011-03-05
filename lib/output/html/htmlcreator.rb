@@ -1,5 +1,5 @@
 
-class HtmlCreator
+module HtmlGen
 
   def title titlenumbering, level, buf
     if buf.strip.size > 0
@@ -155,12 +155,21 @@ class HtmlCreator
     '%'
   end
 
-  def url buf
-    a = buf.split(/ /,2)
+  def url buf, text=nil
+    a = if text==nil
+          buf.split(/ /,2)
+        else
+          a = [ but, text ]
+        end
     if a.size != 2
       return '(<u>'+buf+'</u>)'
     end
-    '<a href="' + a[0] + '">'+a[1]+'</a>'
+    link = if a[0] !~ /:\/\//
+             "http://"+a[0]
+           else 
+             a[0]
+           end
+    '<a href="' + link + '">'+a[1]+'</a>'
   end
 
   def keyword buf
@@ -172,4 +181,6 @@ class HtmlCreator
   end
 end
 
-
+class HtmlCreator
+  include HtmlGen
+end

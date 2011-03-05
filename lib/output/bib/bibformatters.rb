@@ -86,23 +86,25 @@ module BibOutput
 
   def citations bib
     text = ''
-    if bib.has?(:Impact)
-      text += "Impact factor = #{bold(bib[:Impact])}"
+    if @style[:bib_cites]
+      if bib.has?(:Impact)
+        text += "Impact factor = #{bold(bib[:Impact])}"
+      end
+      cited = ''
+      if bib.has?(:Cited)
+        cited += " #{bold(bib[:Cited])}x,"
+      end
+      if bib.has?(:Pmcited)
+        cited += " Pubmed #{bold(bib[:Pmcited])}x,"
+      end
+      if bib.has?(:Gscited)
+        cited += " Google Scholar #{bold(bib[:Gscited])}x,"
+      end
+      if cited != ''
+        text += "Cited "+cited.chop
+      end
+      text = ' <small>('+text+')</small>' if text != ''
     end
-    cited = ''
-    if bib.has?(:Cited)
-      cited += " #{bold(bib[:Cited])}x,"
-    end
-    if bib.has?(:Pmcited)
-      cited += " Pubmed #{bold(bib[:Pmcited])}x,"
-    end
-    if bib.has?(:Gscited)
-      cited += " Google Scholar #{bold(bib[:Gscited])}x,"
-    end
-    if cited != ''
-      text += "Cited "+cited.chop
-    end
-    text = ' <small>('+text+')</small>' if text != ''
     text
   end
 
@@ -196,7 +198,7 @@ module BibDefaultOutput
 
   def write bib
     text = authors(bib[:Author],:etal=>true)
-    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
+    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings' or bib.type == 'conference'
       text += strip_bibtex(comma(italic(bib[:Title])))+comma(bib[:Booktitle])+" #{bib[:Pages]} (#{bib[:Publisher]} #{bib[:Year]})."
     else
      
@@ -267,8 +269,8 @@ class BibSpringerFormatter
   def write bib
     text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
     text += braces(bib[:Year])+' '
-    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings'
-      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+dot(bib[:Pages])
+    if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings' or bib.type == 'conference'
+      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+comma(bib[:Organization])+dot(bib[:Pages])
     else
      
       text += dot(strip_bibtex(capitalize_first(bib[:Title])))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot("#{bib[:Pages]}")
