@@ -1,7 +1,8 @@
 
 MARKWORDS = "
 like show often usually always any appears popular allow easy
-particular now large small many we most allows interesting interest
+particular now large small many we our most allows interesting interest
+use using used potential very extreme
 ".split
 
 NOMARKWORDS = "including".split
@@ -14,7 +15,7 @@ module KeywordFormatting
     MARKWORDS.each do | word |
       # paragraph.replace_each_line_once("((\\W#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
       paragraph.replace_each_line_once("((\\W#{word}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
-      paragraph.replace_each_line_once("((^#{word.capitalize}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
+      paragraph.replace_each_line_once("((\\W#{word.capitalize}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
     end
     paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
   end

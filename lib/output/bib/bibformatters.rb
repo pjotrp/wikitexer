@@ -183,6 +183,15 @@ module BibOutput
     # $stderr.print(str2,"\n")
     str2
   end
+
+  def pages p
+    return '' if p == nil or p.strip == ''
+
+    if p !~ /-/
+      return p + 'p'
+    end
+    p 
+  end
 end
 
 module BibDefaultOutput
@@ -270,10 +279,10 @@ class BibSpringerFormatter
     text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
     text += braces(bib[:Year])+' '
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings' or bib.type == 'conference'
-      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+comma(bib[:Organization])+dot(bib[:Pages])
+      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+comma(bib[:Organization])+dot(pages(bib[:Pages]))
     else
      
-      text += dot(strip_bibtex(capitalize_first(bib[:Title])))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot("#{bib[:Pages]}")
+      text += dot(strip_bibtex(capitalize_first(bib[:Title])))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot(pages("#{bib[:Pages]}"))
     end
     text += url(bib[:Doi],bib[:Url],true)
     if !@style[:final]
