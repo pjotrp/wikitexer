@@ -184,14 +184,19 @@ module BibOutput
     str2
   end
 
+  def edition e
+    e
+  end
+
   def pages p
     return '' if p == nil or p.strip == ''
 
-    if p !~ /-/
+    if p !~ /-/ and p !~ /:/
       return p + 'p'
     end
     p 
   end
+
 end
 
 module BibDefaultOutput
@@ -279,9 +284,17 @@ class BibSpringerFormatter
     text = authors(to_authorlist(bib[:Author]), :etal=>:plain, :etal_num => 3, :amp=>true)
     text += braces(bib[:Year])+' '
     if bib.type == 'book' or bib.type == 'incollection' or bib.type == 'inproceedings' or bib.type == 'conference'
-      text += strip_bibtex(comma(capitalize_first(bib[:Title])))+comma(bib[:Booktitle])+comma(bib[:Publisher])+comma(bib[:Organization])+dot(pages(bib[:Pages]))
+      text += strip_bibtex(dot(capitalize_first(bib.required(:Title))))+comma(bib[:Booktitle])+dot(edition(bib[:Edition]))
+      if bib.type == 'book'
+        text += comma(bib.required(:Publisher))
+      else
+        text += comma(bib[:Publisher])
+      end
+      text += comma(bib[:Organization])+dot(pages(bib[:Pages]))
+    elsif bib.type == 'journal'
+      # Journal article 
+      text += dot(strip_bibtex(capitalize_first(bib.required(:Title))))+dot(bib.required(:Journal))+colon(bib[:Volume],false)+dot(pages("#{bib.required(:Pages)}"))
     else
-     
       text += dot(strip_bibtex(capitalize_first(bib[:Title])))+dot(bib[:Journal])+colon(bib[:Volume],false)+dot(pages("#{bib[:Pages]}"))
     end
     text += url(bib[:Doi],bib[:Url],true)
