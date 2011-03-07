@@ -66,37 +66,37 @@ if $UNITTEST
       creator = HtmlCreator.new
       par = Paragraph.new(["line1\n","line2\n"])
       BasicFormatting::indented(par,creator)
-      assert_equal("line1\nline2\n",par.to_s)
+      assert_equal("line1\nline2\n",par.to_string)
       par = Paragraph.new(["  line1\n","line2\n"])
       BasicFormatting::indented(par,creator)
-      assert_equal("  line1\nline2\n",par.to_s)
+      assert_equal("  line1\nline2\n",par.to_string)
       par = Paragraph.new(["  line1\n","  line2\n"])
       BasicFormatting::indented(par,creator)
-      assert_equal("<div class=\"verbatim\"><br />  line1\n<br />  line2\n<br /></div>",par.to_s)
+      assert_equal("<div class=\"verbatim\"><br />  line1\n<br />  line2\n<br /></div>",par.to_string)
     end
 
     def test_markup
       creator = HtmlCreator.new
       par = Paragraph.new(["''italics''"])
-      assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["''italics\nline2''"])
-      assert_equal("<i>italics\nline2</i>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<i>italics\nline2</i>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["'''bold'''"])
-      assert_equal("<b>bold</b>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<b>bold</b>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["'''''bold intalics'''''"])
-      assert_equal("<i><b>bold intalics</b></i>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<i><b>bold intalics</b></i>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["<small>test</small>"])
-      assert_equal("<SMALL>test</SMALL>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<SMALL>test</SMALL>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["<s>test</s>"])
-      assert_equal("<S>test</S>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<S>test</S>",BasicFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["<u>test</u>"])
-      assert_equal("<U>test</U>",BasicFormatting::markup(par,creator).to_s)
+      assert_equal("<U>test</U>",BasicFormatting::markup(par,creator).to_string)
     end
 
     def test_remark
       creator = HtmlCreator.new
       par = Paragraph.new(["test % test\n","test \\% test"])
-      assert_equal("test \ntest % test",BasicFormatting::remarks(par,creator).to_s)
+      assert_equal("test \ntest % test",BasicFormatting::remarks(par,creator).to_string)
     end
   end
 

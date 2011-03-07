@@ -5,52 +5,57 @@ class Paragraph
 
   def initialize par
     @original = par.clone
-    @current  = set(par)
-    hastitle = false
+    @lines    = set(par)
+    hastitle  = false
   end
  
-  # Updates the paragraph buffer to an Array - each item ending in an eol.
+  # Updates the paragraph buffer. Internally an Array - each item ending in an eol.
   def set buf
-    if buf.kind_of? String
-      a = buf.split(/\n/)
-      (0..a.size-2).each do | i |
-        a[i] += "\n"
-      end
-      buf = a
-    end
-    @current = buf
-    @current
+    @lines =  if buf.kind_of? String
+                a = buf.split(/\n/)
+                (0..a.size-2).each do | i |
+                  a[i] += "\n"
+                end
+                a
+              else
+                buf.to_a
+              end
+    @lines
   end
   
   def set_line i, buf
     buf += "\n" if buf !~ /\n$/
-    @current[i] = buf
+    @lines[i] = buf
   end
 
-  def to_s
-    @current.join
+  def to_s 
+    raise "Nope, can not use this"
+  end
+
+  def to_string
+    @lines.join
   end
 
   def [] i
-    @current[i]
+    @lines[i]
   end
 
   def each 
-    @current.each do | s |
+    @lines.each do | s |
       yield s
     end
   end
 
   def to_a
-    @current
+    @lines
   end
 
   def size
-    @current.size
+    @lines.size
   end
 
   def replace_each_line_once search, replace_func
-    @current.each_with_index do | buf, index |
+    @lines.each_with_index do | buf, index |
       if pos = buf =~ /#{search}/
         orig = $1
         substr = $2
@@ -63,9 +68,10 @@ class Paragraph
           buf2 += buf[pos+orig.size..-1]
         end
         buf = buf2+"\n"
-        @current[index] = buf
+        @lines[index] = buf
       end
     end
+    self
   end
 
   # replace_all replaces all occurences matching +search+, where parentheses
@@ -77,7 +83,7 @@ class Paragraph
   # array of extra matches
   #
   def replace_all search, replace_func, extra_parameters=0
-    buf = to_s
+    buf = to_string
     while pos = buf =~ /#{search}/
       orig = $1
       substr = $2
@@ -115,11 +121,11 @@ if $UNITTEST
       par = Paragraph.new(a)
       assert_equal(par.to_a,a)
       par.set(a)
-      assert_equal(a.join,par.to_s)
+      assert_equal(a.join,par.to_string)
 
       s = "line1\nline2 \n line3"
       par = Paragraph.new(s)
-      assert_equal(s,par.to_s)
+      assert_equal(s,par.to_string)
     end
   end
 

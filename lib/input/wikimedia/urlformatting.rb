@@ -19,11 +19,11 @@ if $UNITTEST
     def test_markup
       creator = HtmlCreator.new
       par = Paragraph.new(["[http://link Test]"])
-      assert_equal("<a href=\"http://link\">Test</a>",UrlFormatting::markup(par,creator).to_s)
+      assert_equal("<a href=\"http://link\">Test</a>",UrlFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["[http://link Test me]"])
-      assert_equal("<a href=\"http://link\">Test me</a>",UrlFormatting::markup(par,creator).to_s)
+      assert_equal("<a href=\"http://link\">Test me</a>",UrlFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["[http://link * Test me]"])
-      assert_equal("<a href=\"http://link\">* Test me</a>",UrlFormatting::markup(par,creator).to_s)
+      assert_equal("<a href=\"http://link\">* Test me</a>",UrlFormatting::markup(par,creator).to_string)
     end
 
   end

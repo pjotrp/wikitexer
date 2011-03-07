@@ -66,19 +66,19 @@ if $UNITTEST
     def test_expand_bullets
       creator = HtmlCreator.new
       par = Paragraph.new("test\n* list1\n")
-      assert_equal("test\n<ul><li>list1\n</ul>\n",ListFormatting::markup(par,creator).to_s)
+      assert_equal("test\n<ul><li>list1\n</ul>\n",ListFormatting::markup(par,creator).to_string)
       par = Paragraph.new("test\n* list1\n* list2\n")
-      assert_equal("test\n<ul><li>list1\n<li>list2\n</ul>\n",ListFormatting::markup(par,creator).to_s)
+      assert_equal("test\n<ul><li>list1\n<li>list2\n</ul>\n",ListFormatting::markup(par,creator).to_string)
       par = Paragraph.new("test\n* list1\n** list2\n")
-      assert_equal("test\n<ul><li>list1\n<ul><li>list2\n</ul>\n</ul>\n",ListFormatting::markup(par,creator).to_s)
+      assert_equal("test\n<ul><li>list1\n<ul><li>list2\n</ul>\n</ul>\n",ListFormatting::markup(par,creator).to_string)
       par = Paragraph.new("test\n* list1\n** list2\n** List 3\n* List 4\n")
-      assert_equal("test\n<ul><li>list1\n<ul><li>list2\n<li>List 3\n</ul><li>List 4\n</ul>\n",ListFormatting::markup(par,creator).to_s)
+      assert_equal("test\n<ul><li>list1\n<ul><li>list2\n<li>List 3\n</ul><li>List 4\n</ul>\n",ListFormatting::markup(par,creator).to_string)
     end
 
     def test_expand_ordered
       creator = HtmlCreator.new
       par = Paragraph.new("test\n# list1\n")
-      assert_equal("test\n<ol><li>list1\n</ol>\n",ListFormatting::markup(par,creator).to_s)
+      assert_equal("test\n<ol><li>list1\n</ol>\n",ListFormatting::markup(par,creator).to_string)
     end
   end
 

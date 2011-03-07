@@ -30,9 +30,9 @@ if $UNITTEST
     def test_markup1
       creator = HtmlCreator.new
       par = Paragraph.new(["FIXME\n"])
-      assert_equal("<font color='RED'><b>FIXME\n</b></font>\n",KeywordFormatting::markup(par,creator).join)
+      assert_equal("<font color='RED'><b>FIXME\n</b></font>\n",KeywordFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["(FIXME) \n"])
-      assert_equal("(<font color='RED'><b>FIXME)</b></font>\n",KeywordFormatting::markup(par,creator).join)
+      assert_equal("(<font color='RED'><b>FIXME)</b></font>\n",KeywordFormatting::markup(par,creator).to_string)
     end
   end
 

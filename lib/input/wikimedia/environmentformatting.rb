@@ -4,51 +4,50 @@ module EnvironmentFormatting
 
   def EnvironmentFormatting::markup paragraph, environments, creator
     last_env = nil
-    paragraph.replace_all("(\\\\begin\\{([^}]+)\\})", proc { | name, orig, values | 
+    paragraph.replace_all("(\\\\begin\\{([^}]+?)\\})", proc { | name, orig, values | 
       # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)
       environments.push(env)
       # last_env = name
       case name
-        when 'verbatim' then return creator.verbatim_start
-        when 'quote'    then return creator.quote_start
-        when 'quotation'then return creator.quote_start
-        when 'ruby'     then return creator.ruby_start
-        when 'shell'    then return creator.shell_start
-        when 'python'   then return creator.python_start
-        when 'perl'     then return creator.perl_start
-        when 'scala'    then return creator.scala_start
-        when 'cmake'    then return creator.cmake_start
-        when 'c'        then return creator.c_start
-        when 'r'        then return creator.r_start
-        when 'swig'     then return creator.swig_start
+        when 'verbatim' then creator.verbatim_start
+        when 'quote'    then creator.quote_start
+        when 'quotation'then creator.quote_start
+        when 'ruby'     then creator.ruby_start
+        when 'shell'    then creator.shell_start
+        when 'python'   then creator.python_start
+        when 'perl'     then creator.perl_start
+        when 'scala'    then creator.scala_start
+        when 'cmake'    then creator.cmake_start
+        when 'c'        then creator.c_start
+        when 'r'        then creator.r_start
+        when 'swig'     then creator.swig_start
       else
         $stderr.print "Warning: unknown literal #{name}\n"
-        return creator.literal_start(name)
+        creator.literal_start(name)
       end
     }, 1)
-    paragraph = paragraph.replace_all("(\\\\end\\{([^}]+)\\})", proc { | name, orig, values | 
+    paragraph = paragraph.replace_all("(\\\\end\\{([^}]+?)\\})", proc { | name, orig, values | 
       # p name,orig,values
       env = environments.pop(name)
       last_env = name
       case name
-        when 'verbatim' then return creator.verbatim_end
-        when 'quote'    then return creator.quote_end
-        when 'quotation' then return creator.quote_end
-        when 'ruby'     then return creator.ruby_end
-        when 'shell'    then return creator.shell_end
-        when 'python'   then return creator.python_end
-        when 'perl'     then return creator.perl_end
-        when 'scala'    then return creator.scala_end
-        when 'cmake'    then return creator.cmake_end
-        when 'r'        then return creator.r_end
-        when 'c'        then return creator.c_end
-        when 'swig'     then return creator.swig_end
+        when 'verbatim' then creator.verbatim_end
+        when 'quote'    then creator.quote_end
+        when 'quotation'then creator.quote_end
+        when 'ruby'     then creator.ruby_end
+        when 'shell'    then creator.shell_end
+        when 'python'   then creator.python_end
+        when 'perl'     then creator.perl_end
+        when 'scala'    then creator.scala_end
+        when 'cmake'    then creator.cmake_end
+        when 'r'        then creator.r_end
+        when 'c'        then creator.c_end
+        when 'swig'     then creator.swig_end
       else
-        return creator.literal_end(name)
+        creator.literal_end(name)
       end
     }, 1)
-    # $stderr.print last_env,'=',paragraph.to_s
     return paragraph,last_env
   end
 
@@ -65,7 +64,7 @@ if $UNITTEST
       environments = EnvironmentStack.new
       par = Paragraph.new(["\\begin{verbatim}\n","test\n","\\end{verbatim}\n"])
       par2,env =  EnvironmentFormatting::markup(par,environments,creator)
-      assert_equal("<pre>\ntest\n</pre>",par2.to_s)
+      assert_equal("<pre>\ntest\n</pre>",par2.to_string)
     end
   end
 
