@@ -72,7 +72,7 @@ if $UNITTEST
       assert_equal("  line1\nline2\n",par.to_s)
       par = Paragraph.new(["  line1\n","  line2\n"])
       BasicFormatting::indented(par,creator)
-      assert_equal("<div class=\"verbatim\">  line1\n  line2\n</div>",par.to_s)
+      assert_equal("<div class=\"verbatim\"><br />  line1\n<br />  line2\n<br /></div>",par.to_s)
     end
 
     def test_markup

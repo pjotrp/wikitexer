@@ -17,6 +17,7 @@ require 'ostruct'
 require 'test/unit'
 
 $UNITTEST = true
+$bib_style = {}
 
 require 'control/wikitexer'
 require 'input/wtparser'

@@ -66,6 +66,7 @@ if $UNITTEST
     def test_expand
       @document = Document.new
       @funcresolver = @document.functionresolver
+      # do not expand unknown
       assert_equal(' \unknown test',expand([' \unknown test']))
       assert_equal('',expand(['\newvar{test}{me}']))
       assert_equal('me',@funcresolver['test'])
@@ -82,7 +83,7 @@ if $UNITTEST
       @document = Document.new
       @funcresolver = @document.functionresolver
       assert_equal('testme',expand(['\dummy{testme}']))
-      assert_equal('testje',expand(['\insertfile{test/data/insertfile.txt}']))
+      assert_equal('testje',expand(['\insertfile{test/data/insertfile.txt}']).strip)
     end
 
   protected

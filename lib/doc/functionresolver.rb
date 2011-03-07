@@ -42,7 +42,7 @@ class FunctionResolver
   end
 
   def hasmethod? name
-    methods.include?(name)
+    @lookup.include?(name) or respond_to?(name.to_sym)
   end
 
   # If a method modifies the document state it should be in this list - and gets passed
@@ -71,7 +71,7 @@ if $UNITTEST
     def test_resolver
       resolver = FunctionResolver.new
       assert(!resolver.hasvar?('test'))
-      assert(resolver.hasmethod?('newvar'))
+      assert(resolver.hasmethod?('newvar')==true,"hasmethod? fails for newvar")
       resolver.newvar('test','me')
       assert(!resolver.hasvar?('testme'))
       assert(resolver.hasvar?('test'))

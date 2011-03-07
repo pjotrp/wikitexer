@@ -28,7 +28,7 @@ class Paragraph
   end
 
   def to_s
-    @current.to_s
+    @current.join
   end
 
   def [] i
@@ -115,7 +115,7 @@ if $UNITTEST
       par = Paragraph.new(a)
       assert_equal(par.to_a,a)
       par.set(a)
-      assert_equal(par.to_s,a.to_s)
+      assert_equal(a.join,par.to_s)
 
       s = "line1\nline2 \n line3"
       par = Paragraph.new(s)

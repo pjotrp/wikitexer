@@ -31,7 +31,7 @@ module ListFormatting
     end
     # ordered list
     indent = 0
-    paragraph.to_a.each_with_index do | line, index |
+    paragraph.to_a.each_with_index do | line, index2 |
       if line =~ /(^[#]+)\s+/
         newindent = $1.size
         buf = $'
@@ -44,7 +44,7 @@ module ListFormatting
           buf = creator.list_end('')+ buf
           indent = newindent
         end
-        paragraph.set_line(index, buf)
+        paragraph.set_line(index2, buf)
       end
     end
     while indent > 0

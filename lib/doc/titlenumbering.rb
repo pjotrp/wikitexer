@@ -52,7 +52,7 @@ class TitleNumbering
   end
 end
 
-if $UNITTEST
+if $UNITTEST!=nil
 
   class Test_TitleNumbering < Test::Unit::TestCase
 

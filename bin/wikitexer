@@ -24,7 +24,7 @@ HTML  = 2
 bib_style = {}
 
 options = OpenStruct.new()
-opts = OptionParser.new() { |opts|
+opts1 = OptionParser.new() { |opts|
   opts.on_tail("-h", "--help", "Show help and examples") {
     print(opts)
     print <<EXAMPLE
@@ -92,6 +92,7 @@ EXAMPLE
   end
 
 }
+opts = opts1
 opts.parse!(ARGV)
 
 $bib_style = bib_style # obviously a hack

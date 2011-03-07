@@ -63,9 +63,9 @@ if $UNITTEST
     def test_markup
       creator = HtmlCreator.new
       environments = EnvironmentStack.new
-      par = Paragraph.new(["\\begin{verbatim}\n","\\end{verbatim}\n"])
-      # p EnvironmentFormatting::markup(par,environments,creator)
-      assert_equal("<pre>\n</pre>verbatim",EnvironmentFormatting::markup(par,environments,creator).to_s)
+      par = Paragraph.new(["\\begin{verbatim}\n","test\n","\\end{verbatim}\n"])
+      par2,env =  EnvironmentFormatting::markup(par,environments,creator)
+      assert_equal("<pre>\ntest\n</pre>",par2.to_s)
     end
   end
 

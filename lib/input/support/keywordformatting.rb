@@ -27,12 +27,12 @@ if $UNITTEST
 
   class Test_BasicFormatting < Test::Unit::TestCase
 
-    def test_markup
+    def test_markup1
       creator = HtmlCreator.new
       par = Paragraph.new(["FIXME\n"])
-      assert_equal("<font color='RED'><b>FIXME\n</b></font>\n",KeywordFormatting::markup(par,creator).to_s)
+      assert_equal("<font color='RED'><b>FIXME\n</b></font>\n",KeywordFormatting::markup(par,creator).join)
       par = Paragraph.new(["(FIXME) \n"])
-      assert_equal("(<font color='RED'><b>FIXME)</b></font>\n",KeywordFormatting::markup(par,creator).to_s)
+      assert_equal("(<font color='RED'><b>FIXME)</b></font>\n",KeywordFormatting::markup(par,creator).join)
     end
   end
 
