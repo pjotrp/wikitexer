@@ -54,7 +54,7 @@ class WtParser
     # temporary use a paragraph
     paragraph = Paragraph.new(line)
     paragraph, last_environment = EnvironmentFormatting::markup(paragraph, environments, @creator)
-    return paragraph.to_s+"\n", last_environment
+    return paragraph.to_string+"\n", last_environment
   end
 
 end

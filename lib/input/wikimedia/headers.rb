@@ -4,7 +4,7 @@ module Headers
   # If a paragraph starts and ends with ='s it is a header
   #
   def Headers::markup document, paragraph, gen_title
-    buf = paragraph.to_s.strip
+    buf = paragraph.to_string.strip
     if buf =~ /^(=+)/
       level = $1.size
       if buf =~ /=+$/
