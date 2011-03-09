@@ -22,6 +22,7 @@ LATEX = 1
 HTML  = 2
 
 bib_style = {}
+parse_bib = true
 
 options = OpenStruct.new()
 opts1 = OptionParser.new() { |opts|
@@ -57,6 +58,10 @@ EXAMPLE
 
   opts.on('-r filename.rb',String,"Use Ruby module") do | fn |
     options.filenamerb = fn
+  end
+
+  opts.on("--no-parse-bib", "Bibliography: do not parse bib files") do
+    parse_bib = false
   end
 
   opts.on("--bib-cites", "Bibliography: show citation values") do
@@ -124,9 +129,11 @@ if options.use_stdin
 else
   ARGV.each do | fn |
 	  if fn =~ /.bib$/
-	  	Bibtex::Parser.parse(fn).map do |entry|
-			  # $stderr.print entry
-			  wikitexer.add_reference entry
+      if parse_bib
+  	  	Bibtex::Parser.parse(fn).map do |entry|
+	  		  # $stderr.print entry
+		  	  wikitexer.add_reference entry
+        end
 		  end
 		else
       num = 1
