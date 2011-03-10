@@ -45,10 +45,18 @@ module BasicFormatting
     is_empty = a.reduce(true) { |res, s| res && s.strip == "" }
 
     if is_indented and !is_empty
-      a = a.map { | s | "<br />"+s }
-      # literal
-      a.push "<br /></div>"
-      a.unshift "<div class=\"verbatim\">"
+      if $indent_env != nil
+        env = $indent_env
+        a.unshift "\\begin{#{env}}\n"
+        a.push "\\end{#{env}}\n"
+        # $stderr.print a.join
+        is_indented = false
+      else
+        a = a.map { | s | "<br />"+s }
+        # literal
+        a.push "<br /></div>"
+        a.unshift "<div class=\"verbatim\">"
+      end
       paragraph.set(a)
     end
     is_indented

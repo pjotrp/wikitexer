@@ -89,7 +89,7 @@ if $UNITTEST
   protected
 
     def expand a
-      Functions::expand(Paragraph.new(a),@document).to_s
+      Functions::expand(Paragraph.new(a),@document).to_string
     end
   end
 

@@ -56,6 +56,10 @@ EXAMPLE
     options.css = uri
   end
 
+  opts.on("--indent-env lang", String, "Set indented lines to language") do |l|
+    options.indent_env = l
+  end
+
   opts.on('-r filename.rb',String,"Use Ruby module") do | fn |
     options.filenamerb = fn
   end
@@ -101,6 +105,7 @@ opts = opts1
 opts.parse!(ARGV)
 
 $bib_style = bib_style # obviously a hack
+$indent_env = options.indent_env
 
 print WIKITEXER_SHOW,"\n" if not options.quiet and !options.use_stdin
 
