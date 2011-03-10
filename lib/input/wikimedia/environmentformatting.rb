@@ -7,8 +7,9 @@ module EnvironmentFormatting
     paragraph.replace_all("(\\\\begin\\{([^}]+?)\\})", proc { | name, orig, values | 
       # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)
-      environments.push(env)
+      environments.push(env) if environments
       # last_env = name
+      # Basically this inserts a 'div' class:
       case name
         when 'verbatim' then creator.verbatim_start
         when 'quote'    then creator.quote_start
@@ -29,7 +30,7 @@ module EnvironmentFormatting
     }, 1)
     paragraph = paragraph.replace_all("(\\\\end\\{([^}]+?)\\})", proc { | name, orig, values | 
       # p name,orig,values
-      env = environments.pop(name)
+      env = environments.pop(name) if environments
       last_env = name
       case name
         when 'verbatim' then creator.verbatim_end

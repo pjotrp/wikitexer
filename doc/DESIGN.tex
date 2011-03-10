@@ -34,7 +34,23 @@ not understand, but filling in what it understands. By default
 embedded in a webserver. Another simplification is that wikitexer is 
 paragraph based for macro expansion - much like TeX itself.
 
+== Flow ==
 
+The program flow is as follows:
+
+# After parsing CLI options an output handler is chosen; currenly only HTML is fully supported
+# Next a parser (WtParser) is created, with a hook to the output handler
+# WikiTexer is created, which is the state engine
+# The input file(s) are parser, line by line using wikitexer.addline
+# addline keeps track of @par, and write\_paragraph will send a paragraph, when it is a unit
+# write\_paragraph parses the @par through parse\_paragraph
+# next calls into the write handler, in three steps:
+## start\_par (writes <p>)
+## write\_paragraph
+## end\_par (writes </p>)
+# parse\_paragraph calls all formatting rules
+# html.write\_paragraph uses 'last\_env' to write all divs and transforms source code to HTML
+#
 == \mediawiki\ input handler ==
 
 The \mediawiki\ input handler supports a minimalistic \mediawiki\ style

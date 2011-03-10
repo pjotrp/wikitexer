@@ -23,10 +23,8 @@ class WtParser
     paragraph = Paragraph.new(par)
 
     if env == nil
-      # ---- indented verbose box
-      if env == nil and BasicFormatting::indented(paragraph, @creator)
-        # indented, do nothing further
-      else
+      is_indented, env = BasicFormatting::indented(paragraph, @creator)
+      if !is_indented
         # ---- first remarks, so later HTML expansion does not break off
         BasicFormatting::remarks(paragraph, @creator)
         # ---- next urls, as we don't want expansion and to allow '[' expansion later
@@ -45,7 +43,7 @@ class WtParser
         KeywordFormatting::markup(paragraph, @creator) 
       end
     end
-    paragraph
+    return paragraph, env
   end
 
   # Parse line for environments and return the line stripped of markers, as well 
@@ -54,6 +52,7 @@ class WtParser
     # temporary use a paragraph
     paragraph = Paragraph.new(line)
     paragraph, last_environment = EnvironmentFormatting::markup(paragraph, environments, @creator)
+    # $stderr.print paragraph.to_string
     return paragraph.to_string+"\n", last_environment
   end
 
