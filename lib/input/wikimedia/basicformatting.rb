@@ -39,8 +39,9 @@ module BasicFormatting
       end
     end
     paragraph.set(a)
-    # set percentage symbol correctly
+    # set percentage, or other, symbol correctly
     paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
+    paragraph.replace_all("((\\\\&))", proc { | buf, orig | creator.amp(buf) } )
   end
 
   # Boxed output of indented paragraph

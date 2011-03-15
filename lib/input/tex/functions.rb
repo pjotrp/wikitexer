@@ -11,15 +11,17 @@ module Functions
   # in place.
   #
   def Functions::expand par, document
+    has_dot = (par.to_string.strip =~ /\./)
     functionresolver = document.functionresolver
     # get all newvars and store them in the functionresolver
-    par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", proc { | name, orig, values |
+    par.replace_all("(\\\\newvar\\{([^}]+)\\}\\{([^}]+)\\})", lambda { | name, orig, values |
+      # 2-arg functions
       body = values[0]
       functionresolver.newvar(name,body)
       return ''  
     }, 1 )
-    # get all single arg functions
-    par.replace_all("(\\\\(\\w+)\\{([^}]+)\\})", proc { | funcname, orig, values |
+    # get all 1-arg functions
+    par.replace_all("(\\\\(\\w+)\\{([^}]+)\\})", lambda { | funcname, orig, values |
       var = values[0]
       if functionresolver.hasmethod?(funcname)
         if functionresolver.docmodify?(funcname)
@@ -28,22 +30,23 @@ module Functions
           return functionresolver.send(funcname,var)
         end
       end
-      return remove_marker(orig)
+      remove_marker(orig)
     }, 1 )
     # Expand all known variables with trailing backslash
-    par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", proc { | funcname, orig, values |
+    par.replace_all("(\\\\(\\w+)(\\\\)(\\W))", lambda { | funcname, orig, values |
       if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]+values[1]
       end
       return remove_marker(orig)
     }, 2)
     # Expand all remaining
-    par.replace_all("(\\\\(\\w+))", proc { | funcname, orig |
+    par.replace_all("(\\\\(\\w+))", lambda { | funcname, orig |
       if functionresolver.hasvar?(funcname)
         return functionresolver[funcname]
       end
       return remove_marker(orig)
     } )
+    # par = Paragraph.new(par.to_string+'.')
     restore_markers(par)
   end
 
