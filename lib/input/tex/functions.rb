@@ -83,13 +83,19 @@ if $UNITTEST
       @document = Document.new
       @funcresolver = @document.functionresolver
       assert_equal('testme',expand(['\dummy{testme}']))
+      assert_equal('testme.',expand(['\dummy{testme}.']))
       assert_equal('testje',expand(['\insertfile{test/data/insertfile.txt}']).strip)
     end
 
   protected
 
     def expand a
-      Functions::expand(Paragraph.new(a),@document).to_string
+      res = Functions::expand(Paragraph.new(a),@document)
+      if res.kind_of? String
+        res
+      else
+        res.to_string
+      end
     end
   end
 
