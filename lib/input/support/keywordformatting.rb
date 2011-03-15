@@ -12,12 +12,14 @@ module KeywordFormatting
   # Replace special markup with appropriate output - e.g. highlight FIXME
   def KeywordFormatting::markup paragraph, creator
     paragraph.replace_each_line_once("((FIXME\\W))", proc { | buf, orig | creator.keyword(buf) } )
-    MARKWORDS.each do | word |
-      # paragraph.replace_each_line_once("((\\W#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
-      paragraph.replace_each_line_once("((\\W#{word}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
-      paragraph.replace_each_line_once("((\\W#{word.capitalize}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
+    if !$style[:final]
+      MARKWORDS.each do | word |
+        # paragraph.replace_each_line_once("((\\W#{word}\\W))", proc { | buf, orig | creator.markword(buf) } )
+        paragraph.replace_each_line_once("((\\W#{word}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
+        paragraph.replace_each_line_once("((\\W#{word.capitalize}(ing|ly)?\\W))", proc { | buf, orig | creator.markword(buf) } )
+      end
+      paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
     end
-    paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
   end
 end
 

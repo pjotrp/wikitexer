@@ -12,6 +12,12 @@ module BasicFormatting
   def BasicFormatting::markup paragraph, creator
     paragraph.replace_all("('''''([^']+)''''')", proc { | buf, orig | creator.italics(creator.bold(buf)) } )
     paragraph.replace_all("('''([^']+)''')", proc { | buf, orig | creator.bold(buf) } )
+    if $style[:final]
+      paragraph.replace_all("^(''([^']+)'')", proc { | buf, orig | buf } )
+    else
+      # highlight first sentence
+      # paragraph.replace_all("^([^\.]+?)", proc { | buf, orig | p buf ; creator.italics(buf) } )
+    end
     paragraph.replace_all("(''([^']+)'')", proc { | buf, orig | creator.italics(buf) } )
     paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf, orig | creator.small(buf) } )
     paragraph.replace_all("(<s>(.*?)<\/s>)", proc { | buf, orig | creator.strikeout(buf) } )
@@ -84,6 +90,7 @@ if $UNITTEST
     end
 
     def test_markup
+      $style[:final] = true
       creator = HtmlCreator.new
       par = Paragraph.new(["''italics''"])
       assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_string)
