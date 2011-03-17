@@ -141,6 +141,7 @@ HEADER
     span.function { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.code { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    span.marked { background-color: yellow; font-weight:bold; }
     span.name { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     .tex { font-family: Times, serif; letter-spacing: -0.09em; }
@@ -175,6 +176,7 @@ HEADER2
     span.code { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.name { color: darkred; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    span.marked { background-color: yellow; font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     .tex { font-family: Times, serif; letter-spacing: -0.09em; }
     span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }

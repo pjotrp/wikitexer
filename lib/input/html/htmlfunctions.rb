@@ -42,6 +42,14 @@ TEXTBOX
     'Figure: '
   end
 
+  def yellow body
+    '<span style="background-color:yellow">'+body+'</span>'
+  end 
+
+  def mark body
+    '<span style="background-color:yellow">'+body+'</span>'
+  end 
+
   def large body
     '<font size="8">'+body+'</font>'
   end
