@@ -57,6 +57,8 @@ class HtmlWriter
       f.close
       code = `/usr/bin/source-highlight -s #{lang} -i #{f.path}`
       code = code.gsub(/<!--(.*?)-->[\n]?/m, "")
+      code = code.gsub(/<font color="#\w+">/, "<span class=\"code\">")
+      code = code.gsub(/<\/font>/, "</span>")
       write code
     end
     # paragraph.each { | line | write line }
