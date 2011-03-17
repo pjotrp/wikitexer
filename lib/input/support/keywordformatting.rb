@@ -20,6 +20,7 @@ module KeywordFormatting
       end
       paragraph.replace_each_line_once("((\/wrk\/))", proc { | buf, orig | '/pjotrp/' } )
     end
+    paragraph
   end
 end
 

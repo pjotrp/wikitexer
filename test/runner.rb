@@ -18,6 +18,7 @@ require 'test/unit'
 
 $UNITTEST = true
 $bib_style = {}
+$style = {}
 
 require 'control/wikitexer'
 require 'input/wtparser'

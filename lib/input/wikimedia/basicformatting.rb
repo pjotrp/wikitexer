@@ -91,7 +91,7 @@ if $UNITTEST
     end
 
     def test_markup
-      $style[:final] = true
+      # $style[:final] = true
       creator = HtmlCreator.new
       par = Paragraph.new(["''italics''"])
       assert_equal("<i>italics</i>",BasicFormatting::markup(par,creator).to_string)
