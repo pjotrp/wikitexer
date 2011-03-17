@@ -78,31 +78,60 @@ TEXTBOX
   end
 
   def format_filename body
-    '<span class="filename">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="filename">'+body+'</span>'
+    end
   end
 
   def format_var body
-    '<span class="varname">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="varname">'+body+'</span>'
+    end
   end
 
   def format_function body
-    '<span class="function">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="function">'+body+'</span>'
+    end
   end
 
   def format_code body
-    '<span class="code">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="code">'+body+'</span>'
+    end
   end
 
   def format_program body
-    '<span class="program">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="program">'+body+'</span>'
+    end
   end
 
   def format_name body
-    '<span class="name">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="name">'+body+'</span>'
+    end
   end
 
   def format_data body
-    '<span class="data">'+body+'</span>'
+    if $style[:final]
+      bold(body)
+    else
+      '<span class="filename">'+body+'</span>'
+    end
+      '<span class="data">'+body+'</span>'
   end
 
   include HtmlGen
