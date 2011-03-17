@@ -86,8 +86,8 @@ if $UNITTEST
       @document = Document.new
       @funcresolver = @document.functionresolver
       assert_equal('testme',expand(['\dummy{testme}']))
-      assert_equal('testme.',expand(['\dummy{testme}.']))
       assert_equal('testje',expand(['\insertfile{test/data/insertfile.txt}']).strip)
+      assert_equal('testme.',expand(['\dummy{testme}.']))
     end
 
   protected
