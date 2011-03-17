@@ -137,7 +137,7 @@ HEADER
     span.filename { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.varname { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.function { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.code { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
+    span.code { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     span.name { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
