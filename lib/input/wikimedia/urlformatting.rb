@@ -6,8 +6,10 @@ module UrlFormatting
     # Find markup that starts with a square bracket and ends with one, and
     # convert it to an href. This edition requires a URL.
     paragraph.replace_all('(\[(https?:[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
-    # Find strings starting with a char, ending in .html
+    # Find strings starting with a char, or slash, ending in .html
     paragraph.replace_all('(\[([A-Za-z/]\S+?\.html\s+[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
+    # Find strings starting with a slash, ending in slash
+    paragraph.replace_all('(\[(/\w+/\s+[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
   end
 
 end
