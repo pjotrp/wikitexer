@@ -161,14 +161,14 @@ module HtmlGen
 
   def url(buf, text=nil)
     a = if text==nil
-          buf.split(/ /,2)
+          buf.split(/\s/,2)
         else
           a = [ buf, text ]
         end
     if a.size != 2
       return '(<u>'+buf+'</u>)'
     end
-    link = if a[0] !~ /:\/\//
+    link = if a[0] !~ /:\/\/\w+\./ and a[0] !~ /\w+\.html/
              "http://"+a[0]
            else 
              a[0]
