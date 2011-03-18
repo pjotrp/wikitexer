@@ -168,7 +168,7 @@ module HtmlGen
     if a.size != 2
       return '(<u>'+buf+'</u>)'
     end
-    link = if a[0] !~ /:\/\/\w+\./ and a[0] !~ /\w+\.html/
+    link = if a[0] !~ /:\/\/\w+\./ and a[0] !~ /\w+\.html/ and a[0] !~ /^\/\w+\//
              "http://"+a[0]
            else 
              a[0]
