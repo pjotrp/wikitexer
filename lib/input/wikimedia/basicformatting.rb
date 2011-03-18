@@ -19,6 +19,7 @@ module BasicFormatting
       # paragraph.replace_all("^([^\.]+?)", proc { | buf, orig | p buf ; creator.italics(buf) } )
     end
     paragraph.replace_all("(''([^']+)'')", proc { | buf, orig | creator.italics(buf) } )
+    paragraph.replace_all('(\*(\w+)\*)', proc { | buf, orig | creator.bold(buf) } )
     paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf, orig | creator.small(buf) } )
     paragraph.replace_all("(<s>(.*?)<\/s>)", proc { | buf, orig | creator.strikeout(buf) } )
     paragraph.replace_all("(<u>(.*?)<\/u>)", proc { | buf, orig | creator.underline(buf) } )
