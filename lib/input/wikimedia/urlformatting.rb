@@ -10,6 +10,7 @@ module UrlFormatting
     paragraph.replace_all('(\[([A-Za-z/]\S+?\.html\s+[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
     # Find strings starting with a slash, ending in slash
     paragraph.replace_all('(\[(/\w+/\s+[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
+    paragraph.replace_all('(\[(search\s+[^\]]+)\])', proc { | buf, orig | creator.url(buf) } )
   end
 
 end
@@ -34,6 +35,8 @@ if $UNITTEST
       assert_equal("<a href=\"/dir/\">Test me</a>",UrlFormatting::markup(par,creator).to_string)
       par = Paragraph.new(["[http://link.com * Test me]"])
       assert_equal("<a href=\"http://link.com\">* Test me</a>",UrlFormatting::markup(par,creator).to_string)
+      par = Paragraph.new(["[search Test me]"])
+      assert_equal("<a href=\"http://www.google.com/search?q=Test+me\">Test me</a>",UrlFormatting::markup(par,creator).to_string)
     end
 
   end
