@@ -2,20 +2,20 @@
 require 'tempfile'
 require 'output/bib/bibformatters'
 
-class HtmlWriter
+class LatexWriter
 
-  attr_accessor :css, :creator
-  def initialize css, creator
-    @css = css
+  attr_accessor :style, :creator
+  def initialize style, creator
+    @style = style
     @creator = creator
   end
 
   def latex
-    '<span class="latex">L<span class="a">A</span><span class="tex">T<span class="e">E</span>X</span></span>'
+    '\LaTeX'
   end
 
   def tex
-    '<span class="latex"><span class="tex">T<span class="e">E</span>X</span></span>'
+    '\TeX'
   end
 
   def wikitexer
@@ -24,7 +24,7 @@ class HtmlWriter
 
   def author
     author = ENV['USER']
-    author = '<a href="http://thebird.nl/">pjotrp</a>' if author == 'wrk'
+    author = 'pjotrp' if author == 'wrk'
     author = 'unknown' if author == nil or author == ''
     author
   end
@@ -112,8 +112,8 @@ class HtmlWriter
   end
 
   def header
-    write "<html>\n"
-    if @css
+    # write "<latex>\n"
+    if @style
       write <<HEADER
 \\begin{document}
 HEADER
@@ -127,26 +127,27 @@ HEADER2
 HEADER2
       end
     end
-    writeln "  <body>"
-    write "<div class=\"source-author\">"
+    # writeln "  <body>"
+    # write "<div class=\"source-author\">"
     write timestamp
-    writeln "</div>"
+    # writeln "</div>"
   end
 
   def footer
     if !$style[:final]
-      write "  <hr \>\n"
-      writeln "  "+wikitexer+' - generated '+timestamp
+      # write "  <hr \>\n"
+      # writeln "  "+wikitexer+' - generated '+timestamp
     end
-    write "  </body>\n</html>\n"
+    # write "  </body>\n</latex>\n"
+    write "\\end{document}"
   end
 
   def start_par paragraph
-    write "\n<p>\n" if !paragraph.hastitle
+    write "\n\n" if !paragraph.hastitle
   end
 
   def end_par paragraph
-    write "\n</p>\n" if !paragraph.hastitle
+    write "\n\n" if !paragraph.hastitle
   end
 
    				# #<Bibtex::Entry:0xb7c5b9f0 @fields={

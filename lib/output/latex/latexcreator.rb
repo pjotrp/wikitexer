@@ -3,54 +3,54 @@ module LatexGen
 
   def title titlenumbering, level, buf
     if buf.strip.size > 0
-      "\chapter{"+titlenumbering.to_s+' '+buf+"}"
+      "\\chapter{"+titlenumbering.to_s+' '+buf+"}"
     else
       buf
     end
   end
 
   def italics buf
-    '<i>'+buf+'</i>'
+    '?emph{'+buf+'}'
   end
 
   def bold buf
-    '<b>'+buf+'</b>'
+    '{?bf '+buf+'}'
   end
 
   def small buf
-    '<SMALL>'+buf+'</SMALL>'
+    '{?small '+buf+'}'
   end
 
   def strikeout buf
-    '<S>'+buf+'</S>'
+    '?'+buf+'?'
   end
 
   def underline buf
-    '<U>'+buf+'</U>'
+    '?'+buf+'?'
   end
 
   def superscript buf
-    '<sup>'+buf+'</sup>'
+    '$^'+buf+'$'
   end
 
   def list_start buf
-    '<ol>' + buf
+    '?begin{enumerate}' + buf
   end
 
   def list_end buf
-    buf + '</ol>'
+    buf + '?end{enumerate}'
   end
 
   def bullets_start buf
-    '<ul>' + buf
+    '?begin{itemize}' + buf
   end
 
   def bullets_end buf
-    buf + '</ul>'
+    buf + '?end{itemize}'
   end
 
   def bullet buf
-    '<li>'+buf  # +'</li>'
+    '?item '+buf  # +'</li>'
   end
 
   def verbatim_start
@@ -152,11 +152,11 @@ module LatexGen
   end
 
   def percentage buf
-    '%'
+    '?%'
   end
 
   def amp buf
-    '&amp;'
+    '&'
   end
 
   def url(buf, text=nil)
