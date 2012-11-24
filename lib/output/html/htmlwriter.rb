@@ -2,7 +2,7 @@
 require 'tempfile'
 require 'output/bib/bibformatters'
 
-class LatexWriter
+class HtmlWriter
 
   attr_accessor :css, :creator
   def initialize css, creator
@@ -10,12 +10,12 @@ class LatexWriter
     @creator = creator
   end
 
-  def latex
-    '<span class="latex">L<span class="a">A</span><span class="tex">T<span class="e">E</span>X</span></span>'
+  def html
+    '<span class="html">L<span class="a">A</span><span class="tex">T<span class="e">E</span>X</span></span>'
   end
 
   def tex
-    '<span class="latex"><span class="tex">T<span class="e">E</span>X</span></span>'
+    '<span class="html"><span class="tex">T<span class="e">E</span>X</span></span>'
   end
 
   def wikitexer
@@ -112,7 +112,7 @@ class LatexWriter
   end
 
   def header
-    write "<Latex>\n"
+    write "<html>\n"
     if @css
       write <<HEADER
     <head>
@@ -147,9 +147,9 @@ HEADER
     span.name { font-family: monospace; font-size:100%;  font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     .tex { font-family: Times, serif; letter-spacing: -0.09em; }
-    span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }
+    span.html{ font-family: Times, serif; letter-spacing: -0.3em; }
     span.tex .e { position:relative; top: 0.40ex; left: -0.01em; }
-    span.latex .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
+    span.html .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
     /*]]>*/
     </style>
 HEADER2
@@ -181,9 +181,9 @@ HEADER2
     span.marked { background-color: yellow; font-weight:bold; }
     span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
     .tex { font-family: Times, serif; letter-spacing: -0.09em; }
-    span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }
+    span.html{ font-family: Times, serif; letter-spacing: -0.3em; }
     span.tex .e { position:relative; top: 0.40ex; left: -0.01em; }
-    span.latex .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
+    span.html .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
     /*]]>*/
     </style>
 HEADER2
@@ -200,7 +200,7 @@ HEADER2
       write "  <hr \>\n"
       writeln "  "+wikitexer+' - generated '+timestamp
     end
-    write "  </body>\n</Latex>\n"
+    write "  </body>\n</html>\n"
   end
 
   def start_par paragraph

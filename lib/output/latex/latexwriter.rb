@@ -115,9 +115,7 @@ class HtmlWriter
     write "<html>\n"
     if @css
       write <<HEADER
-    <head>
-      <link href="#{@css}" rel="stylesheet" type="text/css">
-    </head>
+\\begin{document}
 HEADER
     else
       if $style[:final]
@@ -125,6 +123,7 @@ HEADER
 HEADER2
       else
         write <<HEADER2
+\\begin{document}
 HEADER2
       end
     end
