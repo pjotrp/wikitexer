@@ -1,7 +1,7 @@
 #! /usr/bin/ruby
 #
 # Author:: Pjotr Prins
-# Copyright:: October 2008
+# Copyright:: October 2008-2012
 # License:: Ruby License
 
 rootpath = File.dirname(File.dirname(__FILE__))
@@ -17,7 +17,6 @@ require 'control/wikitexer'
 require 'output/wtlatex'
 require 'output/wthtml'
 require 'input/wtparser'
-
 
 WIKITEXER_VERSION = Version.get(File.dirname(__FILE__),'VERSION')
 WIKITEXER_SHOW = 'wikiTeXer '+WIKITEXER_VERSION+' by Pjotr Prins'
