@@ -10,15 +10,15 @@ module LatexGen
   end
 
   def italics buf
-    '?emph{'+buf+'}'
+    '\emph{'+buf+'}'
   end
 
   def bold buf
-    '{?bf '+buf+'}'
+    '{\bf '+buf+'}'
   end
 
   def small buf
-    '{?small '+buf+'}'
+    '{\small '+buf+'}'
   end
 
   def strikeout buf
@@ -34,23 +34,23 @@ module LatexGen
   end
 
   def list_start buf
-    '?begin{enumerate}' + buf
+    '\begin{enumerate}' + buf + "\n"
   end
 
   def list_end buf
-    buf + '?end{enumerate}'
+    buf + '\end{enumerate}' + "\n"
   end
 
   def bullets_start buf
-    '?begin{itemize}' + buf
+    '\begin{itemize}' + buf + "\n"
   end
 
   def bullets_end buf
-    buf + '?end{itemize}'
+    buf + '\end{itemize}' + "\n"
   end
 
   def bullet buf
-    '?item '+buf  # +'</li>'
+    '\item '+buf + "\n"
   end
 
   def verbatim_start
@@ -152,7 +152,7 @@ module LatexGen
   end
 
   def percentage buf
-    '?%'
+    '\%'
   end
 
   def amp buf
