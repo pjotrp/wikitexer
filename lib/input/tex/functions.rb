@@ -25,9 +25,9 @@ module Functions
       var = values[0]
       if functionresolver.hasmethod?(funcname)
         if functionresolver.docmodify?(funcname)
-          return functionresolver.send(funcname,document,var)
+          return functionresolver.send_formatter(funcname,document,var)
         else
-          return functionresolver.send(funcname,var)
+          return functionresolver.send_formatter(funcname,var)
         end
       end
       remove_marker(orig)

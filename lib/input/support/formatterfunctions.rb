@@ -6,10 +6,6 @@ require 'output/html/htmlcreator'
 
 module FormatterFunctions
 
-  def remark body
-    @writer.remark body
-  end
-
   def ignore body
     ''
   end

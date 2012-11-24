@@ -89,7 +89,7 @@ class Paragraph
       orig = $1
       substr = $2
       extra = []
-      # Check whethe we have extra parameters to this function, defined
+      # Check whether we have extra parameters to this function, defined
       # by regexs in braces ...(1)...(2)...(3)...
       (1..extra_parameters).each do | i |
         extra.push eval("$#{i+2}")

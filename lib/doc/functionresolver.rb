@@ -43,7 +43,15 @@ class FunctionResolver
   end
 
   def hasmethod? name
-    @lookup.include?(name) or respond_to?(name.to_sym)
+    @lookup.include?(name) or respond_to?(name.to_sym) or @writer.respond_to?(name.to_sym)
+  end
+
+  def send_formatter name, *args
+    if @writer.respond_to?(name.to_sym)
+      @writer.send(name,*args)
+    else
+      send(name,*args)
+    end
   end
 
   # If a method modifies the document state it should be in this list - and gets passed
