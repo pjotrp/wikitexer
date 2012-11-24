@@ -183,6 +183,6 @@ HEADER2
   end
 
   def remark body
-    '?remark{'+body+'}'
+    '\remark{'+body+'}'
   end
 end

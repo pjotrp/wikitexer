@@ -1,4 +1,4 @@
-# These functions should really be generic and pass into a Creator module - 
+# These functions should really be generic and pass into a Writer module - 
 # at the moment they are used by the HTML outputter to expand latex style
 # functions
 
@@ -14,6 +14,8 @@ module FormatterFunctions
     ''
   end
 
+  # The following functions should really be moved to the writer class
+ 
   def inserthtmltable filename
     insertfile filename,'<TABLE','<\/TABLE'
   end
