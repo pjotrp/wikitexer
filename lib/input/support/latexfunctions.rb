@@ -1,6 +1,7 @@
 
 module LatexFunctions
 
+if false
   def emph s
     format_emph(s)
   end
@@ -12,5 +13,7 @@ module LatexFunctions
   def textsuperscript s
     format_textsuperscript s
   end
+end
+
 end
 
