@@ -23,15 +23,19 @@ module FileFunctions
   end
 
   def fn filen
-    format_filename(filen)
+    write_filename(filen)
   end
 
   def file filen
-    format_filename(filen)
+    write_filename(filen)
   end
 
   def filename filen
-    format_filename(filen)
+    write_filename(filen)
+  end
+
+  def write_filename filen
+    @writer.filename(filen)
   end
 
   def dummy arg='testDummy'

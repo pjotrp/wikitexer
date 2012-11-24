@@ -288,7 +288,7 @@ TEXTBOX
     '<i>'+body+'</i>'
   end
 
-  def format_cite body, resolved
+  def cite body, resolved
     text = body
     if $bib_style[:format] == :springer
       text = '<font color="red">'+body+'</font>' if !resolved
@@ -299,11 +299,11 @@ TEXTBOX
     end
   end
 
-  def format_textsuperscript body
+  def textsuperscript body
     '<small><sup>'+body+'</sup></small>'
   end
 
-  def format_filename body
+  def filename body
     if $style[:final]
       bold(body)
     else
@@ -311,7 +311,7 @@ TEXTBOX
     end
   end
 
-  def format_var body
+  def var body
     if $style[:final]
       bold(body)
     else
@@ -319,7 +319,7 @@ TEXTBOX
     end
   end
 
-  def format_function body
+  def function body
     if $style[:final]
       bold(body)
     else
@@ -327,7 +327,7 @@ TEXTBOX
     end
   end
 
-  def format_code body
+  def code body
     if $style[:final]
       bold(body)
     else
@@ -335,7 +335,7 @@ TEXTBOX
     end
   end
 
-  def format_program body
+  def program body
     if $style[:final]
       bold(body)
     else
@@ -343,7 +343,7 @@ TEXTBOX
     end
   end
 
-  def format_name body
+  def name body
     if $style[:final]
       bold(body)
     else
@@ -351,7 +351,7 @@ TEXTBOX
     end
   end
 
-  def format_data body
+  def data body
     if $style[:final]
       bold(body)
     else
@@ -361,7 +361,7 @@ TEXTBOX
   end
 
   include HtmlGen
-  def format_url body
+  def url body
     url2(body,body)
   end
 end

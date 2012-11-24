@@ -10,4 +10,7 @@ module FormatterFunctions
     ''
   end
 
+  def format_cite body, resolved
+    @writer.cite(body, resolved)
+  end
 end

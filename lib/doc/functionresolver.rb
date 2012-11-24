@@ -47,10 +47,12 @@ class FunctionResolver
   end
 
   def send_formatter name, *args
-    if @writer.respond_to?(name.to_sym)
-      @writer.send(name,*args)
-    else
+    if @lookup.include?(name) or respond_to?(name.to_sym) 
       send(name,*args)
+    elsif @writer.respond_to?(name.to_sym)
+      @writer.send(name,*args)
+    else 
+      raise "Method "+name+" not found in function resolver"
     end
   end
 
