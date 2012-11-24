@@ -112,10 +112,18 @@ class LatexWriter
   end
 
   def header
-    # write "<latex>\n"
+    write <<DOC_HEADER
+\\documentclass[a4paper,12pt]{memoir}
+% \\usepackage{xltxtra} % For using XeTeX within LaTeX
+% \\usepackage{polyglossia} % Babel replacement for XeTeX
+% \\usepackage[style=apa,hyperref]{biblatex} % For reference management
+% \\usepackage[pdfusetitle]{hyperref} % Creates hyperlinks and index in the PDF document, preferably load after biblatex
+% \\usepackage{graphicx} % Required for inserting images
+% \\usepackage{pgfplots} % Required for inserting graphs
+DOC_HEADER
+
     if @style
       write <<HEADER
-\\begin{document}
 HEADER
     else
       if $style[:final]
@@ -123,10 +131,10 @@ HEADER
 HEADER2
       else
         write <<HEADER2
-\\begin{document}
 HEADER2
       end
     end
+    writeln '\begin{document}'
     # writeln "  <body>"
     # write "<div class=\"source-author\">"
     write timestamp
