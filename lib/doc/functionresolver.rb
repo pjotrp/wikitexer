@@ -3,7 +3,7 @@ require 'input/support/citationfunctions'
 require 'input/support/filefunctions'
 require 'input/support/codefunctions'
 require 'input/support/latexfunctions'
-require 'input/html/htmlfunctions'
+require 'input/support/formatterfunctions'
 
 class NewVar
   attr_reader :name, :body
@@ -27,11 +27,12 @@ class FunctionResolver
 
   include CitationFunctions
   include FileFunctions
-  include HtmlFunctions
+  include FormatterFunctions
   include CodeFunctions
   include LatexFunctions
 
-  def initialize
+  def initialize(writer)
+    @writer = writer
     @lookup = { 'newvar' => 'newvar' }
   end
 

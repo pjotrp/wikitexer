@@ -7,7 +7,7 @@ class WikiTexer
   def initialize(parser, writer)
     @parser = parser
     @writer = writer
-    @document = Document.new
+    @document = Document.new(writer)
     @par = []  
   end
 

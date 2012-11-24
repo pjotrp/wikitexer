@@ -235,4 +235,11 @@ HEADER2
     end
   end
 
+  def remark body
+    <<REMARK
+    <table width='98%'><tr bgcolor='lightyellow'><td border=1 bgcolor='grey'>&nbsp;</td><td>
+    #{body}
+    </td></tr></table>
+REMARK
+  end
 end

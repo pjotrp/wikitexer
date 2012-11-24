@@ -1,24 +1,21 @@
-# These functions should really be generic and pass into a Creator module
+# These functions should really be generic and pass into a Creator module - 
+# at the moment they are used by the HTML outputter to expand latex style
+# functions
 
 require 'output/html/htmlcreator'
 
-module HtmlFunctions
-
-
-  def inserthtmltable filename
-    insertfile filename,'<TABLE','<\/TABLE'
-  end
+module FormatterFunctions
 
   def remark body
-    <<REMARK
-    <table width='98%'><tr bgcolor='lightyellow'><td border=1 bgcolor='grey'>&nbsp;</td><td>
-    #{body}
-    </td></tr></table>
-REMARK
+    @writer.remark body
   end
 
   def ignore body
     ''
+  end
+
+  def inserthtmltable filename
+    insertfile filename,'<TABLE','<\/TABLE'
   end
 
   def textbox body

@@ -11,11 +11,11 @@ class Document
 
   attr_reader :titlenumbering, :references, :citations, :functionresolver, :environments
 
-  def initialize
+  def initialize writer
     @titlenumbering   = TitleNumbering.new
     @citations        = Citations.new
     @references       = References.new
-    @functionresolver = FunctionResolver.new
+    @functionresolver = FunctionResolver.new(writer)
     @environments     = EnvironmentStack.new
   end
 

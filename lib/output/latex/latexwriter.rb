@@ -182,4 +182,7 @@ HEADER2
     end
   end
 
+  def remark body
+    '?remark{'+body+'}'
+  end
 end
