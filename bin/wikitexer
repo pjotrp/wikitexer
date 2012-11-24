@@ -112,12 +112,12 @@ $bib_style = bib_style # obviously a hack
 $style = style
 $indent_env = options.indent_env
 
-print WIKITEXER_SHOW,"\n" if not options.quiet and !options.use_stdin
+$stderr.print WIKITEXER_SHOW,"\n" if not options.quiet and !options.use_stdin
 
 raise 'I can not use both stdin and input files' if options.use_stdin and ARGV.size > 0 
 
 if options.outputtype==LATEX
-  handler = WtLatex.new
+  handler = WtLatex.new(nil)
 elsif options.outputtype==HTML
   handler = WtHtml.new(options.css)
 else

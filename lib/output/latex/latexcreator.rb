@@ -1,9 +1,9 @@
 
-module HtmlGen
+module LatexGen
 
   def title titlenumbering, level, buf
     if buf.strip.size > 0
-      "<h#{level}>"+titlenumbering.to_s+' '+buf+"</h#{level}>"
+      "\chapter{"+titlenumbering.to_s+' '+buf+"}"
     else
       buf
     end
@@ -189,6 +189,6 @@ module HtmlGen
   end
 end
 
-class HtmlCreator
-  include HtmlGen
+class LatexCreator
+  include LatexGen
 end

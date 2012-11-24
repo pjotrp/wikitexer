@@ -2,7 +2,7 @@
 require 'tempfile'
 require 'output/bib/bibformatters'
 
-class HtmlWriter
+class LatexWriter
 
   attr_accessor :css, :creator
   def initialize css, creator
@@ -112,7 +112,7 @@ class HtmlWriter
   end
 
   def header
-    write "<html>\n"
+    write "<Latex>\n"
     if @css
       write <<HEADER
     <head>
@@ -200,7 +200,7 @@ HEADER2
       write "  <hr \>\n"
       writeln "  "+wikitexer+' - generated '+timestamp
     end
-    write "  </body>\n</html>\n"
+    write "  </body>\n</Latex>\n"
   end
 
   def start_par paragraph

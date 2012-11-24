@@ -19,7 +19,7 @@ class HtmlWriter
   end
 
   def wikitexer
-    'wiki'+tex+'er '+WIKITEXER_VERSION+' by Pjotr Prins'
+    # 'wiki'+tex+'er '+WIKITEXER_VERSION+' by Pjotr Prins'
   end
 
   def author
@@ -122,70 +122,9 @@ HEADER
     else
       if $style[:final]
         write <<HEADER2
-    <style type="text/css" media="all">
-    /*<![CDATA[*/
-    /* CSS inserted by theme options */
-    body {font-family:'times new roman',times,serif; }
-    div.verbatim { color: black; background-color: white; border-style:outset; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    div.quote { font-family: palatino font, monospace; font-size:80%; }
-    div.quotation { font-family: palatino font, monospace; font-size:80%; }
-    div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
-    div.source-author { text-align:right; background-color:white; }
-    div.source { color: black; background-color:white ; border-style:outset; margin-left: 10px; margin-right: 10px }
-    div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
-    div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
-    div.r { color: black; background-color:#CCFFFF; ; border-style:outset; }
-    div.perl { color: black; background-color:#CAFFD8; ; border-style:outset; }
-    div.scala { color: black; background-color:#CAFFD8; ; border-style:outset; }
-    div.shell { color: black; background-color:white; ; border-style:outset; }
-    span.filename { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.varname { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.function { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.code { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.marked { background-color: yellow; font-weight:bold; }
-    span.name { font-family: monospace; font-size:100%;  font-weight:bold; }
-    span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    .tex { font-family: Times, serif; letter-spacing: -0.09em; }
-    span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }
-    span.tex .e { position:relative; top: 0.40ex; left: -0.01em; }
-    span.latex .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
-    /*]]>*/
-    </style>
 HEADER2
       else
         write <<HEADER2
-    <style type="text/css" media="all">
-    /*<![CDATA[*/
-    /* CSS inserted by theme options */
-    h1,h2,h3 { font-family: palatino font, monospace; color:darkblue;background-color:#F0F8FF; }
-    body {font-family:'times new roman',times,serif; color:#222222;background-color:#F0F8FF; }
-    div.verbatim { color: black; background-color: white; border-style:outset; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    div.quote { font-family: palatino font, monospace; font-size:80%; }
-    div.quotation { font-family: palatino font, monospace; font-size:80%; }
-    div.source-header { text-align:right; color:blue; background-color:#CCCCFF; }
-    div.source-author { text-align:right; background-color:white; }
-    div.source { color: black; background-color:white ; border-style:outset; margin-left: 10px; margin-right: 10px }
-    div.ruby { color: black; background-color:#FFCCFF; ; border-style:outset; }
-    div.python { color: black; background-color:#CCFFFF; ; border-style:outset; }
-    div.r { color: black; background-color:#CCFFFF; ; border-style:outset; }
-    div.perl { color: black; background-color:#CAFFD8; ; border-style:outset; }
-    div.scala { color: black; background-color:#CAFFD8; ; border-style:outset; }
-    div.shell { color: black; background-color:white; ; border-style:outset; }
-    span.filename { font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.varname { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.function { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.code { color: darkblue; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.program { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.name { color: darkred; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    span.marked { background-color: yellow; font-weight:bold; }
-    span.data { color: darkgreen; font-family: palatino font, monospace; font-size:80%;  font-weight:bold; }
-    .tex { font-family: Times, serif; letter-spacing: -0.09em; }
-    span.latex{ font-family: Times, serif; letter-spacing: -0.3em; }
-    span.tex .e { position:relative; top: 0.40ex; left: -0.01em; }
-    span.latex .a { position: relative; bottom: 0.5ex; left: -0.1em; font-size: 75%; }
-    /*]]>*/
-    </style>
 HEADER2
       end
     end

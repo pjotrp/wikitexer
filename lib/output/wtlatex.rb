@@ -1,10 +1,13 @@
 
+require 'output/latex/latexcreator'
+require 'output/latex/latexwriter'
+
 class WtLatex
   attr_reader :writer, :creator
 
-  def initialize css
+  def initialize style
     @creator = LatexCreator.new
-    @writer = LatexWriter.new css, @creator
+    @writer = LatexWriter.new style,@creator
   end
 
 end
