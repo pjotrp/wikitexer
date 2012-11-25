@@ -1,16 +1,15 @@
-WikiTeXer is created to allow writing simple Mediawiki type input and
-generating HTML or LaTeX. The reasoning is that TeX is great for output, but
-not so friendly for users. Personally I needed a tool that would:
+WikiTeXer is created to allow writing Mediawiki input and
+generate HTML or LaTeX. The reasoning is that TeX is great for output, but
+not so friendly for users. Also, I needed a tool that would:
 
 1. Allow a mixture of Wiki language and LaTeX input
-2. Generate HTML -> Word/OpenOffice
+2. Generate HTML to Word/OpenOffice document formats
 3. Generate LaTeX -> PS -> PDF
 
 There is a plethora of tools that comes some way towards achieving this goal.
 However, there are downsides for each. I did not want a Wiki based HTML server
 - just the command line. The 'deplate' program does a lot of things right,
-unfortunately the architecture was too complex to start hacking it and the
-author made a number of design choices I did not care about.
+unfortunately the architecture was too complex to start hacking it.
 
 Ultimately the architecture should be simple and allow contained HTML for HTML
 output and contained LaTeX for LaTeX output. Much of the complexity of existing
@@ -18,10 +17,11 @@ systems is that they need to cater to either pure LaTeX (like latex2html), or
 HTML (many wysiwyg examples), or XML (docbook, XML/FO). Where the latter is
 about rendering, and less about usage
 
-LaTeX itself is a great system for publishing (less so for interactive systems,
-but I don't care about those too much either). My main criticism is that LaTeX
-(or TeX) is showing its age in terms of programming syntax. For typing I want
-something even less in the way, but to generate powerful output like LaTeX does.
+LaTeX itself is a great system for publishing (less so for interactive
+systems). My main criticism is that LaTeX (or TeX) is showing its age
+in terms of syntax - wiki style syntax just gets less in the way. For
+typing I want something even less in the way, but I still want to
+generate powerful output, the way LaTeX does.
 
 What would be nice is to have a LaTeX environment where one could replace some
 of the common markup with Wiki-style markup. Also macro's would be nice in a
@@ -34,8 +34,18 @@ can be used to handle translation automatically as a plugin.
 Darn, I found I have another project on my hands. And it shows how powerful a
 force TeX still is.
 
-The latest is that WikiTeXer works, is fast, and delivers the goods I want. Need 
-a new name for the project, though.
+The latest is that WikiTeXer works, is fast, and delivers the goods.
+It even supports bibtex parsing, and generating HTML bibliographies.
+These last years I have use WikiTeXer for paper writing - and now I am
+writing my thesis with it.
+
+WikiTeXer has some shortcomings. The parser is regex based - it should
+really be a proper token parser. Also, I should refactor some of the
+modules and method namings. Still, the code is easy to adapt - feel
+free to do so.
+
+In the process of writing this software, I started to appreciate the
+work of Donald Knuth even more!
 
 Pjotr Prins.
 
