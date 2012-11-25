@@ -40,7 +40,9 @@ module BasicFormatting
     end
     paragraph.set(a)
     # set percentage, or other, symbol correctly
-    paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
+    if creator.respond_to?(:percentage)
+      paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
+    end
     paragraph.replace_all("((\\\\&))", proc { | buf, orig | creator.amp(buf) } )
   end
 

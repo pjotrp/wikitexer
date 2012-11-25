@@ -152,7 +152,7 @@ module HtmlGen
   end
 
   def percentage buf
-    '%'
+    '&#37;'
   end
 
   def amp buf
