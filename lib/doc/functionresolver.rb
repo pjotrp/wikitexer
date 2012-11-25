@@ -25,7 +25,7 @@ end
 #
 class FunctionResolver
 
-  include CitationFunctions
+  # include CitationFunctions - specific for HTML
   include FileFunctions
   include FormatterFunctions
   include CodeFunctions

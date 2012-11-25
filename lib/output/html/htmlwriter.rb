@@ -3,6 +3,8 @@ require 'tempfile'
 require 'output/bib/bibformatters'
 
 class HtmlWriter
+  
+  include CitationFunctions 
 
   attr_accessor :css, :creator
   def initialize css, creator
@@ -288,7 +290,7 @@ TEXTBOX
     '<i>'+body+'</i>'
   end
 
-  def cite body, resolved
+  def format_cite body, resolved
     text = body
     if $bib_style[:format] == :springer
       text = '<font color="red">'+body+'</font>' if !resolved

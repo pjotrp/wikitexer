@@ -14,11 +14,11 @@ module LatexGen
   end
 
   def bold buf
-    '{\bf '+buf+'}'
+    '\textbf{'+buf+'}'
   end
 
   def small buf
-    '{\small '+buf+'}'
+    '\small{'+buf+'}'
   end
 
   def strikeout buf
@@ -55,12 +55,12 @@ module LatexGen
 
   def verbatim_start
     # "<pre>\n<![CDATA[\n"
-    "<pre>"
+    '\text{'
   end
 
   def verbatim_end
     # "]]>\n</pre>"
-    "</pre>"
+    "}"
   end
 
   def shell_start
@@ -152,7 +152,7 @@ module LatexGen
   end
 
   def percentage buf
-    '\%'
+    '\percentage_symbol'
   end
 
   def amp buf
@@ -181,11 +181,11 @@ module LatexGen
   alias url2 url
 
   def keyword buf
-    "<font color='RED'>"+bold(buf)+"</font>"
+    bold(buf)
   end
 
   def markword buf
-    "<font color='GRAY'>"+bold(buf)+"</font>"
+    bold(buf)
   end
 end
 

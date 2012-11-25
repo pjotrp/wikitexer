@@ -25,6 +25,7 @@ module Functions
       var = values[0]
       if functionresolver.hasmethod?(funcname)
         if functionresolver.docmodify?(funcname)
+          # This function modifise the document state (e.g. cite function)
           return functionresolver.send_formatter(funcname,document,var)
         else
           return functionresolver.send_formatter(funcname,var)
