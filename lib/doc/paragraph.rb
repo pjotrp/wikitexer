@@ -67,7 +67,7 @@ class Paragraph
         if pos+orig.size < buf.size-2
           buf2 += buf[pos+orig.size..-1]
         end
-        buf = buf2+"\n"
+        buf = buf2 # +"\n"
         @lines[index] = buf
       end
     end
