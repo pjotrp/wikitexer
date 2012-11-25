@@ -182,4 +182,8 @@ HEADER2
     end
   end
 
+  def filename buf
+    @creator.bold(buf)
+  end
+
 end

@@ -187,6 +187,7 @@ module LatexGen
   def markword buf
     bold(buf)
   end
+
 end
 
 class LatexCreator
