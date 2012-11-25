@@ -152,7 +152,7 @@ module LatexGen
   end
 
   def percentage buf
-    '\percentage_symbol'
+    '\percentagesymbol'
   end
 
   def amp buf
