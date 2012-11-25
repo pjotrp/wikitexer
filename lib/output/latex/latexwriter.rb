@@ -151,11 +151,11 @@ HEADER2
   end
 
   def start_par paragraph
-    write "\n\n" if !paragraph.hastitle
+    write "\n" if !paragraph.hastitle
   end
 
   def end_par paragraph
-    write "\n\n" if !paragraph.hastitle
+    write "\n" if !paragraph.hastitle
   end
 
    				# #<Bibtex::Entry:0xb7c5b9f0 @fields={
