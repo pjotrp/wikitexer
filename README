@@ -1,5 +1,5 @@
-WikiTeXer is created to allow writing Mediawiki input and
-generate HTML or LaTeX. The reasoning is that TeX is great for output, but
+WikiTeXer is created to allow Mediawiki input and
+generate HTML or LaTeX output. The reasoning is that TeX is great for output, but
 not so friendly for users. Also, I needed a tool that would:
 
 1. Allow a mixture of Wiki language and LaTeX input
@@ -18,12 +18,32 @@ HTML (many wysiwyg examples), or XML (docbook, XML/FO). Where the latter is
 about rendering, and less about usage
 
 LaTeX itself is a great system for publishing (less so for interactive
-systems). My main criticism is that LaTeX (or TeX) is showing its age
-in terms of syntax - wiki style syntax just gets less in the way. For
-typing I want something even less in the way, but I still want to
-generate powerful output, the way LaTeX does.
+systems). My main criticism is that LaTeX (or TeX) is not so readable
+in terms of syntax. Some wiki style syntax just gets less in the way.
+I like to write/read
 
-What would be nice is to have a LaTeX environment where one could replace some
+  This '''word''' is ''emphasized''
+
+instead of
+
+  This \textbf{word} is \emph{emphasized}
+
+I like markup for headers
+
+  == header ==
+
+instead of 
+
+  \subsection{header}
+
+Though the benefit is smaller there.
+
+For typing I want something even less in the way, but I still want to
+generate powerful output, the way LaTeX does. And I want to generate
+HTML, which I can convert to Microsoft Word/OpenOffice, for those
+collaborators/co-authors who can not deal with LaTeX.
+
+So I thought it would be nice to have a LaTeX environment where one could replace some
 of the common markup with Wiki-style markup. Also macro's would be nice in a
 modern language, say Ruby.  Finally we need great output. Converting figures
 between LaTeX and HTML can be done transparently.  However, tables are a
@@ -49,3 +69,4 @@ work of Donald Knuth even more!
 
 Pjotr Prins.
 
+WikiTeXer is published under a BSD license, see LICENSE.txt
