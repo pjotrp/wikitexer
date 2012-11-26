@@ -43,7 +43,9 @@ module BasicFormatting
     if creator.respond_to?(:percentage)
       paragraph.replace_all("((\\\\%))", proc { | buf, orig | creator.percentage(buf) } )
     end
-    paragraph.replace_all("((\\\\&))", proc { | buf, orig | creator.amp(buf) } )
+    if creator.respond_to?(:amp)
+      paragraph.replace_all("((\\\\&))", proc { | buf, orig | creator.amp(buf) } )
+    end
   end
 
   # Boxed output of indented paragraph

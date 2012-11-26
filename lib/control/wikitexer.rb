@@ -16,7 +16,7 @@ class WikiTexer
   #
   def addline s, lineno, fn
     if s =~ /^#if (\S+)/
-      if @writer.name != $1
+      if @writer.writer_name != $1
         @document.stop_parsing
       end
       return

@@ -10,7 +10,7 @@ class LatexWriter
     @creator = creator
   end
 
-  def name
+  def writer_name
     'LaTeX'
   end
 

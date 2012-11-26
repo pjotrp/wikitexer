@@ -12,7 +12,7 @@ class HtmlWriter
     @creator = creator
   end
 
-  def name
+  def writer_name
     'HTML'
   end
 

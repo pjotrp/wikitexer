@@ -151,10 +151,6 @@ module LatexGen
     "</#{name}>"
   end
 
-  def amp buf
-    '&'
-  end
-
   def url(buf, text=nil)
     a = if text==nil
           buf.split(/\s/,2)
