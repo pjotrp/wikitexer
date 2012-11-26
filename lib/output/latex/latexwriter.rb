@@ -182,4 +182,8 @@ HEADER2
     @creator.bold(buf)
   end
 
+  def mark buf
+    @creator.bold(buf)
+  end
+
 end
