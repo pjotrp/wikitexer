@@ -180,9 +180,16 @@ module LatexGen
   end
 
   def markword buf
-    bold(buf)
+    textcolor('magenta',buf)
   end
 
+  def textcolor c, buf
+    '{\color{'+c+'}{'+buf+'}}'
+  end
+
+  def color c, buf
+    '\colorbox{'+c+'}{'+buf+'}'
+  end
 end
 
 class LatexCreator

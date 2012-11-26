@@ -143,7 +143,9 @@ HEADER2
       # writeln "  "+wikitexer+' - generated '+timestamp
     end
     # write "  </body>\n</latex>\n"
-    write "\\end{document}"
+    writeln '\bibliography{bibliography}{}'
+    writeln '\bibliographystyle{plain}'
+    write   '\end{document}'
   end
 
   def start_par paragraph
@@ -183,7 +185,7 @@ HEADER2
   end
 
   def mark buf
-    @creator.bold(buf)
+    @creator.color("yellow",buf)
   end
 
 end

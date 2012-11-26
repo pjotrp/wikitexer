@@ -191,6 +191,10 @@ module HtmlGen
   def markword buf
     "<font color='GRAY'>"+bold(buf)+"</font>"
   end
+
+  def color c, buf
+    "<font color='#{c}'>"+bold(buf)+"</font>"
+  end
 end
 
 class HtmlCreator
