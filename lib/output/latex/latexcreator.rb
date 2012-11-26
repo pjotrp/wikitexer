@@ -1,11 +1,14 @@
 
 module LatexGen
 
-  def title titlenumbering, level, buf
-    if buf.strip.size > 0
-      "\\chapter{"+titlenumbering.to_s+' '+buf+"}"
+  def title titlenumbering, level, text
+    if text.strip.size > 0
+      # For LaTeX we ignore the numbering scheme
+      names = %w{ chapter section subsection subsection paragragh subparagraph }
+      name = names[level-1]
+      '\\'+name+"{"+text+"}"
     else
-      buf
+      text
     end
   end
 
