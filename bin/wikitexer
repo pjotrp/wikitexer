@@ -40,7 +40,7 @@ Examples:
     wikitexer --latex -r latex.rb input1.tex input2.tex > output.tex
     wikitexer --html -r html.rb input1.tex input2.tex > output.html
 
-For a full description see http://URL/
+For a full description see https://github.com/pjotrp/wikitexer
 
 EXAMPLE
 

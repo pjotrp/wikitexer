@@ -69,6 +69,38 @@ work of Donald Knuth even more!
 
 Pjotr Prins.
 
+# Install and run
+
+    https://github.com/pjotrp/wikitexer.git
+    cd wikitexer
+    ./bin/wikitexer
+
+# Input
+
+WikiTeXer takes a mixture of markup, LaTeX and HTML as input.
+Input it does not recognise is left alone.
+
+## Markup (Wikimedia style)
+
+## LaTeX
+
+## HTML
+
+# Output
+
+WikiTeXer generates LaTeX or HTML
+
+## LaTeX
+
+To generate LaTeX simply use the --latex switch of wikitexer.
+
+The LaTeX style is defined in a user provided 'wtstyle.tex', which
+should include the documentclass.
+
+## HTML
+
+# License
+
 WikiTeXer is published under a BSD license, see LICENSE.txt
 
 
