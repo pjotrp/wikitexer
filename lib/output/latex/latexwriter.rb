@@ -113,13 +113,6 @@ class LatexWriter
 
   def header
     write <<DOC_HEADER
-\\documentclass[a4paper,12pt]{memoir}
-% \\usepackage{xltxtra} % For using XeTeX within LaTeX
-% \\usepackage{polyglossia} % Babel replacement for XeTeX
-% \\usepackage[style=apa,hyperref]{biblatex} % For reference management
-% \\usepackage[pdfusetitle]{hyperref} % Creates hyperlinks and index in the PDF document, preferably load after biblatex
-% \\usepackage{graphicx} % Required for inserting images
-% \\usepackage{pgfplots} % Required for inserting graphs
 DOC_HEADER
 
     if @style
@@ -134,11 +127,10 @@ HEADER2
 HEADER2
       end
     end
+    writeln '\input{wtstyle}'
     writeln '\begin{document}'
-    # writeln "  <body>"
-    # write "<div class=\"source-author\">"
-    write timestamp
-    # writeln "</div>"
+    # write   '\hfill '
+    # writeln timestamp
   end
 
   def footer
