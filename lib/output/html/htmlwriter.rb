@@ -12,6 +12,10 @@ class HtmlWriter
     @creator = creator
   end
 
+  def name
+    'HTML'
+  end
+
   def html
     '<span class="html">L<span class="a">A</span><span class="tex">T<span class="e">E</span>X</span></span>'
   end

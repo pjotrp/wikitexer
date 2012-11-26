@@ -15,12 +15,25 @@ class WikiTexer
   # parse the incoming stream
   #
   def addline s, lineno, fn
-    # Check for environments, and update the env stack (should)
-    s, last_env = @document.scan(@parser,s)
-    # add line to paragraph
-    @par.push s
-    # if it is a full paragraph write it out, and empty @par
-    write_paragraph(last_env) if s.strip.size == 0
+    if s =~ /^#if (\S+)/
+      if @writer.name != $1
+        @document.stop_parsing
+      end
+      return
+    end
+    if s =~ /^#endif/
+      @document.start_parsing
+      return
+    end
+
+    if @document.parsing?
+      # Check for environments, and update the env stack (should)
+      s, last_env = @document.scan(@parser,s)
+      # add line to paragraph
+      @par.push s
+      # if it is a full paragraph write it out, and empty @par
+      write_paragraph(last_env) if s.strip.size == 0
+    end
   end
 
   def write_paragraph last_env

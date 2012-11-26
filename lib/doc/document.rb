@@ -6,7 +6,6 @@ require 'doc/functionresolver'
 require 'doc/environment/environmentstack'
 
 # Keeps track of the document state
-
 class Document
 
   attr_reader :titlenumbering, :references, :citations, :functionresolver, :environments
@@ -17,6 +16,7 @@ class Document
     @references       = References.new
     @functionresolver = FunctionResolver.new(writer)
     @environments     = EnvironmentStack.new
+    @parsing = true
   end
 
   # Every input line passes through the +scan+ method to scan for 
@@ -27,5 +27,15 @@ class Document
   # Note the stack is not working
   def scan parser, s
     parser.parse_environments(@environments, s)
+  end
+
+  def start_parsing 
+    @parsing = true
+  end
+  def stop_parsing 
+    @parsing = false
+  end
+  def parsing?
+    @parsing
   end
 end

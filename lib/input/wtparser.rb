@@ -18,7 +18,6 @@ class WtParser
   end
 
   # Parse a paragraph of this document and return the modified paragraph
-
   def parse_paragraph document, par, env
     paragraph = Paragraph.new(par)
 

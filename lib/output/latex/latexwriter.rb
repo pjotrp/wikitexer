@@ -10,6 +10,10 @@ class LatexWriter
     @creator = creator
   end
 
+  def name
+    'LaTeX'
+  end
+
   def latex
     '\LaTeX'
   end
