@@ -127,7 +127,8 @@ should include the documentclass.
 
 When WikiTeXer is running in draft mode (i.e. when the --final switch
 is not used) some extra functionality is switched on. For example
-color codings, keyword formatting, see the file keywordformatting.rb, and
+color codings, keyword highlighting (list of words that may
+pin-point questionable grammar), see the file keywordformatting.rb, and
 highlighting the first sentence of a paragraph.
 
 # License

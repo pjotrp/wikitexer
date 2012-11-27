@@ -6,6 +6,8 @@ module DraftModeFormatting
     if not $style[:final]
       # highlight first sentence
       paragraph.replace_once('^(([^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
+      # don't use a comma before because
+      paragraph.replace_once('((,\s+(because|partly)))', proc { | buf, orig | creator.markword(buf) } )
     end
     paragraph
   end
