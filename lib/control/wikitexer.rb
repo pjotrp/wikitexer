@@ -21,6 +21,10 @@ class WikiTexer
       end
       return
     end
+    if s =~ /^#if DRAFT/
+      @document.stop_parsing
+      return
+    end
     if s =~ /^#endif/
       @document.start_parsing
       return

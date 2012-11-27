@@ -132,6 +132,6 @@ highlighting the first sentence of a paragraph.
 
 # License
 
-WikiTeXer is published under a BSD license, see LICENSE.txt
+WikiTeXer by Pjotr Prins (c) 2012, is published under a BSD license, see LICENSE.txt
 
 
