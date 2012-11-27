@@ -179,6 +179,10 @@ module LatexGen
     bold(buf)
   end
 
+  def highlight buf
+    '\highlight{'+buf+'}'
+  end
+
   def markword buf
     bold(buf)
   end

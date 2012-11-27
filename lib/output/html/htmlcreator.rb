@@ -188,6 +188,10 @@ module HtmlGen
     "<font color='RED'>"+bold(buf)+"</font>"
   end
 
+  def highlight buf
+    italics(buf)
+  end
+
   def markword buf
     "<font color='GRAY'>"+bold(buf)+"</font>"
   end

@@ -100,10 +100,53 @@ class Paragraph
         buf2 = buf[0..pos-1]
       end
       # now invoke the lambda using the function name and parameters
-      if extra_parameters == 0
-        buf2 += replace_func.call(substr, orig)
+      if substr 
+        if extra_parameters == 0
+          buf2 += replace_func.call(substr, orig)
+        else
+          buf2 += replace_func.call(substr, orig, extra)
+        end
       else
-        buf2 += replace_func.call(substr, orig, extra)
+        raise "This should not happen"
+      end
+      # orig.size is the replacement size
+      # buf.size is the original buffer
+      if pos+orig.size <= buf.size-1
+        # store the postfix
+        buf2 += buf[pos+orig.size..-1]
+      end
+      # print buf2
+      # sleep 2
+      buf = buf2
+    end
+    set(buf)  
+    self
+  end
+
+  def replace_once search, replace_func, extra_parameters=0
+    buf = to_string
+    if pos = buf =~ /#{search}/
+      # OK, we have a match
+      orig = $1
+      substr = $2
+      extra = []
+      # Check whether we have extra parameters to this function, defined
+      # by regexs in braces ...(1)...(2)...(3)...
+      (1..extra_parameters).each do | i |
+        extra.push eval("$#{i+2}")
+      end
+      buf2 = ''
+      if pos > 0 
+        # store the prefix
+        buf2 = buf[0..pos-1]
+      end
+      # now invoke the lambda using the function name and parameters
+      if substr 
+        if extra_parameters == 0
+          buf2 += replace_func.call(substr, orig)
+        else
+          buf2 += replace_func.call(substr, orig, extra)
+        end
       end
       # orig.size is the replacement size
       # buf.size is the original buffer

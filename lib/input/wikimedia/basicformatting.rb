@@ -12,12 +12,6 @@ module BasicFormatting
   def BasicFormatting::markup paragraph, creator
     paragraph.replace_all("('''''([^']+)''''')", proc { | buf, orig | creator.italics(creator.bold(buf)) } )
     paragraph.replace_all("('''([^']+)''')", proc { | buf, orig | creator.bold(buf) } )
-    if $style[:final]
-      paragraph.replace_all("^(''([^']+)'')", proc { | buf, orig | buf } )
-    else
-      # highlight first sentence
-      # paragraph.replace_all("^([^\.]+?)", proc { | buf, orig | p buf ; creator.italics(buf) } )
-    end
     paragraph.replace_all("(''([^']+)'')", proc { | buf, orig | creator.italics(buf) } )
     paragraph.replace_all('(\*(\w+)\*)', proc { | buf, orig | creator.bold(buf) } )
     paragraph.replace_all("(<small>(.*?)<\/small>)", proc { | buf, orig | creator.small(buf) } )

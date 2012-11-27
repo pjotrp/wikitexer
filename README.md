@@ -85,17 +85,24 @@ Input it does not recognise is left alone.
 
 ### #if and #endif
 
-Output text only to HTML
+Output this section of text to HTML only
 
     #if HTML
     Output this text for HTML only
     #endif
 
-Output text only to LaTeX
+Output this section of text to LaTeX only
 
     #if LaTeX
     Output this text for LaTeX only
     #endif
+
+Output this section of text when in DRAFT mode
+
+    #if DRAFT
+    Output this text in DRAFT mode only
+    #endif
+
 
 ## LaTeX
 
@@ -113,6 +120,15 @@ The LaTeX style is defined in a user provided 'wtstyle.tex', which
 should include the documentclass.
 
 ## HTML
+
+## All modes
+
+### Draft vs final mode
+
+When WikiTeXer is running in draft mode (i.e. when the --final switch
+is not used) some extra functionality is switched on. For example
+color codings, keyword formatting, see the file keywordformatting.rb, and
+highlighting the first sentence of a paragraph.
 
 # License
 

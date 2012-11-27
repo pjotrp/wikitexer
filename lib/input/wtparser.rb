@@ -6,6 +6,7 @@ require 'input/wikimedia/urlformatting'
 require 'input/wikimedia/listformatting'
 require 'input/wikimedia/environmentformatting'
 require 'input/support/keywordformatting'
+require 'input/support/draftmodeformatting'
 require 'input/tex/functions'
 require 'doc/paragraph'
 
@@ -36,7 +37,9 @@ class WtParser
         Functions::expand(paragraph, document)
         # ---- create titles from wiki type markup
         Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
-        # ---- standard wiki type markup (bold, italics etc.)
+        # ---- some markup when in Draft mode
+        DraftModeFormatting::markup(paragraph, @creator)
+        # ---- standard wiki style markup (bold, italics etc.)
         BasicFormatting::markup(paragraph, @creator)
         # ---- special markup, for example highlighting FIXME
         KeywordFormatting::markup(paragraph, @creator) 
