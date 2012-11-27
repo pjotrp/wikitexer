@@ -164,20 +164,17 @@ HEADER2
 				  #   @key="Mattson", @type="book">
 
   def bibliography writer, style, citations, references
-    write "\n<hr>\n<h2>Bibliography</h2>\n"
-    # $stderr.print references
-    # p references
-    bibformatter = BibFormatter::get_formatter(writer,style)
-    citations.each do | ref, citation |
-      text = citation
-      if references[citation]
-        # p references[citation]
-        bib = references[citation]
-        text = bibformatter.write(bib)
-      end
-      marker = bibformatter.reference_marker(ref)
-      write "\n#{marker} #{text}<br />\n"
-    end
+    # bibformatter = BibFormatter::get_formatter(writer,style)
+    # citations.each do | ref, citation |
+    #   text = citation
+    #   if references[citation]
+    #    # p references[citation]
+    #     bib = references[citation]
+    #     text = bibformatter.write(bib)
+    #   end
+    #   marker = bibformatter.reference_marker(ref)
+    #   write "\n#{marker} #{text}<br />\n"
+    # end
   end
 
   def filename buf

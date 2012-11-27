@@ -180,7 +180,7 @@ module LatexGen
   end
 
   def markword buf
-    textcolor('magenta',buf)
+    bold(buf)
   end
 
   def textcolor c, buf
