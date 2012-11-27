@@ -7,7 +7,9 @@ module DraftModeFormatting
       # highlight first sentence
       paragraph.replace_once('^(([^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
       # don't use a comma before because
-      paragraph.replace_once('((,\s+(because|partly)))', proc { | buf, orig | creator.markword(buf) } )
+      paragraph.replace_once('((,\s+(because|while|partly)))', proc { | buf, orig | creator.markword(buf) } )
+      # use a comma before 'and'
+      # paragraph.replace_once('(([^\,]\s+and))', proc { | buf, orig | creator.markword(buf) } )
     end
     paragraph
   end
