@@ -103,6 +103,17 @@ Output this section of text when in DRAFT mode
     Output this text in DRAFT mode only
     #endif
 
+    #if FINAL
+    Output this text in FINAL mode only
+    #endif
+
+Skip this section of text
+
+    #if SKIP
+    Never output this text
+    #endif
+
+Note: '#if' statements can not be nested.
 
 ## LaTeX
 

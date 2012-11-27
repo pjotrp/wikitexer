@@ -21,7 +21,15 @@ class WikiTexer
       end
       return
     end
-    if s =~ /^#if DRAFT/
+    if s =~ /^#if (SKIP|FALSE)/
+      @document.stop_parsing
+      return
+    end
+    if s =~ /^#if DRAFT/ and not $style[:final]
+      @document.stop_parsing
+      return
+    end
+    if s =~ /^#if FINAL/ and $style[:final]
       @document.stop_parsing
       return
     end
