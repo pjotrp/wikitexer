@@ -5,7 +5,7 @@ module DraftModeFormatting
   def DraftModeFormatting::markup paragraph, creator
     if not $style[:final]
       # highlight first sentence
-      paragraph.replace_once('^(([^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
+      paragraph.replace_once('^(([\w\']+\s[^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
       # don't use a comma before because
       paragraph.replace_once('((,\s+(because|while|partly)))', proc { | buf, orig | creator.markword(buf) } )
       # use a comma before 'and'
