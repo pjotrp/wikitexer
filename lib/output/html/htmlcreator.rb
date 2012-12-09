@@ -192,8 +192,16 @@ module HtmlGen
     italics(buf)
   end
 
+  def correct buf
+    bold(textcolor('red',buf))
+  end
+
   def markword buf
     "<font color='GRAY'>"+bold(buf)+"</font>"
+  end
+
+  def textcolor c, buf
+    color(c,buf)
   end
 
   def color c, buf
