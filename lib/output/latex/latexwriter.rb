@@ -187,6 +187,10 @@ HEADER2
     @creator.bold(buf)
   end
 
+  def code buf
+    @creator.bold(buf)
+  end
+
   def mark buf
     @creator.color("yellow",buf)
   end
