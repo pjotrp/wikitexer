@@ -2,35 +2,35 @@
 module CodeFunctions
 
   def var varname
-    format_var(varname)
+    @writer.var(varname)
   end
 
   def function s
-    format_function(s)
+    @writer.function(s)
   end
 
   def func s
-    format_function(s)
+    @writer.function(s)
   end
 
   def program source
-    format_program(source)
+    @writer.program(source)
   end
 
   def data source
-    format_data(source)
+    @writer.data(source)
   end
 
   def name source
-    format_name(source)
+    @writer.name(source)
   end
 
   def code source
-    format_code(source)
+    @writer.code(source)
   end
 
   def command source
-    format_code(source)
+    @writer.code(source)
   end
 
 end

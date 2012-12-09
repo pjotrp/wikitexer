@@ -53,23 +53,25 @@ class LatexWriter
 
   def code_box paragraph, env, lang=nil
     lang = env if lang == nil
-    write "<div class=\"source\">\n"
-    write "<div class=\"#{lang}\">\n"
-    tagbox env
-    Tempfile.open("wikitexer") do | f |
-      paragraph.each { | line | f.print line }
-      f.close
-      code = `/usr/bin/source-highlight -s #{lang} -i #{f.path}`
-      code = code.gsub(/<!--(.*?)-->[\n]?/m, "")
-      if $style[:final]
-        code = code.gsub(/<font color="#\w+">/, "<b>")
-        code = code.gsub(/<\/font>/, "</b>")
-      end
-      write code
-    end
-    # paragraph.each { | line | write line }
-    write "</div>\n"
-    write "</div>\n"
+    # write "<div class=\"source\">\n"
+    # write "<div class=\"#{lang}\">\n"
+    # tagbox env
+    # Tempfile.open("wikitexer") do | f |
+    #   paragraph.each { | line | f.print line }
+    #   f.close
+    #   code = `/usr/bin/source-highlight -s #{lang} -i #{f.path}`
+    #   code = code.gsub(/<!--(.*?)-->[\n]?/m, "")
+    #   if $style[:final]
+    #     code = code.gsub(/<font color="#\w+">/, "<b>")
+    #     code = code.gsub(/<\/font>/, "</b>")
+    #   end
+    # write code
+    # end
+    writeln '\begin{verbatim}'
+    paragraph.each { | line | write line }
+    writeln '\end{verbatim}'
+    # write "</div>\n"
+    # write "</div>\n"
   end
  
   # Writes a paragraph to stdout. When last_env contains a special 
@@ -178,6 +180,10 @@ HEADER2
   end
 
   def filename buf
+    @creator.bold(buf)
+  end
+
+  def name buf
     @creator.bold(buf)
   end
 
