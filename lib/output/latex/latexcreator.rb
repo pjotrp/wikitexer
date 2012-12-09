@@ -187,6 +187,10 @@ module LatexGen
     bold(buf)
   end
 
+  def correct buf
+    bold(textcolor('red',buf))
+  end
+
   def textcolor c, buf
     '{\color{'+c+'}{'+buf+'}}'
   end
