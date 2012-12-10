@@ -35,12 +35,12 @@ class WtParser
         ListFormatting::markup(paragraph, @creator)
         # ---- expand functions TeX style 
         Functions::expand(paragraph, document)
-        # ---- some markup when in Draft mode
-        DraftModeFormatting::markup(paragraph, @creator)
         # ---- create titles from wiki type markup
         Headers::markup(document, paragraph, proc {|titlenumber,level,buf| @creator.title(titlenumber,level,buf) } )
         # ---- standard wiki style markup (bold, italics etc.)
         BasicFormatting::markup(paragraph, @creator)
+        # ---- some markup when in Draft mode
+        DraftModeFormatting::markup(paragraph, @creator)
         # ---- special markup, for example highlighting FIXME
         KeywordFormatting::markup(paragraph, @creator) 
       end
