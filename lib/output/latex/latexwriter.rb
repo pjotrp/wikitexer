@@ -46,9 +46,9 @@ class LatexWriter
   end
 
   def tagbox text
-    write "<div class=\"source-header\">"
+    # write "<div class=\"source-header\">"
     write text.capitalize
-    write "</div>"
+    # write "</div>"
   end
 
   def code_box paragraph, env, lang=nil
@@ -80,17 +80,17 @@ class LatexWriter
     # $stderr.print last_env,",",paragraph,"\n" if last_env != nil
     case last_env
       when 'verbatim'
-        write "<div class=\"verbatim\">"
+        writeln '\begin{verbatim}'
         paragraph.each { | line | write line }
-        write "</div>"
+        writeln '\end{verbatim}'
       when 'quote'
-        write "<div class=\"quote\">"
+        writeln '\begin{verbatim}'
         paragraph.each { | line | write line }
-        write "</div>"
+        writeln '\end{verbatim}'
       when 'quotation'
-        write "<div class=\"quotation\">"
+        writeln '\begin{verbatim}'
         paragraph.each { | line | write line }
-        write "</div>"
+        writeln '\end{verbatim}'
       when 'cmake'
         code_box paragraph, last_env, 'shell'
       when 'perl' 
