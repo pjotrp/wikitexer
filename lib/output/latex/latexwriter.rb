@@ -145,7 +145,7 @@ HEADER2
       # writeln "  "+wikitexer+' - generated '+timestamp
     end
     # write "  </body>\n</latex>\n"
-    writeln '\bibliography{bibliography}{}'
+    writeln '\bibliography{../bibliography/bibliography,bibliography}{}'
     writeln '\bibliographystyle{plain}'
     write   '\end{document}'
   end
