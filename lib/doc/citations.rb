@@ -15,6 +15,10 @@ class Citations
     @citations[cite].to_s
   end
 
+  def size
+    @citations.size
+  end
+
   def each 
     @citations.sort{|a,b| a[1]<=>b[1]}.each { |elem|
       yield elem[1], elem[0]

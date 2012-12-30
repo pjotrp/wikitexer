@@ -145,8 +145,6 @@ HEADER2
       # writeln "  "+wikitexer+' - generated '+timestamp
     end
     # write "  </body>\n</latex>\n"
-    writeln '\bibliography{../bibliography/bibliography,bibliography}{}'
-    writeln '\bibliographystyle{plain}'
     write   '\end{document}'
   end
 
@@ -158,25 +156,10 @@ HEADER2
     write "\n" if !paragraph.hastitle
   end
 
-   				# #<Bibtex::Entry:0xb7c5b9f0 @fields={
-	  			#   :Title=>#<Bibtex::Field:0xb7c591dc @value="Patterns for parallel programming", @key=:Title>, 
-		  		#   :Year=>#<Bibtex::Field:0xb7c57f1c @value="2004", @key=:Year>, :Isbn=>#<Bibtex::Field:0xb7c578c8 @value="0321228111", @key=:Isbn>, 
-			  	#   :Publisher=>#<Bibtex::Field:0xb7c57274 @value="Addison-Wesley Professional", @key=:Publisher>, 
-				  #   :Author=>#<Bibtex::Field:0xb7c5b7c0 @value="Mattson, Timothy and Sanders, Beverly and Massingill, Berna", @key=:Author>}, 
-				  #   @key="Mattson", @type="book">
-
   def bibliography writer, style, citations, references
-    # bibformatter = BibFormatter::get_formatter(writer,style)
-    # citations.each do | ref, citation |
-    #   text = citation
-    #   if references[citation]
-    #    # p references[citation]
-    #     bib = references[citation]
-    #     text = bibformatter.write(bib)
-    #   end
-    #   marker = bibformatter.reference_marker(ref)
-    #   write "\n#{marker} #{text}<br />\n"
-    # end
+    return if citations.size == 0
+    writeln '\bibliography{../bibliography/bibliography,bibliography}{}'
+    writeln '\bibliographystyle{plain}'
   end
 
   def filename buf

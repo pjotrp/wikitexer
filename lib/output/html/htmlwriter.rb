@@ -225,6 +225,7 @@ HEADER2
 				  #   @key="Mattson", @type="book">
 
   def bibliography writer, style, citations, references
+    return if citations.size == 0
     write "\n<hr>\n<h2>Bibliography</h2>\n"
     # $stderr.print references
     # p references
