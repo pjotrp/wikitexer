@@ -5,7 +5,7 @@ module DraftModeFormatting
   def DraftModeFormatting::markup paragraph, creator
     if not $style[:final]
       # highlight first sentence
-      paragraph.replace_once('^(([\w\']+\s[^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
+      # paragraph.replace_once('^(([\w\']+\s[^\.]+\.))', proc { | buf, orig | creator.highlight(buf) } )
       # Mark large numbers
       paragraph.replace_once('(((\d\d\d\d)\s))', proc { | buf, orig | creator.correct(buf) } )
       # just mark
