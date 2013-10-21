@@ -79,6 +79,10 @@ class LatexWriter
   def write_paragraph last_env, environments, paragraph
     # $stderr.print last_env,",",paragraph,"\n" if last_env != nil
     case last_env
+      when 'listing'
+        writeln '\begin{listing}'
+        paragraph.each { | line | write line }
+        writeln '\end{listing}'
       when 'verbatim'
         writeln '\begin{verbatim}'
         paragraph.each { | line | write line }

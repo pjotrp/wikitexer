@@ -56,6 +56,15 @@ module LatexGen
     '\item '+buf + "\n"
   end
 
+  def listing_start
+    '\begin{listing}'
+  end
+
+  def listing_end
+    '\end{listing}'
+  end
+
+
   def verbatim_start
     # "<pre>\n<![CDATA[\n"
     '\text{'
@@ -147,11 +156,11 @@ module LatexGen
   end
 
   def literal_start name
-    "<#{name}>"
+    "\\begin{#{name}}\n"
   end
 
   def literal_end name
-    "</#{name}>"
+    "\\end{#{name}}\n"
   end
 
   def url(buf, text=nil)
