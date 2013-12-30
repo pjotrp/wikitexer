@@ -17,7 +17,7 @@ require 'output/wtlatex'
 require 'output/wthtml'
 require 'input/wtparser'
 
-WIKITEXER_VERSION = Version.get(File.dirname(__FILE__),'VERSION')
+WIKITEXER_VERSION = File.dirname(__FILE__)+'/VERSION'
 WIKITEXER_SHOW = 'wikiTeXer '+WIKITEXER_VERSION+' by Pjotr Prins'
 LATEX = 1
 HTML  = 2
