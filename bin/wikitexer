@@ -12,7 +12,6 @@ $UNITTEST = nil
 require 'optparse'
 require 'ostruct'
 require 'bibtex'
-require 'util/other/version'
 require 'control/wikitexer'
 require 'output/wtlatex'
 require 'output/wthtml'
