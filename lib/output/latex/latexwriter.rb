@@ -161,9 +161,12 @@ HEADER2
   end
 
   def bibliography writer, style, citations, references
-    return if citations.size == 0
-    writeln '\bibliography{../bibliography/bibliography,bibliography}{}'
-    writeln '\bibliographystyle{plain}'
+    # if citations.size == 0
+    #   $stderr.print "No citations found" <- does not work because bibtex parses its own
+    # else
+      writeln '\bibliography{bibliography,../bibliography/thesis,../bibliography/bibliography}{}'
+      writeln '\bibliographystyle{plain}'
+    # end
   end
 
   def filename buf

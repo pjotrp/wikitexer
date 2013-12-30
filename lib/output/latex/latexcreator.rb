@@ -75,6 +75,14 @@ module LatexGen
     "}"
   end
 
+  def abstract_start
+    '\begin{abstract}'
+  end
+
+  def abstract_end
+    '\end{abstract}'
+  end
+
   def shell_start
     ''
   end

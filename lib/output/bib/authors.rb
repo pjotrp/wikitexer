@@ -10,8 +10,12 @@ module FormatBibAuthors
           if s !~ /,/
             # No comma! 
             first,last = s.split(/\s+/,2)
-            raise 'Problem with bib name '+s if last == nil
-            last + ', '+first
+            if first and not last
+              first
+            else
+              raise 'Problem with bib name <'+s+'>' if not first and not last
+              last + ', '+first
+            end
           else
             s
           end

@@ -4,6 +4,10 @@ module EnvironmentFormatting
 
   def EnvironmentFormatting::markup paragraph, environments, creator
     last_env = nil
+    return paragraph,'abstract' if paragraph.to_string.index('{abstract}')
+    return paragraph,'author' if paragraph.to_string.index('{author}')
+    return paragraph,'tabular' if paragraph.to_string.index('{tabular}')
+    return paragraph,'table' if paragraph.to_string.index('{table}')
     paragraph.replace_all("(\\\\begin\\{([^}]+?)\\})", proc { | name, orig, values | 
       # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)
