@@ -53,6 +53,10 @@ module HtmlGen
     '<li>'+buf  # +'</li>'
   end
 
+  def bignum buf
+    '<b>'+buf+'</b>'
+  end
+
   def verbatim_start
     # "<pre>\n<![CDATA[\n"
     "<pre>"
