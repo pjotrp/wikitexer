@@ -1,6 +1,6 @@
-WikiTeXer is created to allow Mediawiki input and
-generate HTML or LaTeX output. The reasoning is that TeX is great for output, but
-not so friendly for users. Also, I needed a tool that would:
+WikiTeXer is created to allow Mediawiki-style input and generate HTML
+and/or LaTeX output. The reasoning is that TeX is great for output,
+but not so friendly for users. Also, I needed a tool that would:
 
 1. Allow a mixture of Wiki language and LaTeX input
 2. Generate HTML to Word/OpenOffice document formats

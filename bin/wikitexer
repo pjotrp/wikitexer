@@ -12,13 +12,12 @@ $UNITTEST = nil
 require 'optparse'
 require 'ostruct'
 require 'bibtex'
-# require 'util/other/version'
 require 'control/wikitexer'
 require 'output/wtlatex'
 require 'output/wthtml'
 require 'input/wtparser'
 
-WIKITEXER_VERSION = '1.0'  # Version.get(File.dirname(__FILE__),'VERSION')
+WIKITEXER_VERSION = File.dirname(__FILE__)+'/VERSION'
 WIKITEXER_SHOW = 'wikiTeXer '+WIKITEXER_VERSION+' by Pjotr Prins'
 LATEX = 1
 HTML  = 2

@@ -79,6 +79,10 @@ class LatexWriter
   def write_paragraph last_env, environments, paragraph
     # $stderr.print last_env,",",paragraph,"\n" if last_env != nil
     case last_env
+      when 'listing'
+        writeln '\begin{listing}'
+        paragraph.each { | line | write line }
+        writeln '\end{listing}'
       when 'verbatim'
         writeln '\begin{verbatim}'
         paragraph.each { | line | write line }
@@ -157,9 +161,12 @@ HEADER2
   end
 
   def bibliography writer, style, citations, references
-    return if citations.size == 0
-    writeln '\bibliography{../bibliography/bibliography,bibliography}{}'
-    writeln '\bibliographystyle{plain}'
+    # if citations.size == 0
+    #   $stderr.print "No citations found" <- does not work because bibtex parses its own
+    # else
+      writeln '\bibliography{bibliography,../bibliography/thesis,../bibliography/bibliography}{}'
+      writeln '\bibliographystyle{plain}'
+    # end
   end
 
   def filename buf

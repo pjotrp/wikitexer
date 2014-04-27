@@ -102,9 +102,9 @@ class Paragraph
       # now invoke the lambda using the function name and parameters
       if substr 
         if extra_parameters == 0
-          buf2 += replace_func.call(substr, orig)
+          buf2 += replace_func.call(substr, orig)         # name, orig
         else
-          buf2 += replace_func.call(substr, orig, extra)
+          buf2 += replace_func.call(substr, orig, extra)  # name, orig, values
         end
       else
         raise "This should not happen"
