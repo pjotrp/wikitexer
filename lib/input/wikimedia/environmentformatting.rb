@@ -2,12 +2,20 @@
 
 module EnvironmentFormatting
 
+  ENVLIST = %w{abstract minipage}
+
   def EnvironmentFormatting::markup paragraph, environments, creator
     last_env = nil
-    return paragraph,'abstract' if paragraph.to_string.index('{abstract}')
+    ENVLIST.each do | kw |
+      return paragraph,kw if paragraph.to_string.index("{#{kw}}")
+    end
+    return paragraph,'tabu' if paragraph.to_string.index('{tabu}')
+    return paragraph,'methods' if paragraph.to_string.index('{methods}')
+    return paragraph,'center' if paragraph.to_string.index('{center}')
     return paragraph,'author' if paragraph.to_string.index('{author}')
     return paragraph,'tabular' if paragraph.to_string.index('{tabular}')
     return paragraph,'table' if paragraph.to_string.index('{table}')
+    return paragraph,'figure' if paragraph.to_string.index('{figure}')
     paragraph.replace_all("(\\\\begin\\{([^}]+?)\\})", proc { | name, orig, values | 
       # $stderr.print "#{name},#{orig},#{values}"
       env = Environment.new(name)

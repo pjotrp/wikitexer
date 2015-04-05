@@ -283,6 +283,14 @@ TEXTBOX
     '<span style="background-color:yellow">'+body+'</span>'
   end 
 
+  def ins body
+    '<b><font color="blue">'+body+'</font></b>'
+  end 
+
+  def del body
+    '<del><font color="red">'+body+'</font></del>'
+  end 
+
   def large body
     '<font size="8">'+body+'</font>'
   end
