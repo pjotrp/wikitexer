@@ -122,12 +122,14 @@ class HtmlWriter
     if @css
       write <<HEADER
     <head>
+      <meta charset="utf-8" />
       <link href="#{@css}" rel="stylesheet" type="text/css">
     </head>
 HEADER
     else
       if $style[:final]
         write <<HEADER2
+    <meta charset="utf-8" />
     <style type="text/css" media="all">
     /*<![CDATA[*/
     /* CSS inserted by theme options */

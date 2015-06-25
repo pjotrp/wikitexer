@@ -146,7 +146,8 @@ else
       end
     else
       num = 1
-      File.open(fn).each_line do | s |
+      File.open(fn,"r:iso-8859-1:utf-8",&:read).each_line do | s |
+        # $stderr.print(s)
         wikitexer.addline(s,num,fn)
         num += 1
       end
